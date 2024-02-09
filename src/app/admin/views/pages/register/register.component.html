@@ -1,0 +1,56 @@
+<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+  <c-container>
+    <c-row class="justify-content-center">
+      <c-col lg="7" md="9" xl="6">
+        <c-card class="mx-4">
+          <c-card-body class="p-4">
+            <form cForm>
+              <h1>Register</h1>
+              <p class="text-medium-emphasis">Create your account</p>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilUser"></svg>
+                </span>
+                <input cFormControl type="username" id="username"  name="email" [(ngModel)]="user.username" class="form-input" placeholder="enter your username" required="required">
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>@</span>
+                <input cFormControl type="email" id="email"  name="email" [(ngModel)]="user.email" class="form-input" placeholder="enter your email" required="required">
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilLockLocked"></svg>
+                </span>
+                <input cFormControl type="password" id="password" name="password" [(ngModel)]="user.password" class="form-input" placeholder="enter your password" required="required">
+              </c-input-group>
+
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilWc"></svg>
+                </span>
+              <c-form-check>
+                <input cFormCheckInput type="radio" [(ngModel)]="user.sexe" name="gender" [value]=true id="male" />
+                <label cFormCheckLabel>Male </label>
+              </c-form-check>
+                <c-form-check>
+                  <input cFormCheckInput type="radio" [(ngModel)]="user.sexe" name="gender" [value]=false id="female" />
+                  <label cFormCheckLabel>Female</label>
+                </c-form-check>
+              </c-input-group>
+
+              <!--              <c-input-group class="mb-4">-->
+<!--                <span cInputGroupText>-->
+<!--                  <svg cIcon name="cilLockLocked"></svg>-->
+<!--                </span>-->
+<!--                <input cFormControl type="password" class="form-input" name="confirm-password" [(ngModel)]="user.passwordConfirm" id="confirm-password" placeholder="enter your password again" required="required">-->
+<!--              </c-input-group>-->
+              <div class="d-grid">
+                <button cButton type="submit" color="success" (click)="onSubmit()">Create Account</button>
+              </div>
+            </form>
+          </c-card-body>
+        </c-card>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>

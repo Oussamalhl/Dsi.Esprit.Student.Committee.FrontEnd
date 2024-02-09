@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<!--
+* CoreUI - Angular 13 Free Admin Template
+* @version v4.0.0-beta.0
+* @link https://coreui.io/angular/
+* Copyright (c) 2017-2022 creativeLabs Łukasz Holeczek
+* License: MIT
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <base href="/">
+  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
+  <meta content="CoreUI Free Angular Admin Template" name="description" />
+  <meta content="Łukasz Holeczek" name="author" />
+  <meta
+    content="CoreUI,Bootstrap,Admin,Template,Free,Angular,Dashboard,Typescript"
+    name="keyword"
+  />
+  <link href="assets/favicon.ico" rel="icon" type="image/x-icon">
+  <title>CoreUI Free Angular Admin Template</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body class="mat-typography">
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<style>
+
+  .bouncing-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    font-size: 70px;
+    font-weight: 900;
+    font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+  }
+
+
+
+  .e, .s ,.p, .r, .i, .t,.pp,.ppp {
+    position: relative;
+    color: #d11d4d;
+    text-shadow: 0 3px #450c1b, 0 5px #450c1b, 0 7px #450c1b;
+  }
+
+  .w {
+    animation: bounce 1.7s ease infinite;
+    -webkit-animation: bounce 1.7s ease infinite;
+  }
+
+  .o {
+    animation: bounce 1.7s ease infinite .1s;
+    -webkit-animation: bounce 1.7s ease infinite .1s;
+  }
+
+  .m {
+    animation: bounce 1.7s ease infinite .2s;
+    -webkit-animation: bounce 1.7s ease infinite .2s;
+  }
+
+  .a {
+    animation: bounce 1.7s ease infinite .3s;
+    -webkit-animation: bounce 1.7s ease infinite .3s;
+  }
+
+  .n {
+    animation: bounce 1.7s ease infinite .4s;
+    -webkit-animation: bounce 1.7s ease infinite .4s;
+  }
+
+  .aa {
+    animation: bounce 1.7s ease infinite .5s;
+    -webkit-animation: bounce 1.7s ease infinite .5s;
+  }
+
+
+  .r {
+    animation: bounce 1.7s ease infinite .6s;
+    -webkit-animation: bounce 1.7s ease infinite .6s;
+  }
+
+  .aaaa {
+    animation: bounce 1.7s ease infinite .7s;
+    -webkit-animation: bounce 1.7s ease infinite .7s;
+  }
+
+  .bl {
+    animation: bounce 1.7s ease infinite .8s;
+    -webkit-animation: bounce 1.7s ease infinite .8s;
+  }
+
+  .l {
+    animation: bounce 1.7s ease infinite .9s;
+    -webkit-animation: bounce 1.7s ease infinite .9s;
+  }
+
+  @keyframes bounce {
+    0%   { transform: scale(1,1) translateY(0); }
+    10%  { transform: scale(1.1,.9) translateY(0); }
+    30%  { transform: scale(.9,1.1)   translateY(-55px);}
+    50%  { transform: scale(1.05,.95) translateY(0); }
+    58%  { transform: scale(1,1) translateY(-7px); }
+    65%  { transform: scale(1,1) translateY(0);}
+    100% { transform: scale(1,1) translateY(0);}
+  }
+
+  @-webkit-keyframes bounce {
+    0%   { transform: scale(1,1) translateY(0); }
+    10%  { transform: scale(1.1,.9) translateY(0); }
+    30%  { transform: scale(.9,1.1)   translateY(-55px);}
+    50%  { transform: scale(1.05,.95) translateY(0); }
+    58%  { transform: scale(1,1) translateY(-7px);}
+    65%  { transform: scale(1,1) translateY(0);}
+    100% { transform: scale(1,1) translateY(0);}
+  }
+
+
+  .bouncing-text:before, .bouncing-text:after {
+    content:"";
+    position: absolute;
+    background-color: rgba(0,0,0,0.4);
+    width: 50px;
+    height:5px;
+    border-radius:50%;
+    top:44px;
+    z-index:-1;
+  }
+
+  .shadow, .shadow-two, .shadow-three, .shadow-four {
+    position: absolute;
+    top:82px;
+    z-index:-1;
+  }
+
+  .shadow:before, .shadow:after, .shadow-two:before, .shadow-two:after, .shadow-three:before, .shadow-three:after, .shadow-four:before, .shadow-four:after {
+    content:"";
+    position: absolute;
+    background-color: rgba(0,0,0,0.4);
+    width: 50px;
+    height:5px;
+    border-radius:50%;
+    top: -38px;
+  }
+
+  .bouncing-text:before {
+    left:7px;
+    animation: scale 1.7s linear infinite;
+    -webkit-animation: scale 1.7s linear infinite;
+  }
+
+  @keyframes scale {
+    0% {transform: scaleX(1);}
+    25% {transform: scaleX(0.4);}
+    50% {transform: scaleX(1);}
+    75% {transform: scaleX(0.9);}
+    100% {transform: scaleX(1);}
+  }
+
+  @-webkit-keyframes scale {
+    0% {transform: scaleX(1);}
+    25% {transform: scaleX(0.4);}
+    50% {transform: scaleX(1);}
+    75% {transform: scaleX(0.9);}
+    100% {transform: scaleX(1);}
+  }
+
+  .bouncing-text:after {
+    left: 70px;
+    animation: scale 1.7s linear infinite .1s;
+    -webkit-animation: scale 1.7s linear infinite .1s;
+  }
+
+  .shadow:before {
+    left: 127px;
+    animation: scale 1.7s linear infinite .2s;
+    -webkit-animation: scale 1.7s linear infinite .2s;
+  }
+
+  .shadow:after {
+    left:185px;
+    animation: scale 1.7s linear infinite .3s;
+    -webkit-animation: scale 1.7s linear infinite .3s;
+  }
+
+  .shadow-two:before {
+    left:240px;
+    animation: scale 1.7s linear infinite .4s;
+    -webkit-animation: scale 1.7s linear infinite .4s;
+  }
+
+  .shadow-two:after {
+    left: 293px;
+    animation: scale 1.7s linear infinite .5s;
+    -webkit-animation: scale 1.7s linear infinite .5s;
+  }
+  .shadow-three:before {
+    left: 343px;
+    animation: scale 1.7s linear infinite .6s;
+    -webkit-animation: scale 1.7s linear infinite .6s;
+  }
+  .shadow-three:after {
+    left: 390px;
+    animation: scale 1.7s linear infinite .7s;
+    -webkit-animation: scale 1.7s linear infinite .7s;
+  }
+  .shadow-four:before{
+    left: 435px;
+    animation: scale 1.7s linear infinite .8s;
+    -webkit-animation: scale 1.7s linear infinite .8s;
+  }
+  .shadow-four:after{
+    left: 480px;
+    animation: scale 1.7s linear infinite .9s;
+    -webkit-animation: scale 1.7s linear infinite .9s;
+  }
+
+
+</style>
+  <div class="bouncing-text">
+    <div class="e">E</div>
+    <div class="s">S</div>
+    <div class="p">P</div>
+    <div class="r">R</div>
+    <div class="i">I</div>
+    <div class="t">T</div>
+    <div class="pp">.</div>
+    <div class="ppp">.</div>
+    <div class="shadow"></div>
+    <div class="shadow-two"></div>
+<!--    <div class="shadow-three"></div>-->
+<!--    <div class="shadow-four"></div>-->
+  </div>
+</body>
+<script src="/assets/user-template/js/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/assets/user-template/js/bootstrap.min.js"></script>
+<script src="/assets/user-template/js/jquery.bxslider.min.js"></script>
+<script src="/assets/user-template/js/bootstrap-slider.js"></script>
+<script src="/assets/user-template/js/waypoints.min.js"></script>
+<script src="/assets/user-template/js/jquery.counterup.min.js"></script>
+<script src="/assets/user-template/js/bg-moving.js"></script>
+<script src="/assets/user-template/js/dl-menu/modernizr.custom.js"></script>
+<script src="/assets/user-template/js/dl-menu/jquery.dlmenu.js"></script>
+<script src="/assets/user-template/js/jquery.countdown.js"></script>
+<script src="/assets/user-template/js/jquery.accordion.js"></script>
+<script src="/assets/user-template/js/jquery.plugin.js"></script>
+<script src="/assets/user-template/js/functions.js"></script>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+</html>
