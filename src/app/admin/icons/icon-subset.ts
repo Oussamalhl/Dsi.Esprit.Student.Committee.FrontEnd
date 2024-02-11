@@ -43,7 +43,7 @@ import {
   cilDrop,
   cilEnvelopeClosed,
   cilEnvelopeOpen,
-  cilFile,
+  cilFile, cilGroup,
   cilHome,
   cilInbox,
   cilIndentDecrease,
@@ -182,6 +182,7 @@ export const iconSubset = {
   cilUserFemale,
   cilUserFollow,
   cilUserUnfollow,
+  cilGroup,
 };
 
 export enum IconSubset {

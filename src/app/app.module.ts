@@ -77,6 +77,9 @@ import { UserAddComponent } from './admin/user/user-add/user-add.component';
 import { UserUpdateComponent } from './admin/user/user-update/user-update.component';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatSelectModule} from "@angular/material/select";
+import { ReclamationShowAllComponent } from './admin/reclamation/reclamation-show-all/reclamation-show-all.component';
+import { ReclamationAddComponent } from './admin/reclamation/reclamation-add/reclamation-add.component';
+import { ReclamationUpdateComponent } from './admin/reclamation/reclamation-update/reclamation-update.component';
 
 
 
@@ -90,7 +93,7 @@ const APP_CONTAINERS = [
   DefaultLayoutComponent,
 ];
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, DefaultLayoutUComponent, DefaultFooterUComponent, DefaultHeaderUComponent, CommingSoonComponent, UserIndexComponent, SigninComponent,SignupComponent, UserShowAllComponent, UserDetailsComponent, UserAddComponent, UserUpdateComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, DefaultLayoutUComponent, DefaultFooterUComponent, DefaultHeaderUComponent, CommingSoonComponent, UserIndexComponent, SigninComponent,SignupComponent, UserShowAllComponent, UserDetailsComponent, UserAddComponent, UserUpdateComponent, ReclamationShowAllComponent, ReclamationAddComponent, ReclamationUpdateComponent],
   imports: [
     BrowserModule,
     ScheduleModule,

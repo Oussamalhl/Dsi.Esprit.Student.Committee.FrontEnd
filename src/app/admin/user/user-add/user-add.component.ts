@@ -33,14 +33,10 @@ export class UserAddComponent implements OnInit {
       map((tag: string | null) => (tag ? this._filter(tag) : this.roles.slice())),
     );
   }
-  @ViewChild('roleInput') roleInput: ElementRef<HTMLInputElement> | undefined;
+  @ViewChild('roleInput') roleInput!: ElementRef<HTMLInputElement>;
 
   addUser(u:User) {
     let role : Role[]=[]
-    // u.roles.forEach(e=> this.selectedRoles.forEach(t=>e.name=t))
-    // this.selectedRoles.forEach(e=>
-    //   role.name=e,
-    //  u.roles.push(role))
     this.selectedRoles.forEach(e=>role.push(new Role(e)))
     u.roles=role;
     console.log(u.roles);

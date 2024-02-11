@@ -14,6 +14,7 @@ import {PaginationsComponent} from "./admin/views/base/paginations/paginations.c
 import {UserDetailsComponent} from "./admin/user/user-details/user-details.component";
 import {UserShowAllComponent} from "./admin/user/user-show-all/user-show-all.component";
 import {UserAddComponent} from "./admin/user/user-add/user-add.component";
+import {UserUpdateComponent} from "./admin/user/user-update/user-update.component";
 
 const routes: Routes = [
 
@@ -55,6 +56,10 @@ const routes: Routes = [
       {
         path: 'users/addUser',
         component: UserAddComponent
+      },
+      {
+        path: 'users/updateUser/:id',
+        component: UserUpdateComponent
       },
       {
         path: 'users',

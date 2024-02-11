@@ -1,7 +1,7 @@
 <c-breadcrumb [style]="'--cui-breadcrumb-divider:\'>\''">
   <c-breadcrumb-item url="/admin">Home</c-breadcrumb-item>
   <c-breadcrumb-item [active]="false">Users</c-breadcrumb-item>
-  <c-breadcrumb-item url="/admin/event/show" [active]="true">Show Users</c-breadcrumb-item>
+  <c-breadcrumb-item url="/admin/users" [active]="true">Show Users</c-breadcrumb-item>
 
 </c-breadcrumb>
 <style>
@@ -61,12 +61,12 @@
                       <mat-accordion>
                         <mat-expansion-panel hideToggle>
                           <mat-expansion-panel-header>
-                            Description
+                            Details
                           </mat-expansion-panel-header>
                           <div class="d-flex justify-content-center">
                             <button mat-raised-button [routerLink]="['showUser/'+element.id]"
                                     color="primary">
-                              Details</button>
+                              more..</button>
                           </div>
                         </mat-expansion-panel>
                         <mat-expansion-panel (opened)="panelOpenState = true"
@@ -115,7 +115,7 @@
                       <div class="d-flex justify-content-center">
                         <button
                           _ngcontent-qgx-c208
-                          [routerLink]="[element.id,'Update']"
+                          [routerLink]="['updateUser/'+element.id]"
                           cButton
                           class="me-1 btn btn-ghost-warning ng-star-inserted"
                           variant="ghost"

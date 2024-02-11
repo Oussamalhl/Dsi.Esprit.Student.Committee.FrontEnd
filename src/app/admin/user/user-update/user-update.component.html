@@ -1,1 +1,156 @@
-<p>user-update works!</p>
+<c-breadcrumb [style]="'--cui-breadcrumb-divider:\'>\''">
+  <c-breadcrumb-item url="/admin">Home</c-breadcrumb-item>
+  <c-breadcrumb-item url="/admin/users" >Users</c-breadcrumb-item>
+  <c-breadcrumb-item [active]="false">Update User</c-breadcrumb-item>
+</c-breadcrumb>
+<style>
+  .example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+  }
+
+  .example-radio-button {
+    margin: 5px;
+  }
+</style>
+<div class="body flex-grow-1 px-3">
+  <c-container breakpoint="lg" class="h-auto container-lg" _nghost-qgx-c92="">
+
+    <c-row _ngcontent-qgx-c191="" _nghost-qgx-c96="" class="row">
+      <c-col _ngcontent-qgx-c191="" xs="12" _nghost-qgx-c94="" class="col-12">
+        <c-card _ngcontent-qgx-c191="" class="mb-4 card">
+          <c-card-header _ngcontent-qgx-c191="" class="card-header">
+            <strong _ngcontent-qgx-c191="" class="h3">Update User "{{u.username}}"</strong>
+          </c-card-header>
+          <c-card-body _ngcontent-qgx-c191="" class="card-body">
+            <div class="body flex-grow-1 px-3">
+
+              <form #browserDefaultsForm="ngForm"
+                    class="row g-3"
+                    cForm
+                    cRow
+                    ngNativeValidate>
+
+                <c-col [md]="6">
+                  <div cFormFloating>
+
+                    <input type="text"
+                           cFormControl
+                           id="nameInput"
+                           placeholder="Enter User Name "
+                           [(ngModel)]="u.username"
+                           [ngModelOptions]="{standalone: true}"
+                           required
+                    />
+
+                    <label cLabel for="nameInput">User Name</label>
+                  </div>
+                </c-col>
+                <br>
+                <c-col [md]="6">
+                  <div cFormFloating>
+
+                    <input type="password"
+                           cFormControl
+                           id="Password"
+                           [(ngModel)]="u.password"
+                           [ngModelOptions]="{standalone: true}"
+                           required
+                    />
+
+                    <label cLabel for="Password">User Password</label>
+                  </div>
+                </c-col>
+                <br>
+<!--                <c-col [md]="6">-->
+<!--                  <div cFormFloating>-->
+<!--                    <input cFormControl type="datetime-local" id="dateS"-->
+<!--                           name="dateS" [(ngModel)]="e.eventDateStart" [ngModelOptions]="{standalone: true}" required>-->
+<!--                    <label cLabel for="dateS">Starts On: {{e.eventDateStart}}</label>-->
+<!--                  </div>-->
+<!--                </c-col>-->
+
+                <c-col [md]="6">
+                  <div cFormFloating>
+
+                    <input type="email"
+                           cFormControl
+                           id="email"
+                           placeholder="Enter User Email "
+                           [(ngModel)]="u.email"
+                           [ngModelOptions]="{standalone: true}"
+                           required
+                    />
+
+                    <label cLabel for="nameInput">Email</label>
+                  </div>
+                </c-col>
+
+                <c-col [md]="3">
+                  <mat-form-field appearance="fill">
+                    <mat-select [(ngModel)]="u.sexe" [ngModelOptions]="{standalone: true}" required>
+                      <mat-option *ngFor="let s of sexe" [value]="s ==='Homme'">
+                        {{s}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-label>Sexe</mat-label>
+                  </mat-form-field>
+                </c-col>
+
+                <c-col [md]="3">
+                  <mat-form-field class="example-chip-list" appearance="fill">
+                    <mat-label>Select Roles</mat-label>
+                    <mat-chip-list #chipList aria-label="Tag selection">
+                      <mat-chip
+                        *ngFor="let t of selectedRoles"
+                        (removed)="remove(t)">
+                        {{t}}
+                        <button matChipRemove>
+                          <mat-icon>cancel</mat-icon>
+                        </button>
+                      </mat-chip>
+                      <input
+                        placeholder="New Role..."
+                        #roleInput
+                        [formControl]="tagCtrl"
+                        [matAutocomplete]="auto"
+                        [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        (matChipInputTokenEnd)="add($event)">
+                    </mat-chip-list>
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                      <mat-option *ngFor="let role of filteredRoles| async" [value]="role">
+                        {{role}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </c-col>
+                <c-col [md]="12" ></c-col>
+                <br><br>
+                <c-col [sm]>
+
+                  <button cButton class="me-1" color="primary" type="submit" class="me-1 active btn btn-outline-primary"
+                          aria-pressed="true" variant="outline" (click)="UpdateUser(u)">
+                    Submit
+                  </button>
+                  <button cButton variant="outline" class="me-1 btn btn-outline-secondary"
+                          type="button" (click)="reset()">
+                    Reset
+                  </button>
+                </c-col>
+              </form>
+
+            </div>
+          </c-card-body>
+        </c-card>
+      </c-col>
+
+    </c-row>
+    <c-row _ngcontent-qgx-c191="" _nghost-qgx-c96="" class="row">
+
+    </c-row>
+
+  </c-container>
+</div>

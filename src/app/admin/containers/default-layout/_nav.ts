@@ -32,15 +32,17 @@ export const navItems: INavData[] = [
   {
     name: 'USERS',
     url: '/admin/users',
-    iconComponent: { name: 'cil-puzzle' },
+    iconComponent: { name: 'cil-user' },
     children: [
       {
-        name: 'addUser',
-        url: '/admin/users/addUser'
+        name: 'add User',
+        url: '/admin/users/addUser',
+        iconComponent: { name: 'cilUserFollow' }
       },
       {
-        name: 'showUsers',
-        url: '/admin/users'
+        name: 'show Users',
+        url: '/admin/users',
+        iconComponent: { name: 'cilGroup' }
       }
 
     ]

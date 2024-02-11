@@ -36,8 +36,9 @@ export class UserService {
     return this.http.delete<User>(API_URL+'deleteUser?idUser='+id);
   }
   updateUser(u:User){
-    return this.http.put<User>(API_URL+'updateUser?idUser=',u);
+    return this.http.put<User>(API_URL+'updateUser',u);
   }
+
 
 
 
