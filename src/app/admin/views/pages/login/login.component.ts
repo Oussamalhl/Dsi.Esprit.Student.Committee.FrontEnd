@@ -26,13 +26,13 @@ export class LoginComponent {
     }
     if (this.isLoggedIn) {
 
-      setTimeout(() =>
-        {
-          this.router.navigate(['/admin']);
-        },
-        3000);
+      this.router.navigate(['/admin']).then(() => {
+        window.location.reload();
+      });
 
-
+      this.router.navigate(['/']).then(() => {
+        window.location.reload();
+      });
     }
   }
   logout():void {

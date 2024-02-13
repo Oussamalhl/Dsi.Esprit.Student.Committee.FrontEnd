@@ -34,7 +34,7 @@ export class UserShowAllComponent implements OnInit {
 
   Delete(id: number) {
     this._service.deleteUser(id).subscribe(res => console.log("User Deleted"));
-    setTimeout(() => this.reload(),1000);
+    setTimeout(() => this.reload(), 1000);
 
   }
 

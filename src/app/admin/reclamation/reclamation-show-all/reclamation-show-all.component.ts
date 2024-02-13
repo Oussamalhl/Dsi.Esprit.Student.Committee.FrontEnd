@@ -7,6 +7,8 @@ import {Reclamation} from "../../../models/Reclamation";
 import {ActivatedRoute, Router} from "@angular/router";
 import {LiveAnnouncer} from "@angular/cdk/a11y";
 import {ReclamationService} from "../../../_services/reclamation.service";
+import {User} from "../../../models/User";
+import {UserService} from "../../../_services/user.service";
 
 @Component({
   selector: 'app-reclamation-show-all',
@@ -23,21 +25,21 @@ import {ReclamationService} from "../../../_services/reclamation.service";
 export class ReclamationShowAllComponent implements OnInit {
 
   reclamationsList: Reclamation[] = [];
-  displayedColumns: string[] = ['eventId', 'eventName', 'description', 'eventDateStart', 'eventDateEnd', 'eventTime',
-    'eventLocation', 'eventMotive', 'type', 'status', 'places', 'tags', 'admin', 'files', 'feedback','Participants', 'Staff', 'Speakers', 'Update', 'Remove'];
+  userDetails!:User;
+  displayedColumns: string[] = ['name', 'type', 'target', 'description', 'date', 'status','user', 'Update', 'Remove'];
   dataSource = new MatTableDataSource<Reclamation>(this.reclamationsList);
   panelOpenState = false;
-  r: Reclamation = new Reclamation();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private RS: ReclamationService, private _Activatedroute: ActivatedRoute, private _router: Router, private _liveAnnouncer: LiveAnnouncer) {
+  constructor(private RS: ReclamationService, private US: UserService, private _Activatedroute: ActivatedRoute, private _router: Router, private _liveAnnouncer: LiveAnnouncer) {
 
   }
 
   Delete(id: number) {
     this.RS.deleteReclamation(id).subscribe(res => console.log("Reclamation Deleted"));
-    setTimeout(() => this.reload(),1000);  }
+    setTimeout(() => this.reload(), 1000);
+  }
 
   reload() {
     this.RS.getAllReclamations().subscribe(res => {
@@ -69,24 +71,30 @@ export class ReclamationShowAllComponent implements OnInit {
     }
   }
 
-
+  showUserDetails(recId:number):User{
+    this.RS.getUser(recId).subscribe(u=>{this.userDetails=u
+      //this.panelOpenState=true
+      console.log(u)})
+    //console.log(this.userDetails)
+    return this.userDetails
+  }
 
   ngOnInit(): void {
-
+    let user: User
     this.RS.getAllReclamations().subscribe(res => {
       console.log(res);
       this.reclamationsList = res;
-      this.reclamationsList.forEach(e=>{
-        e.user=this.RS.getUser(e.id)
-          console.log(res);
-        });
-      })
-      this.dataSource = new MatTableDataSource<Reclamation>(this.reclamationsList);
-      if (this.reclamationsList != []) {
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      }
+      // this.reclamationsList.forEach(e => {
+      //  this.RS.getUser(e.id).subscribe(u=>e.user=u)
+      //   //console.log(e.user);
+      //   //this.US.getUser(e.user)
+      // });
 
-    }
+      this.dataSource = new MatTableDataSource<Reclamation>(this.reclamationsList);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    });
+
+  }
 
 }

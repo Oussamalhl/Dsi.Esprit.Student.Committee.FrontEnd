@@ -24,7 +24,7 @@ export class SigninComponent implements OnInit {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;
     }
-    if (this.isLoggedIn) {
+    if (!this.isLoggedIn) {
 
       setTimeout(() =>
         {

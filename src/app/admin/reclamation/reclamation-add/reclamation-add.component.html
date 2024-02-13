@@ -1,1 +1,136 @@
-<p>reclamation-add works!</p>
+<c-breadcrumb [style]="'--cui-breadcrumb-divider:\'>\''">
+  <c-breadcrumb-item url="/admin">Home</c-breadcrumb-item>
+  <c-breadcrumb-item url="/admin/reclamations" >Reclamations</c-breadcrumb-item>
+  <c-breadcrumb-item url="/admin/reclamations/addReclamation" [active]="true">Add Reclamation</c-breadcrumb-item>
+</c-breadcrumb>
+<style>
+  .example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+  }
+
+  .example-radio-button {
+    margin: 5px;
+  }
+</style>
+<div class="body flex-grow-1 px-3">
+  <c-container breakpoint="lg" class="h-auto container-lg" _nghost-qgx-c92="">
+
+    <c-row _ngcontent-qgx-c191="" _nghost-qgx-c96="" class="row">
+      <c-col _ngcontent-qgx-c191="" xs="12" _nghost-qgx-c94="" class="col-12">
+        <c-card _ngcontent-qgx-c191="" class="mb-4 card">
+          <c-card-header _ngcontent-qgx-c191="" class="card-header">
+            <strong _ngcontent-qgx-c191="" class="h3">Add Reclamation</strong>
+          </c-card-header>
+          <c-card-body _ngcontent-qgx-c191="" class="card-body">
+            <div class="body flex-grow-1 px-3">
+
+              <form #browserDefaultsForm="ngForm"
+                    class="row g-3"
+                    cForm
+                    cRow
+                    ngNativeValidate>
+
+                <c-col [md]="6">
+                  <div cFormFloating>
+
+                    <input type="text"
+                           cFormControl
+                           id="nameInput"
+                           placeholder="Enter Reclamation Name "
+                           [(ngModel)]="r.name"
+                           [ngModelOptions]="{standalone: true}"
+                           required=true
+                    />
+
+                    <label cLabel for="nameInput">Reclamation Name</label>
+                  </div>
+                </c-col>
+
+                <c-col [md]="3">
+                  <mat-form-field appearance="fill">
+                    <mat-select [(ngModel)]="r.type" [ngModelOptions]="{standalone: true}" required>
+                      <mat-option>None</mat-option>
+                      <mat-option *ngFor="let t of type" [value]="t">
+                        {{t}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-label>Type</mat-label>
+                    <mat-hint>Please pick up your reclamation type here</mat-hint>
+                  </mat-form-field>
+                </c-col>
+
+                <div [ngSwitch]="r.type">
+                  <div *ngSwitchCase="'CLUB'">CLUB reclamation</div>
+                  <div *ngSwitchCase="'EVENT'">EVENT reclamation</div>
+                </div>
+
+
+                <br>
+                <c-col [md]="3">
+                  <mat-form-field appearance="fill">
+                    <mat-select [(ngModel)]="r.target" [ngModelOptions]="{standalone: true}" required>
+                      <mat-option *ngFor="let t of targets" [value]="t">
+                        {{t}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-label>Target</mat-label>
+                  </mat-form-field>
+                </c-col>
+                <br>
+                <c-col [md]="6">
+                  <div cFormFloating>
+
+                    <textarea
+                      cFormControl
+                      id="Description"
+                      placeholder="Enter Description "
+                      [(ngModel)]="r.description"
+                      [ngModelOptions]="{standalone: true}"
+                    ></textarea>
+
+                    <label cLabel for="Description">Reclamation Description</label>
+                  </div>
+                </c-col>
+                <br>
+                <c-col [md]="3">
+                  <mat-form-field appearance="fill">
+                    <mat-select [(ngModel)]="r.status" [ngModelOptions]="{standalone: true}" required>
+                      <mat-option *ngFor="let s of status" [value]="s ==='OPEN'">
+                        {{s}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-label>Status</mat-label>
+                  </mat-form-field>
+                </c-col>
+
+
+                <c-col [md]="12" ></c-col>
+                <br><br>
+                <c-col [sm]>
+
+                  <button cButton class="me-1" color="primary" type="submit" class="me-1 active btn btn-outline-primary"
+                          aria-pressed="true" variant="outline" (submit)="addReclamation(r)">
+                    Submit
+                  </button>
+                  <button cButton variant="outline" class="me-1 btn btn-outline-secondary"
+                          type="reset">
+                    Reset
+                  </button>
+                </c-col>
+              </form>
+
+            </div>
+          </c-card-body>
+        </c-card>
+      </c-col>
+
+    </c-row>
+    <c-row _ngcontent-qgx-c191="" _nghost-qgx-c96="" class="row">
+
+    </c-row>
+
+  </c-container>
+</div>

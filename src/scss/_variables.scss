@@ -16,7 +16,9 @@
 // $gray-600:  #8a93a2;
 // $gray-700:  #768192;
 // $gray-800:  #636f83;
-// $gray-900:  #4f5d73;
+$gray-900:  #4f5d73;
+$red-esprit:  #ab2424;
+$light-red-esprit: #f03a3a;
 // $black:     #000015;
 
 // fusv-disable
@@ -400,7 +402,7 @@
 //   5: 5px
 // );
 
-// $border-color:                $gray-200;
+ //$border-color:                $light-red-esprit;
 
 // $border-radius:               .25rem;
 // $border-radius-sm:            .2rem;
@@ -1022,7 +1024,6 @@
 // $dropdown-link-color:               $gray-900;
 // $dropdown-link-hover-color:         shade-color($gray-900, 10%);
 // $dropdown-link-hover-bg:            $gray-100;
-
 // $dropdown-link-active-color:        $component-active-color;
 // $dropdown-link-active-bg:           $component-active-bg;
 
@@ -1100,7 +1101,7 @@
 // $card-cap-color:                    unset;
 // $card-height:                       null;
 // $card-color:                        unset;
-// $card-bg:                           $white;
+//$card-bg:                           #fa4343;
 
 // $card-img-overlay-padding:          $spacer;
 
@@ -1532,7 +1533,7 @@
 // $sidebar-padding-y:                        0;
 // $sidebar-padding-x:                        0;
 // $sidebar-color:                            $high-emphasis-light;
-// $sidebar-bg:                               $gray-base;
+ $sidebar-bg:                               $red-esprit;
 // $sidebar-border-width:                     0;
 // $sidebar-border-color:                     transparent;
 // $sidebar-transition:                       margin-left .15s, margin-right .15s, box-shadow .075s, transform .15s, width .15s, z-index 0s ease .15s;
@@ -1605,7 +1606,7 @@
 
 // $sidebar-toggler-indicator-width:          4rem;
 // $sidebar-toggler-indicator-height:         3rem;
-// $sidebar-toggler-indicator-color:          $gray-600;
+ $sidebar-toggler-indicator-color:          $light-red-esprit;
 // $sidebar-toggler-indicator:                str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3Cpath fill='#{$sidebar-toggler-indicator-color}' d='M9.148 2.352l-4.148 4.148 4.148 4.148q0.148 0.148 0.148 0.352t-0.148 0.352l-1.297 1.297q-0.148 0.148-0.352 0.148t-0.352-0.148l-5.797-5.797q-0.148-0.148-0.148-0.352t0.148-0.352l5.797-5.797q0.148-0.148 0.352-0.148t0.352 0.148l1.297 1.297q0.148 0.148 0.148 0.352t-0.148 0.352z'/%3E%3C/svg%3E"), "#", "%23");
 // $sidebar-toggler-hover-bg:                 rgba(0, 0, 0, .3);
 // $sidebar-toggler-hover-indicator-color:    $sidebar-nav-link-hover-color;

@@ -48,6 +48,21 @@ export const navItems: INavData[] = [
     ]
   },
   {
+    name: 'Reclamations',
+    url: '/admin/reclamations',
+    iconComponent: { name: 'cil-notes' },
+    children: [
+      {
+        name: 'add Reclamations',
+        url: '/admin/reclamations/addReclamation'
+      },
+      {
+        name: 'show Reclamations',
+        url: '/admin/reclamations'
+      }
+    ]
+  },
+  {
     name: 'EVENTS',
     url: '/admin/events',
     iconComponent: { name: 'cil-cursor' },
@@ -63,7 +78,7 @@ export const navItems: INavData[] = [
     ]
   },
   {
-    name: 'FUNDRAISERS',
+    name: 'Reclamations',
     url: '/admin/fundraisers',
     iconComponent: { name: 'cil-notes' },
     children: [

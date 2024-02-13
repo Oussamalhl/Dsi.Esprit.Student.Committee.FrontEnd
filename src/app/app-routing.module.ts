@@ -15,6 +15,10 @@ import {UserDetailsComponent} from "./admin/user/user-details/user-details.compo
 import {UserShowAllComponent} from "./admin/user/user-show-all/user-show-all.component";
 import {UserAddComponent} from "./admin/user/user-add/user-add.component";
 import {UserUpdateComponent} from "./admin/user/user-update/user-update.component";
+import {ReclamationShowAllComponent} from "./admin/reclamation/reclamation-show-all/reclamation-show-all.component";
+import {ReclamationAddComponent} from "./admin/reclamation/reclamation-add/reclamation-add.component";
+import {ReclamationUpdateComponent} from "./admin/reclamation/reclamation-update/reclamation-update.component";
+import {AuthGaurdService} from "./_services/auth-gaurd.service";
 
 const routes: Routes = [
 
@@ -41,6 +45,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: DefaultLayoutComponent,
+    canActivate:[AuthGaurdService],
     data: {
       title: 'Home'
     },
@@ -64,6 +69,18 @@ const routes: Routes = [
       {
         path: 'users',
         component: UserShowAllComponent
+      },
+      {
+        path: 'reclamations',
+        component: ReclamationShowAllComponent
+      },
+      {
+        path: 'reclamations/addReclamation',
+        component: ReclamationAddComponent
+      },
+      {
+        path: 'reclamations/updateReclamation/:id',
+        component: ReclamationUpdateComponent
       },
 
       {
