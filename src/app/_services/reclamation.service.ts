@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {Reclamation} from "../models/Reclamation";
 import {User} from "../models/User";
 import {UserService} from "./user.service";
+import {reclamationFile} from "../models/reclamationFile";
 
 const API_URL = 'http://localhost:8083/api/reclamation/';
 
@@ -11,7 +12,8 @@ const API_URL = 'http://localhost:8083/api/reclamation/';
   providedIn: 'root'
 })
 export class ReclamationService {
-  private idUser!:number
+  private idUser!: number
+
   constructor(private http: HttpClient, private us: UserService) {
   }
 
@@ -29,24 +31,24 @@ export class ReclamationService {
 
   getUser(id: number) {
     var subject = new Subject<User>();
-    let user:User;
+    let user: User;
 
-     this.http.get<number>(API_URL + 'getUser?idReclamation=' + id).subscribe(data=>{
-       //console.log(data)
-       //subject.next(this.us.getReclamationUser(data))
-       this.us.getReclamationUser(data).subscribe(r=>{
-           user=r
-           //console.log(user)
-         subject.next(user);
+    this.http.get<number>(API_URL + 'getUser?idReclamation=' + id).subscribe(data => {
+      //console.log(data)
+      //subject.next(this.us.getReclamationUser(data))
+      this.us.getReclamationUser(data).subscribe(r => {
+        user = r
+        //console.log(user)
+        subject.next(user);
 
-       })
+      })
 
-       //return subject.asObservable();
-       //user=this.us.getUser(data)
-       //this.us.getReclamationUser(data)
-       //user=this.us.getReclamationUser(data)
-       //console.log(user);
-     })
+      //return subject.asObservable();
+      //user=this.us.getUser(data)
+      //this.us.getReclamationUser(data)
+      //user=this.us.getReclamationUser(data)
+      //console.log(user);
+    })
     return subject.asObservable();
   }
 
@@ -56,5 +58,21 @@ export class ReclamationService {
 
   updateReclamation(r: Reclamation) {
     return this.http.put<Reclamation>(API_URL + 'updateReclamation', r);
+  }
+
+  GetReclamationFiles(id: number): Observable<reclamationFile[]> {
+    return this.http.get<reclamationFile[]>(API_URL + 'getFiles/' + id);
+  }
+
+  AddReclamationFiles(id: number, file: FormData) {
+    return this.http.post<reclamationFile>(API_URL + 'addFile/' + id, file, {observe: 'response'});
+  }
+
+  RemoveReclamationFile(id: number, fid: number) {
+    return this.http.delete<reclamationFile>(API_URL + id + "/deleteFile/" + fid);
+  }
+
+  getImage(imageName: string) {
+    return this.http.get<reclamationFile>(API_URL + 'getImage/' + imageName);
   }
 }

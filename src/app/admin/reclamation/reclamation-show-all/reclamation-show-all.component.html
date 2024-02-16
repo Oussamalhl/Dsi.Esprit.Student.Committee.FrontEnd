@@ -99,8 +99,24 @@
                     <td mat-cell *matCellDef="let element"> {{element.status ? "Open" : "Closed"}} </td>
                   </ng-container>
 
-
-                  <ng-container matColumnDef="user">-->
+                  <ng-container matColumnDef="files">
+                    <th mat-header-cell *matHeaderCellDef> Files
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      <div class="d-flex justify-content-center">
+                        <button
+                          _ngcontent-qgx-c208
+                          cButton
+                          [routerLink]="[element.id,'Files']"
+                          class="me-1 btn btn-ghost-secondary ng-star-inserted"
+                          variant="ghost"
+                          size="lg">
+                          <svg cIcon name="cil-file" size="xl" title="cilMagnifyingGlass"></svg>
+                        </button>
+                      </div>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="user">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by admin"> User
                     </th>
                     <td mat-cell *matCellDef="let element">

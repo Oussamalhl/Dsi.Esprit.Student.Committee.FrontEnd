@@ -1,13 +1,15 @@
-import { Reclamation } from "./Reclamation";
+import {Reclamation} from "./Reclamation";
 
-export class reclamationFile{
-  fileId!:number;
+export class reclamationFile {
+  fileId!: number;
 
-  fileName!:string;
+  fileName!: string;
 
-  filePath!:string;
+  filePath!: string;
 
-  uploadDate!:Date;
+  uploadDate!: Date;
 
-  reclamation!:Reclamation;
+  picByte!: string[]
+
+  reclamation!: Reclamation;
 }

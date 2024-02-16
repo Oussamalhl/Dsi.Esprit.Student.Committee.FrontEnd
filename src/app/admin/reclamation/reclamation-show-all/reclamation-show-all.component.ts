@@ -25,8 +25,8 @@ import {UserService} from "../../../_services/user.service";
 export class ReclamationShowAllComponent implements OnInit {
 
   reclamationsList: Reclamation[] = [];
-  userDetails!:User;
-  displayedColumns: string[] = ['name', 'type', 'target', 'description', 'date', 'status','user', 'Update', 'Remove'];
+  userDetails!: User;
+  displayedColumns: string[] = ['name', 'type', 'target', 'description', 'date', 'status', 'files', 'user', 'Update', 'Remove'];
   dataSource = new MatTableDataSource<Reclamation>(this.reclamationsList);
   panelOpenState = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -71,10 +71,12 @@ export class ReclamationShowAllComponent implements OnInit {
     }
   }
 
-  showUserDetails(recId:number):User{
-    this.RS.getUser(recId).subscribe(u=>{this.userDetails=u
+  showUserDetails(recId: number): User {
+    this.RS.getUser(recId).subscribe(u => {
+      this.userDetails = u
       //this.panelOpenState=true
-      console.log(u)})
+      console.log(u)
+    })
     //console.log(this.userDetails)
     return this.userDetails
   }

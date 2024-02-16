@@ -19,6 +19,12 @@ import {ReclamationShowAllComponent} from "./admin/reclamation/reclamation-show-
 import {ReclamationAddComponent} from "./admin/reclamation/reclamation-add/reclamation-add.component";
 import {ReclamationUpdateComponent} from "./admin/reclamation/reclamation-update/reclamation-update.component";
 import {AuthGaurdService} from "./_services/auth-gaurd.service";
+import {
+  ReclamationShowFilesComponent
+} from "./admin/reclamation/reclamation-show-all/reclamation-show-files/reclamation-show-files.component";
+import {
+  ReclamationAddFileComponent
+} from "./admin/reclamation/reclamation-add/reclamation-add-file/reclamation-add-file.component";
 
 const routes: Routes = [
 
@@ -81,6 +87,14 @@ const routes: Routes = [
       {
         path: 'reclamations/updateReclamation/:id',
         component: ReclamationUpdateComponent
+      },
+      {
+        path: 'reclamations/:id/Files',
+        component: ReclamationShowFilesComponent,
+      },
+      {
+        path: 'reclamations/:id/Files/add',
+        component: ReclamationAddFileComponent,
       },
 
       {

@@ -30,7 +30,7 @@ import {
   BreadcrumbModule,
   ButtonGroupModule,
   ButtonModule,
-  CardModule,
+  CardModule, CarouselModule,
   DropdownModule,
   FooterModule,
   FormModule,
@@ -41,7 +41,7 @@ import {
   ProgressModule,
   SharedModule,
   SidebarModule, TableModule,
-  TabsModule,
+  TabsModule, ToastModule,
   UtilitiesModule,
 } from '@coreui/angular';
 
@@ -80,6 +80,8 @@ import {MatSelectModule} from "@angular/material/select";
 import { ReclamationShowAllComponent } from './admin/reclamation/reclamation-show-all/reclamation-show-all.component';
 import { ReclamationAddComponent } from './admin/reclamation/reclamation-add/reclamation-add.component';
 import { ReclamationUpdateComponent } from './admin/reclamation/reclamation-update/reclamation-update.component';
+import { ReclamationShowFilesComponent } from './admin/reclamation/reclamation-show-all/reclamation-show-files/reclamation-show-files.component';
+import { ReclamationAddFileComponent } from './admin/reclamation/reclamation-add/reclamation-add-file/reclamation-add-file.component';
 
 
 
@@ -93,7 +95,7 @@ const APP_CONTAINERS = [
   DefaultLayoutComponent,
 ];
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, DefaultLayoutUComponent, DefaultFooterUComponent, DefaultHeaderUComponent, CommingSoonComponent, UserIndexComponent, SigninComponent,SignupComponent, UserShowAllComponent, UserDetailsComponent, UserAddComponent, UserUpdateComponent, ReclamationShowAllComponent, ReclamationAddComponent, ReclamationUpdateComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, DefaultLayoutUComponent, DefaultFooterUComponent, DefaultHeaderUComponent, CommingSoonComponent, UserIndexComponent, SigninComponent,SignupComponent, UserShowAllComponent, UserDetailsComponent, UserAddComponent, UserUpdateComponent, ReclamationShowAllComponent, ReclamationAddComponent, ReclamationUpdateComponent, ReclamationShowFilesComponent, ReclamationAddFileComponent],
   imports: [
     BrowserModule,
     ScheduleModule,
@@ -141,7 +143,9 @@ const APP_CONTAINERS = [
     MatExpansionModule,
     MatChipsModule,
     MatAutocompleteModule,
-    MatSelectModule
+    MatSelectModule,
+    CarouselModule,
+    ToastModule
 
 
   ],

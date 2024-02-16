@@ -22,12 +22,12 @@
       <c-col _ngcontent-qgx-c191="" xs="12" _nghost-qgx-c94="" class="col-12">
         <c-card _ngcontent-qgx-c191="" class="mb-4 card">
           <c-card-header _ngcontent-qgx-c191="" class="card-header">
-            <strong _ngcontent-qgx-c191="" class="h3">Update Reclamation "{{r.name}}" of "{{r.user.username}}"</strong>
+            <strong _ngcontent-qgx-c191="" class="h3">Update Reclamation "{{r.name}}" of "{{r.user?r.user.username:'unknown'}}"</strong>
           </c-card-header>
           <c-card-body _ngcontent-qgx-c191="" class="card-body">
             <div class="body flex-grow-1 px-3">
 
-              <div class="card" style="width: 18rem;">
+              <div *ngIf="r.user" class="card" style="width: 18rem;">
                 <div class="card-body">
                   <h5 class="card-title">{{r.user.username}}</h5>
                   <h6 class="card-subtitle mb-2 text-body-secondary">{{r.user.email}}</h6>
