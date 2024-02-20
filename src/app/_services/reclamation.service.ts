@@ -72,7 +72,20 @@ export class ReclamationService {
     return this.http.delete<reclamationFile>(API_URL + id + "/deleteFile/" + fid);
   }
 
-  getImage(imageName: string) {
-    return this.http.get<reclamationFile>(API_URL + 'getImage/' + imageName);
+  GetReclamationTargets(type: string):Observable<string[]> {
+
+    return this.http.get<string[]>(API_URL + 'getTargets?type=' + type)
+
   }
+  countAllReclamationByMonth():Observable<any> {
+
+    return this.http.get<any>(API_URL + 'countAllRecByMonth')
+
+  }
+  countReclamationStatusByYear():Observable<any> {
+
+    return this.http.get<any>(API_URL + 'countRecStatusByYear')
+
+  }
+
 }

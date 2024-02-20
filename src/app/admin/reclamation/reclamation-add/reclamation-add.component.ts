@@ -17,8 +17,8 @@ export class ReclamationAddComponent implements OnInit {
   r: Reclamation = new Reclamation();
   selectedType!:string
   status=['OPEN', 'CLOSED'];
-  type=['CLUB', 'EVENT','OTHER..'];
-  targets:string[]=['Enactus','Sport']
+  type=['club', 'event','OTHER..'];
+  targets!:string[]
   separatorKeysCodes: number[] = [ENTER, COMMA];
   ngForm=new FormGroup({
     type: new FormControl(null)
@@ -32,12 +32,23 @@ export class ReclamationAddComponent implements OnInit {
 
     if (this.ngForm.valid){
       this.RS.AddReclamation(r).subscribe(res=>{
-        console.log(r + "Has been added");
+        console.log(res.name + "Has been added");
       })
     }
     this._router.navigateByUrl("admin/reclamations");
   }
+getTargets(type:string){
+  console.log("type: "+type);
+      this.RS.GetReclamationTargets(type).subscribe(e=>{
+        this.targets=[]
+          this.targets=e
+        //e.forEach(t=>console.log("targets: "+t))
+        //console.log("targets: "+e);
 
+      })
+  //return this.targets
+
+}
   ngOnInit(): void {
 
   }

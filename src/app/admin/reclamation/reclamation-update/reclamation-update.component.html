@@ -113,7 +113,7 @@
                 <c-col [md]="3">
                   <mat-form-field appearance="fill">
                     <mat-select [(ngModel)]="r.status" [ngModelOptions]="{standalone: true}" required>
-                      <mat-option *ngFor="let s of status" [value]="s ==='OPEN'">
+                      <mat-option *ngFor="let s of status" [value]="s ==='CLOSED'">
                         {{s}}
                       </mat-option>
                     </mat-select>

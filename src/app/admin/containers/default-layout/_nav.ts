@@ -59,6 +59,10 @@ export const navItems: INavData[] = [
       {
         name: 'show Reclamations',
         url: '/admin/reclamations'
+      },
+      {
+        name: 'Reclamation Charts',
+        url: '/admin/reclamations/charts'
       }
     ]
   },

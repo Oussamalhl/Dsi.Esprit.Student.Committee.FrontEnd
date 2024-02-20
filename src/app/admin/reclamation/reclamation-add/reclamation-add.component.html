@@ -51,9 +51,9 @@
 
                 <c-col [md]="3">
                   <mat-form-field appearance="fill">
-                    <mat-select [(ngModel)]="r.type" [ngModelOptions]="{standalone: true}" required>
+                    <mat-select [(ngModel)]="r.type" [ngModelOptions]="{standalone: true}" (ngModelChange)="getTargets(r.type)" required>
                       <mat-option>None</mat-option>
-                      <mat-option *ngFor="let t of type" [value]="t">
+                      <mat-option *ngFor="let t of type" [value]="t" >
                         {{t}}
                       </mat-option>
                     </mat-select>
@@ -62,16 +62,19 @@
                   </mat-form-field>
                 </c-col>
 
+                <div>
+
+                </div>
                 <div [ngSwitch]="r.type">
-                  <div *ngSwitchCase="'CLUB'">CLUB reclamation</div>
-                  <div *ngSwitchCase="'EVENT'">EVENT reclamation</div>
+                  <div *ngSwitchCase="'club'">CLUB reclamation</div>
+                  <div *ngSwitchCase="'event'">EVENT reclamation</div>
                 </div>
 
 
                 <br>
                 <c-col [md]="3">
                   <mat-form-field appearance="fill">
-                    <mat-select [(ngModel)]="r.target" [ngModelOptions]="{standalone: true}" required>
+                    <mat-select [(ngModel)]="r.target" name="targets" required>
                       <mat-option *ngFor="let t of targets" [value]="t">
                         {{t}}
                       </mat-option>
@@ -98,7 +101,7 @@
                 <c-col [md]="3">
                   <mat-form-field appearance="fill">
                     <mat-select [(ngModel)]="r.status" [ngModelOptions]="{standalone: true}" required>
-                      <mat-option *ngFor="let s of status" [value]="s ==='OPEN'">
+                      <mat-option *ngFor="let s of status" [value]="s ==='CLOSED'">
                         {{s}}
                       </mat-option>
                     </mat-select>

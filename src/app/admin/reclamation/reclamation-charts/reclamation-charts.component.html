@@ -1,0 +1,36 @@
+<c-row>
+  <c-col >
+    <mat-form-field appearance="fill">
+      <mat-select [(ngModel)]="selectedYear" [ngModelOptions]="{standalone: true}" (ngModelChange)="filterCountByYear(selectedYear)" required>
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let y of years" [value]="y" >
+          {{y}}
+        </mat-option>
+      </mat-select>
+      <mat-label>Type</mat-label>
+      <mat-hint>Please pick up a date</mat-hint>
+    </mat-form-field>
+  </c-col>
+</c-row>
+<c-row>
+  <c-col xs="12" lg="6">
+    <c-card class="mb-4">
+      <c-card-header>
+        Reclamation Count
+      </c-card-header>
+      <c-card-body>
+        <c-chart type="bar" [data]="dataMonths"></c-chart>
+      </c-card-body>
+    </c-card>
+  </c-col>
+  <c-col xs="12" lg="6">
+    <c-card class="mb-4">
+      <c-card-header>
+        Pie Chart
+      </c-card-header>
+      <c-card-body>
+        <c-chart type="pie" [data]="dataStatus"></c-chart>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>

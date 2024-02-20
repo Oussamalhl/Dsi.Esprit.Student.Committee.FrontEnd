@@ -73,20 +73,6 @@ export class ReclamationShowFilesComponent implements OnInit {
 
   }
 
-//Gets called when the user clicks on retieve image button to get the image from back end
-  getImage(imageName: string) {
-    //Make a call to Sprinf Boot to get the Image Bytes.
-    this.RS.getImage(imageName)
-      .subscribe(
-        res => {
-          this.base64Data = res.picByte;
-          //this.retrievedImages.push('data:image/png;base64,' + this.base64Data);
-          this.retrievedImages.forEach(e => console.log("retrieved image: " + e));
-        }
-      );
-    //this.retrievedImages.forEach(e=>console.log("retrieved image: "+e))
-  }
-
   ngOnInit(): void {
     this.id = Number(this._Activatedroute.snapshot.paramMap.get("id"));
     if (this.id != null) {

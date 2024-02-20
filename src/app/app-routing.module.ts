@@ -25,6 +25,7 @@ import {
 import {
   ReclamationAddFileComponent
 } from "./admin/reclamation/reclamation-add/reclamation-add-file/reclamation-add-file.component";
+import {ReclamationChartsComponent} from "./admin/reclamation/reclamation-charts/reclamation-charts.component";
 
 const routes: Routes = [
 
@@ -91,6 +92,10 @@ const routes: Routes = [
       {
         path: 'reclamations/:id/Files',
         component: ReclamationShowFilesComponent,
+      },
+      {
+        path: 'reclamations/charts',
+        component: ReclamationChartsComponent,
       },
       {
         path: 'reclamations/:id/Files/add',
