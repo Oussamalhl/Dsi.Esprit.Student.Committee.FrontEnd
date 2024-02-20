@@ -16,12 +16,17 @@ export class ReclamationChartsComponent implements OnInit {
 
   years: number[] = [2020, 2021, 2022, 2023, 2024]
   reclamationCount!: number[][]
-  reclamationStatusCount!:number[][]
+  reclamationStatusCount!: number[][]
+  reclamationsTypeCount!: any[][]
   dataMonths: any
   dataStatus: any
+  dataTypes: any
   selectedYear!: number
-  yearlyCount= 0
-  yearlyProcessed=0
+  yearlyCount = 0
+  yearlyProcessed = 0
+  clubsCount = 0
+  eventsCount = 0
+  otherCount = 0
 
   January = 0
   February = 0
@@ -52,17 +57,21 @@ export class ReclamationChartsComponent implements OnInit {
       this.reclamationCount = res;
     });
 
-    this.RS.countReclamationStatusByYear().subscribe(res=>{
+    this.RS.countReclamationStatusByYear().subscribe(res => {
       //console.log(res)
-      this.reclamationStatusCount=res;
-
+      this.reclamationStatusCount = res;
+    })
+    this.RS.countReclamationTypeByYear().subscribe(res => {
+      //console.log(res)
+      this.reclamationsTypeCount = res;
     })
 
   }
 
   filterCountByYear(year: number) {
 
-    this.yearlyCount= 0
+    this.yearlyCount = 0
+    this.yearlyProcessed = 0
     this.January = 0
     this.February = 0
     this.March = 0
@@ -75,6 +84,9 @@ export class ReclamationChartsComponent implements OnInit {
     this.October = 0
     this.November = 0
     this.December = 0
+    this.eventsCount = 0
+    this.clubsCount = 0
+    this.otherCount = 0
 
     this.reclamationCount.forEach(e => {
       //console.log(e);
@@ -84,7 +96,7 @@ export class ReclamationChartsComponent implements OnInit {
       if (e.includes(year)) {
         console.log('year: ' + e[0] + ' month: ' + e[1] + ' count: ' + e[2]);
         this.yearlyCount += e[2]
-        e[1] == 1 ? this.January = e[2]:
+        e[1] == 1 ? this.January = e[2] :
           e[1] == 2 ? this.February = e[2] :
             e[1] == 3 ? this.March = e[2] :
               e[1] == 4 ? this.April = e[2] :
@@ -96,17 +108,29 @@ export class ReclamationChartsComponent implements OnInit {
                           e[1] == 10 ? this.October = e[2] :
                             e[1] == 11 ? this.November = e[2] :
                               e[1] == 12 ? this.December = e[2] :
-                                console.log(this.February)
+                                console.log('null: ' + e)
 
       }
-      this.reclamationStatusCount.forEach(e=>{
-        if(e.includes(year)){
-          this.yearlyProcessed=e[1];
+      this.reclamationStatusCount.forEach(e => {
+        if (e.includes(year)) {
+          this.yearlyProcessed = e[1];
         }
       })
+      this.reclamationsTypeCount.forEach(e => {
+        if (e.includes(year)) {
+          console.log('year: ' + e[0] + ' type: ' + e[1] + ' count: ' + e[2]);
+          //this.yearlyCount += e[2]
+          e[1] === 'EVENT' ? this.eventsCount = e[2] :
+            e[1] == 'CLUB' ? this.clubsCount = e[2] :
+              e[1] == 'OTHER' ? this.otherCount = e[2] :
+                console.log(this.otherCount)
+
+        }
+      })
+
     })
-    console.log('yearly count: '+this.yearlyCount)
-    console.log('yearly processed: '+this.yearlyProcessed)
+    console.log('yearly count: ' + this.yearlyCount)
+    console.log('yearly processed: ' + this.yearlyProcessed)
     this.dataMonths = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
       datasets: [
@@ -122,8 +146,18 @@ export class ReclamationChartsComponent implements OnInit {
       datasets: [
         {
           label: 'Status',
-          backgroundColor: ['#DD1B16','#41B883'],
-          data: [this.yearlyCount-this.yearlyProcessed,this.yearlyProcessed]
+          backgroundColor: ['#DD1B16', '#41B883'],
+          data: [this.yearlyCount - this.yearlyProcessed, this.yearlyProcessed]
+        }
+      ]
+    }
+    this.dataTypes = {
+      labels: ['Clubs', 'Events', 'Other'],
+      datasets: [
+        {
+          label: 'Type',
+          backgroundColor: ['#DD1B16', '#41B883', '#f87979'],
+          data: [this.clubsCount, this.eventsCount, this.otherCount]
         }
       ]
     }

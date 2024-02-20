@@ -17,7 +17,7 @@ export class ReclamationUpdateComponent implements OnInit {
   id!:number;
   selectedType!:string
   status=['OPEN', 'CLOSED'];
-  type=['CLUB', 'EVENT','OTHER..'];
+  type=['CLUB', 'EVENT','OTHER'];
   targets:string[]=['Enactus','Sport']
   separatorKeysCodes: number[] = [ENTER, COMMA];
   ngForm=new FormGroup({

@@ -17,7 +17,7 @@ export class ReclamationAddComponent implements OnInit {
   r: Reclamation = new Reclamation();
   selectedType!:string
   status=['OPEN', 'CLOSED'];
-  type=['club', 'event','OTHER..'];
+  type=['CLUB', 'EVENT','OTHER'];
   targets!:string[]
   separatorKeysCodes: number[] = [ENTER, COMMA];
   ngForm=new FormGroup({
