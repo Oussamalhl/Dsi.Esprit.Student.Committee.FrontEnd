@@ -87,10 +87,14 @@ import {
   cilUser,
   cilUserFemale,
   cilUserFollow,
-  cilUserUnfollow, cilWc,
+  cilUserUnfollow, cilWc,cilBullhorn,cilLibrary,cilNoteAdd,cilListRich
 } from '@coreui/icons';
 
 export const iconSubset = {
+  cilListRich,
+  cilNoteAdd,
+  cilLibrary,
+  cilBullhorn,
   cilWc,
   cil3d,
   cibCcAmex,

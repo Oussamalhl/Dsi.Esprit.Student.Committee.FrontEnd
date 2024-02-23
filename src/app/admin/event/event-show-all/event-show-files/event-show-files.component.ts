@@ -1,34 +1,35 @@
-import {Component, OnInit} from '@angular/core';
-import {reclamationFile} from "../../../../models/reclamationFile";
-import {Reclamation} from "../../../../models/Reclamation";
-import {ReclamationService} from "../../../../_services/reclamation.service";
+import { Component, OnInit } from '@angular/core';
+
 import {ActivatedRoute, Router} from "@angular/router";
 import {DomSanitizer} from "@angular/platform-browser";
+import {event} from "../../../../models/event";
+import {EventService} from "../../../../_services/event.service";
+import {eventFile} from "../../../../models/eventFile";
 
 @Component({
-  selector: 'app-reclamation-show-files',
-  templateUrl: './reclamation-show-files.component.html',
-  styleUrls: ['./reclamation-show-files.component.scss']
+  selector: 'app-event-show-files',
+  templateUrl: './event-show-files.component.html',
+  styleUrls: ['./event-show-files.component.scss']
 })
-export class ReclamationShowFilesComponent implements OnInit {
+export class EventShowFilesComponent implements OnInit {
 
   name: string = "";
   id!: number;
-  r!: Reclamation;
-  files: reclamationFile[] = [];
+  e!: event;
+  files: eventFile[] = [];
   pdf: any[] = [];
   secured: any;
-  pdfFiles: reclamationFile[] = [];
-  retrievedImages: reclamationFile[] = [];
+  pdfFiles: eventFile[] = [];
+  retrievedImages: eventFile[] = [];
   src: any[] = []
 
-  constructor(private RS: ReclamationService, private _router: Router, private _Activatedroute: ActivatedRoute, private sanitizer: DomSanitizer) {
+  constructor(private ES: EventService, private _router: Router, private _Activatedroute: ActivatedRoute, private sanitizer: DomSanitizer) {
   }
 
   Remove(id: number) {
 
     // this.tmp = (new URL(f.filePath)).toString();
-    this.RS.RemoveReclamationFile(this.id, id).subscribe(res => {
+    this.ES.RemoveEventFile(this.id, id).subscribe(res => {
       console.log(res);
       console.log("File Deleted");
     });
@@ -39,7 +40,7 @@ export class ReclamationShowFilesComponent implements OnInit {
 
 
   RemovePdf(id: number) {
-    this.RS.RemoveReclamationFile(this.id, id).subscribe(res => {
+    this.ES.RemoveEventFile(this.id, id).subscribe(res => {
         console.log(res);
         console.log("File Deleted");
       }
@@ -50,7 +51,7 @@ export class ReclamationShowFilesComponent implements OnInit {
 
   reload() {
     this.pdf = [];
-    this.RS.GetReclamationFiles(this.id).subscribe(res => {
+    this.ES.GetEventFiles(this.id).subscribe(res => {
       this.files = res;
       console.log(res);
       res.forEach(f => {
@@ -72,15 +73,15 @@ export class ReclamationShowFilesComponent implements OnInit {
   ngOnInit(): void {
     this.id = Number(this._Activatedroute.snapshot.paramMap.get("id"));
     if (this.id != null) {
-      this.RS.getReclamation(this.id).subscribe(res => {
+      this.ES.GetEvent(this.id).subscribe(res => {
         console.log(res);
-        this.r = res;
-        this.name = this.r.name;
+        this.e = res;
+        this.name = this.e.name;
 
       });
 
 
-      this.RS.GetReclamationFiles(this.id).subscribe(res => {
+      this.ES.GetEventFiles(this.id).subscribe(res => {
         this.files = res;
         //console.log(res);
         res.forEach(f => {

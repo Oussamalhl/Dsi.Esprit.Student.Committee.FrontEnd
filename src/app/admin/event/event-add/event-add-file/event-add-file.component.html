@@ -1,0 +1,105 @@
+<div class="position-relative" *ngIf="uploaded">
+  <c-toaster placement="top-end" position="absolute" >
+    <c-toast [autohide]="true" [delay]="5000" [fade]="false" [visible]="true" [fade]="true" class="align-items-center text-white border-0" color="success">
+      <c-toast-header [closeButton]="false">
+        <svg cIcon="" name="cil-check" size="xl">
+        </svg>
+
+        File Upload Confirmation
+
+      </c-toast-header>
+      <c-toast-body>Your File has been Uploaded Successfully !</c-toast-body>
+    </c-toast>
+  </c-toaster>
+</div>
+<div class="position-relative" *ngIf="empty">
+  <c-toaster placement="top-end" position="absolute">
+    <c-toast [autohide]="true" [delay]="5000" [fade]="false" [visible]="true" [fade]="true"  class="align-items-center text-white border-0" color="danger">
+      <c-toast-header [closeButton]="false">
+        <svg cIcon="" name="cil-file" size="xl">
+        </svg>
+
+        File Upload Error
+
+      </c-toast-header>
+      <c-toast-body>Please Choose File !</c-toast-body>
+    </c-toast>
+  </c-toaster>
+</div>
+<c-breadcrumb [style]="'--cui-breadcrumb-divider:\'>\''">
+  <c-breadcrumb-item url="/admin">Home</c-breadcrumb-item>
+  <c-breadcrumb-item [active]="false">Events</c-breadcrumb-item>
+  <c-breadcrumb-item url="/admin/events" >Show Events</c-breadcrumb-item>
+  <c-breadcrumb-item [active]="false">Show Files</c-breadcrumb-item>
+  <c-breadcrumb-item [active]="false">Add Files</c-breadcrumb-item>
+
+</c-breadcrumb>
+
+<div class="body flex-grow-1 px-3">
+  <c-container breakpoint="lg" class="h-auto container-lg" _nghost-qgx-c92="">
+
+    <c-row _ngcontent-qgx-c191="" _nghost-qgx-c96="" class="row">
+      <c-col _ngcontent-qgx-c191="" xs="12" _nghost-qgx-c94="" class="col-12">
+        <c-card _ngcontent-qgx-c191="" class="mb-4 card">
+          <c-card-header _ngcontent-qgx-c191="" class="card-header">
+            <strong _ngcontent-qgx-c191="" class="h3">Upload Event "{{name}}" File(s)</strong>
+          </c-card-header>
+          <c-card-body _ngcontent-qgx-c191="" class="card-body">
+            <div class="body flex-grow-1 px-3">
+              <form #browserDefaultsForm="ngForm"
+
+                    class="row g-3"
+                    cForm
+                    cRow
+                    ngNativeValidate
+
+
+              >
+
+                <c-col [md]="6">
+                  <label cLabel for="PDFInput" class="h6">Upload Files</label>
+
+                  <c-input-group>
+
+                    <input aria-describedby="inputGroupFileAddon04"
+                           aria-label="Upload"
+                           cFormControl
+                           #fileInput
+                           name="fileu"
+                           multiple="false"
+                           id="PDFInput"
+                           type="file"
+                           accept=".pdf,.png, .jpg, .jpeg, .svg"
+                           (change)="onFileChange($event)">
+                    <button cButton class="me-1" color="primary" type="submit"
+                            class="me-1 active btn btn-outline-primary"
+                            aria-pressed="true" variant="outline" (click)="onSubmit()">
+                      Upload
+                    </button>
+                  </c-input-group>
+                  <c-col>
+                    <br><br>
+                    <div class="imagePreview" *ngIf="URL && URL !== ''">
+                      <img [src]="URL" [alt]="uploadForm.value.name" width=100% height=auto>
+                    </div>
+                  </c-col>
+
+                </c-col>
+
+                <br><br><br><br><br><br><br><br><br><br>
+
+                <c-col [md]="8">
+                  <button cButton variant="outline" class="me-1 btn btn-outline-info"
+                          type="reset" [routerLink]="['/admin/events']" >
+                    Done Uploading
+                  </button>
+                </c-col>
+              </form>
+            </div>
+
+          </c-card-body>
+        </c-card>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>

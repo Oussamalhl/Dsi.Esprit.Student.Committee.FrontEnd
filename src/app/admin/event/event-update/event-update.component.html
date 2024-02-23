@@ -1,0 +1,203 @@
+<c-breadcrumb [style]="'--cui-breadcrumb-divider:\'>\''">
+  <c-breadcrumb-item url="/admin">Home</c-breadcrumb-item>
+  <c-breadcrumb-item url="/admin/events" >Events</c-breadcrumb-item>
+  <c-breadcrumb-item [active]="false">Update Event</c-breadcrumb-item>
+</c-breadcrumb>
+<style>
+  .example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+  }
+
+  .example-radio-button {
+    margin: 5px;
+  }
+</style>
+<div class="body flex-grow-1 px-3">
+  <c-container breakpoint="lg" class="h-auto container-lg" _nghost-qgx-c92="">
+
+    <c-row _ngcontent-qgx-c191="" _nghost-qgx-c96="" class="row">
+      <c-col _ngcontent-qgx-c191="" xs="12" _nghost-qgx-c94="" class="col-12">
+        <c-card _ngcontent-qgx-c191="" class="mb-4 card">
+          <c-card-header _ngcontent-qgx-c191="" class="card-header">
+            <strong _ngcontent-qgx-c191="" class="h3">Update Event "{{e.name}}"</strong>
+          </c-card-header>
+          <c-card-body _ngcontent-qgx-c191="" class="card-body">
+            <div class="body flex-grow-1 px-3">
+
+              <form #browserDefaultsForm="ngForm"
+                    class="row g-3"
+                    cForm
+                    cRow
+                    ngNativeValidate>
+
+                <c-col [md]="6">
+                  <div cFormFloating>
+
+                    <input type="text"
+                           cFormControl
+                           id="nameInput"
+                           placeholder="Enter Event Name "
+                           [(ngModel)]="e.name"
+                           [ngModelOptions]="{standalone: true}"
+                           required
+                    />
+
+                    <label cLabel for="nameInput">Event Name</label>
+                  </div>
+                </c-col>
+                <br>
+                <c-col [md]="6">
+                  <div cFormFloating>
+
+                    <textarea
+                      cFormControl
+                      id="Description"
+                      placeholder="Enter Description "
+                      [(ngModel)]="e.description"
+                      [ngModelOptions]="{standalone: true}"
+                    ></textarea>
+
+                    <label cLabel for="Description">Event Description</label>
+                  </div>
+                </c-col>
+                <br>
+                <c-col [md]="6">
+                  <div cFormFloating>
+                    <input cFormControl type="datetime-local" id="dateS"
+                           name="dateS" [(ngModel)]="e.eventDateStart" [ngModelOptions]="{standalone: true}" required>
+                    <label cLabel for="dateS">Starts On: {{e.eventDateStart}}</label>
+                  </div>
+                </c-col>
+
+                <c-col [md]="6">
+                  <div cFormFloating>
+                    <input cFormControl type="datetime-local" id="dateE"
+                           name="dateE" [(ngModel)]="e.eventDateEnd" [ngModelOptions]="{standalone: true}" required>
+                    <label cLabel for="dateE">Ends On: {{e.eventDateEnd}}</label>
+                  </div>
+                </c-col>
+
+                <c-col [md]="6">
+                  <div cFormFloating>
+                    <input cFormControl type="time" id="time"
+                           name="time" [(ngModel)]="e.eventTime" [ngModelOptions]="{standalone: true}">
+                    <label cLabel for="time">Time: {{e.eventTime}}</label>
+                  </div>
+                </c-col>
+                <c-col [md]="6">
+                  <div cFormFloating>
+
+                    <input type="text"
+                           cFormControl
+                           id="location"
+                           placeholder="Enter A Location Or Link "
+                           [(ngModel)]="e.eventLocation"
+                           [ngModelOptions]="{standalone: true}"
+                           required
+                    />
+
+                    <label cLabel for="location">Location</label>
+                  </div>
+                </c-col>
+                <c-col [md]="3">
+                  <mat-form-field appearance="fill">
+                    <mat-select [(ngModel)]="e.eventMotive" [ngModelOptions]="{standalone: true}" required>
+                      <mat-option *ngFor="let m of motives" [value]="m">
+                        {{m}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-label>Motive</mat-label>
+                  </mat-form-field>
+
+                </c-col>
+                <c-col [md]="3">
+                  <mat-form-field appearance="fill">
+                    <mat-select [(ngModel)]="e.status" [ngModelOptions]="{standalone: true}" required>
+                      <mat-option *ngFor="let s of status" [value]="s">
+                        {{s}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-label>Status</mat-label>
+                  </mat-form-field>
+                </c-col>
+                <c-col [md]="6">
+                  <div cFormFloating>
+                    <input type="number"
+                           cFormControl
+                           id="places"
+                           placeholder="Enter Capacity "
+                           [(ngModel)]="e.places"
+                           [ngModelOptions]="{standalone: true}"
+                           min="10" required
+                    />
+                    <label cLabel for="places">Capacity</label>
+                  </div>
+                </c-col>
+                <c-col [md]="3">
+                  <mat-form-field class="example-chip-list" appearance="fill">
+                    <mat-label>Select Tags</mat-label>
+                    <mat-chip-list #chipList aria-label="Tag selection">
+                      <mat-chip
+                        *ngFor="let t of selectedTags"
+                        (removed)="remove(t)">
+                        {{t}}
+                        <button matChipRemove>
+                          <mat-icon>cancel</mat-icon>
+                        </button>
+                      </mat-chip>
+                      <input
+                        placeholder="New Tag..."
+                        #tagInput
+                        [formControl]="tagCtrl"
+                        [matAutocomplete]="auto"
+                        [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        (matChipInputTokenEnd)="add($event)">
+                    </mat-chip-list>
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                      <mat-option *ngFor="let tag of filteredTags| async" [value]="tag">
+                        {{tag}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </c-col>
+                <c-col [md]="3">
+                  <mat-form-field appearance="fill">
+                    <mat-select [(ngModel)]="e.type" [ngModelOptions]="{standalone: true}" required>
+                      <mat-option *ngFor="let t of type" [value]="t">
+                        {{t}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-label>Type</mat-label>
+                  </mat-form-field>
+                </c-col>
+                <c-col [md]="12" ></c-col>
+                <br><br>
+                <c-col [sm]>
+
+                  <button cButton class="me-1" color="primary" type="submit" class="me-1 active btn btn-outline-primary"
+                          aria-pressed="true" variant="outline" (click)="UpdateEvent(e)">
+                    Submit
+                  </button>
+                  <button cButton variant="outline" class="me-1 btn btn-outline-secondary"
+                          type="button" (click)="reset()">
+                    Reset
+                  </button>
+                </c-col>
+              </form>
+
+            </div>
+          </c-card-body>
+        </c-card>
+      </c-col>
+
+    </c-row>
+    <c-row _ngcontent-qgx-c191="" _nghost-qgx-c96="" class="row">
+
+    </c-row>
+
+  </c-container>
+</div>

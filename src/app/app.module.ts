@@ -84,6 +84,12 @@ import { ReclamationShowFilesComponent } from './admin/reclamation/reclamation-s
 import { ReclamationAddFileComponent } from './admin/reclamation/reclamation-add/reclamation-add-file/reclamation-add-file.component';
 import { ReclamationChartsComponent } from './admin/reclamation/reclamation-charts/reclamation-charts.component';
 import {ChartjsModule} from "@coreui/angular-chartjs";
+import { EventShowAllComponent } from './admin/event/event-show-all/event-show-all.component';
+import { EventAddComponent } from './admin/event/event-add/event-add.component';
+import { EventUpdateComponent } from './admin/event/event-update/event-update.component';
+import { EventShowFilesComponent } from './admin/event/event-show-all/event-show-files/event-show-files.component';
+import { EventChartsComponent } from './admin/event/event-charts/event-charts.component';
+import { EventAddFileComponent } from './admin/event/event-add/event-add-file/event-add-file.component';
 
 
 
@@ -97,7 +103,7 @@ const APP_CONTAINERS = [
   DefaultLayoutComponent,
 ];
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, DefaultLayoutUComponent, DefaultFooterUComponent, DefaultHeaderUComponent, CommingSoonComponent, UserIndexComponent, SigninComponent,SignupComponent, UserShowAllComponent, UserDetailsComponent, UserAddComponent, UserUpdateComponent, ReclamationShowAllComponent, ReclamationAddComponent, ReclamationUpdateComponent, ReclamationShowFilesComponent, ReclamationAddFileComponent, ReclamationChartsComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, DefaultLayoutUComponent, DefaultFooterUComponent, DefaultHeaderUComponent, CommingSoonComponent, UserIndexComponent, SigninComponent,SignupComponent, UserShowAllComponent, UserDetailsComponent, UserAddComponent, UserUpdateComponent, ReclamationShowAllComponent, ReclamationAddComponent, ReclamationUpdateComponent, ReclamationShowFilesComponent, ReclamationAddFileComponent, ReclamationChartsComponent, EventShowAllComponent, EventAddComponent, EventUpdateComponent, EventShowFilesComponent, EventChartsComponent, EventAddFileComponent],
     imports: [
         BrowserModule,
         ScheduleModule,

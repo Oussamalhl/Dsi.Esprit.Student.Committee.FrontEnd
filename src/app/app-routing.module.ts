@@ -26,6 +26,12 @@ import {
   ReclamationAddFileComponent
 } from "./admin/reclamation/reclamation-add/reclamation-add-file/reclamation-add-file.component";
 import {ReclamationChartsComponent} from "./admin/reclamation/reclamation-charts/reclamation-charts.component";
+import {EventShowAllComponent} from "./admin/event/event-show-all/event-show-all.component";
+import {EventAddComponent} from "./admin/event/event-add/event-add.component";
+import {EventUpdateComponent} from "./admin/event/event-update/event-update.component";
+import {EventShowFilesComponent} from "./admin/event/event-show-all/event-show-files/event-show-files.component";
+import {EventChartsComponent} from "./admin/event/event-charts/event-charts.component";
+import {EventAddFileComponent} from "./admin/event/event-add/event-add-file/event-add-file.component";
 
 const routes: Routes = [
 
@@ -100,6 +106,31 @@ const routes: Routes = [
       {
         path: 'reclamations/:id/Files/add',
         component: ReclamationAddFileComponent,
+      },
+
+      {
+        path: 'events',
+        component: EventShowAllComponent
+      },
+      {
+        path: 'events/addEvent',
+        component: EventAddComponent
+      },
+      {
+        path: 'events/updateEvent/:id',
+        component: EventUpdateComponent
+      },
+      {
+        path: 'events/:id/Files',
+        component: EventShowFilesComponent,
+      },
+      {
+        path: 'events/charts',
+        component: EventChartsComponent,
+      },
+      {
+        path: 'events/:id/Files/add',
+        component: EventAddFileComponent,
       },
 
       {

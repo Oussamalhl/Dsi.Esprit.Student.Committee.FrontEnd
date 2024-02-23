@@ -40,16 +40,6 @@ export class ReclamationChartsComponent implements OnInit {
   October = 0
   November = 0
   December = 0
-  // countByMonth = {
-  //   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-  //   datasets: [
-  //     {
-  //       label: 'Reclamations',
-  //       backgroundColor: '#f87979',
-  //       data: [this.January, this.February, this.March, this.April, this.May, this.June, this.July, this.August, this.September, this.October, this.November, this.December]
-  //     }
-  //   ]
-  // };
 
   ngOnInit(): void {
     this.RS.countAllReclamationByMonth().subscribe(res => {
@@ -89,10 +79,6 @@ export class ReclamationChartsComponent implements OnInit {
     this.otherCount = 0
 
     this.reclamationCount.forEach(e => {
-      //console.log(e);
-      //console.log(e);
-      // e.forEach(y=>{
-      //   console.log(y);
       if (e.includes(year)) {
         console.log('year: ' + e[0] + ' month: ' + e[1] + ' count: ' + e[2]);
         this.yearlyCount += e[2]
@@ -119,7 +105,6 @@ export class ReclamationChartsComponent implements OnInit {
       this.reclamationsTypeCount.forEach(e => {
         if (e.includes(year)) {
           console.log('year: ' + e[0] + ' type: ' + e[1] + ' count: ' + e[2]);
-          //this.yearlyCount += e[2]
           e[1] === 'EVENT' ? this.eventsCount = e[2] :
             e[1] == 'CLUB' ? this.clubsCount = e[2] :
               e[1] == 'OTHER' ? this.otherCount = e[2] :
@@ -136,7 +121,7 @@ export class ReclamationChartsComponent implements OnInit {
       datasets: [
         {
           label: 'Reclamations',
-          backgroundColor: '#f87979',
+          backgroundColor: '#e12222',
           data: [this.January, this.February, this.March, this.April, this.May, this.June, this.July, this.August, this.September, this.October, this.November, this.December]
         }
       ]
@@ -146,7 +131,7 @@ export class ReclamationChartsComponent implements OnInit {
       datasets: [
         {
           label: 'Status',
-          backgroundColor: ['#DD1B16', '#41B883'],
+          backgroundColor: ['#DD1B16', '#1bd507'],
           data: [this.yearlyCount - this.yearlyProcessed, this.yearlyProcessed]
         }
       ]
@@ -156,7 +141,7 @@ export class ReclamationChartsComponent implements OnInit {
       datasets: [
         {
           label: 'Type',
-          backgroundColor: ['#DD1B16', '#41B883', '#f87979'],
+          backgroundColor: ['#DD1B16', '#be4807', 'rgba(208,185,185,0.19)'],
           data: [this.clubsCount, this.eventsCount, this.otherCount]
         }
       ]

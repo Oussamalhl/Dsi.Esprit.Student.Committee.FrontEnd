@@ -3,17 +3,16 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort, Sort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
-import {Reclamation} from "../../../models/Reclamation";
 import {ActivatedRoute, Router} from "@angular/router";
 import {LiveAnnouncer} from "@angular/cdk/a11y";
-import {ReclamationService} from "../../../_services/reclamation.service";
+import {EventService} from "../../../_services/event.service";
 import {User} from "../../../models/User";
-import {UserService} from "../../../_services/user.service";
+import {event} from "../../../models/event";
 
 @Component({
-  selector: 'app-reclamation-show-all',
-  templateUrl: './reclamation-show-all.component.html',
-  styleUrls: ['./reclamation-show-all.component.scss'],
+  selector: 'app-event-show-all',
+  templateUrl: './event-show-all.component.html',
+  styleUrls: ['./event-show-all.component.scss'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({height: '0px', minHeight: '0'})),
@@ -22,37 +21,39 @@ import {UserService} from "../../../_services/user.service";
     ]),
   ],
 })
-export class ReclamationShowAllComponent implements OnInit {
+export class EventShowAllComponent implements OnInit {
 
-  reclamationsList: Reclamation[] = [];
-  userDetails!: User;
-  displayedColumns: string[] = ['name', 'type', 'target', 'description', 'date', 'status', 'files', 'user', 'Update', 'Remove'];
-  dataSource = new MatTableDataSource<Reclamation>(this.reclamationsList);
+  eventsList: event[]=[]
+  displayedColumns: string[] = ['name', 'description', 'eventDateStart', 'eventDateEnd', 'eventTime',
+    'eventLocation', 'eventMotive', 'type', 'status', 'places', 'tags', 'files','Participants', 'Update', 'Remove'];
+  dataSource = new MatTableDataSource<event>(this.eventsList);
+  expandedElement!: event | null;
   panelOpenState = false;
+  u: User = new User();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private RS: ReclamationService, private US: UserService, private _Activatedroute: ActivatedRoute, private _router: Router, private _liveAnnouncer: LiveAnnouncer) {
+  constructor(private ES: EventService, private _Activatedroute: ActivatedRoute, private _router: Router, private _liveAnnouncer: LiveAnnouncer) {
 
   }
 
   Delete(id: number) {
-    this.RS.deleteReclamation(id).subscribe(res => console.log("Reclamation Deleted"));
-    setTimeout(() => this.reload(), 1000);
-  }
+    this.ES.removeEvent(id).subscribe(res => console.log("Event Deleted"));
+    setTimeout(() => this.reload(), 2500);  }
 
   reload() {
-    this.RS.getAllReclamations().subscribe(res => {
+    this.ES.FindAllEvents().subscribe(res => {
       console.log(res);
-      this.reclamationsList = res;
-      this.dataSource = new MatTableDataSource<Reclamation>(this.reclamationsList);
-      if (this.reclamationsList != []) {
+      this.eventsList = res;
+      this.dataSource = new MatTableDataSource<event>(this.eventsList);
+      if (this.eventsList != []) {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       }
 
     });
   }
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -71,17 +72,10 @@ export class ReclamationShowAllComponent implements OnInit {
     }
   }
 
-  showUserDetails(recId: number): User {
-    this.RS.getUser(recId).subscribe(u => {
-      this.userDetails = u
-      //this.panelOpenState=true
-      console.log(u)
-    })
-    //console.log(this.userDetails)
-    return this.userDetails
-  }
+
 
   ngOnInit(): void {
+
     this.reload()
   }
 
