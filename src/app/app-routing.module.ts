@@ -33,6 +33,9 @@ import {EventShowFilesComponent} from "./admin/event/event-show-all/event-show-f
 import {EventChartsComponent} from "./admin/event/event-charts/event-charts.component";
 import {EventAddFileComponent} from "./admin/event/event-add/event-add-file/event-add-file.component";
 import {EventParticipantsComponent} from "./admin/event/event-show-all/event-participants/event-participants.component";
+import {
+  EventAddParticipantsComponent
+} from "./admin/event/event-show-all/event-participants/event-add-participants/event-add-participants.component";
 
 const routes: Routes = [
 
@@ -128,6 +131,10 @@ const routes: Routes = [
       {
         path: 'events/:id/participants',
         component: EventParticipantsComponent,
+      },
+      {
+        path: 'events/:id/participants/Addparticipants',
+        component: EventAddParticipantsComponent,
       },
       {
         path: 'events/charts',

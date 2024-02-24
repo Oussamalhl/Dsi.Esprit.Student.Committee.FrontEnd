@@ -14,4 +14,5 @@ export class event{
   places!: number;
   tags !:string[];
   files!:eventFile[];
+  clubs!:string[];
 }

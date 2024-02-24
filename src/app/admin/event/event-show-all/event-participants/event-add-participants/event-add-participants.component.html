@@ -2,7 +2,8 @@
   <c-breadcrumb-item url="/admin">Home</c-breadcrumb-item>
   <c-breadcrumb-item [active]="false">Events</c-breadcrumb-item>
   <c-breadcrumb-item url="/admin/events">Show Events</c-breadcrumb-item>
-  <c-breadcrumb-item>Event Participants</c-breadcrumb-item>
+  <c-breadcrumb-item [routerLink]="'/admin/events/'+id+'/participants'" >Event Participants</c-breadcrumb-item>
+  <c-breadcrumb-item [active]="true">Events Add Participants</c-breadcrumb-item>
 
 </c-breadcrumb>
 <style>
@@ -32,11 +33,6 @@
   }
 
 </style>
-<div class="d-flex justify-content-center">
-  <button mat-raised-button [routerLink]="['Addparticipants']"
-          color="primary">
-    Add Participants</button>
-</div>
 <div class="position-relative" *ngIf="generated">
   <c-toaster placement="top-end" position="absolute" >
     <c-toast [autohide]="true" [delay]="5000" [fade]="false" [visible]="true" [fade]="true" class="align-items-center text-white border-0" color="success">
@@ -58,7 +54,9 @@
         <c-card _ngcontent-qgx-c204="" class="mb-4 card">
           <c-card-header _ngcontent-qgx-c204="" class="card-header">
 
-            <strong _ngcontent-qgx-c204 class="h3">Event "{{name}}" Participants</strong>
+            <strong _ngcontent-qgx-c204 class="h3">Add Participants to Event: "{{name}}" </strong>
+            <br>
+            <strong _ngcontent-qgx-c204 class="h3">Clubs Involved in this Event: "{{e.clubs}}" </strong>
 
           </c-card-header>
           <c-card-body _ngcontent-qgx-c204="" class="card-body">
@@ -107,11 +105,48 @@
                     </th>
                     <td mat-cell *matCellDef="let element"> {{element[2]}} </td>
                   </ng-container>
-                  <ng-container matColumnDef="confirmation">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Username">
-                      Confirmation
+
+                  <ng-container matColumnDef="participate">
+                    <th mat-header-cell *matHeaderCellDef> Participate
                     </th>
-                    <td mat-cell *matCellDef="let element"> {{element[3].isConfirmed ? 'Confirmed':'Not Done'}} </td>
+                    <td mat-cell *matCellDef="let element">
+                      <div class="d-flex justify-content-center">
+                        <button [cPopover]="popoverHtml"
+                                _ngcontent-qgx-c208
+                                cPopoverPlacement="bottom"
+                                [cPopoverTrigger]="'click'"
+                                cButton
+                                class="me-1 btn btn-ghost-danger ng-star-inserted"
+                                variant="ghost"
+                                size="lg">
+
+                          <svg cIcon name="cilUserFollow" size="xl" title="Numbered List Icon"></svg>
+                          <ng-template #popoverHtml>
+                            <h3 class="popover-header">
+                              Participate
+                            </h3>
+
+                            <div class="popover-body">
+                              Are you sure you want to <i cTextColor="danger">Participate</i> this User?
+                            </div>
+                            <div class="d-flex justify-content-center">
+                              <button cButton
+                                      _ngcontent-qgx-c208
+                                      class="me-1 btn btn-outline-danger ng-star-inserted"
+                                      variant="outline"
+                                      (click)="Participate(element[0])"> Participate
+                              </button>
+                              <button cButton
+                                      ngcontent-qgx-c208
+                                      class="me-1 btn btn-outline-info ng-star-inserted"
+                                      variant="outline"> Cancel
+                              </button>
+                            </div>
+                            <br>
+                          </ng-template>
+                        </button>
+                      </div>
+                    </td>
                   </ng-container>
 
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

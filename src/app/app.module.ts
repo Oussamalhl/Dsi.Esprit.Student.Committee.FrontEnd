@@ -92,6 +92,7 @@ import { EventChartsComponent } from './admin/event/event-charts/event-charts.co
 import { EventAddFileComponent } from './admin/event/event-add/event-add-file/event-add-file.component';
 import { EventParticipantsComponent } from './admin/event/event-show-all/event-participants/event-participants.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { EventAddParticipantsComponent } from './admin/event/event-show-all/event-participants/event-add-participants/event-add-participants.component';
 
 
 
@@ -105,7 +106,7 @@ const APP_CONTAINERS = [
   DefaultLayoutComponent,
 ];
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, DefaultLayoutUComponent, DefaultFooterUComponent, DefaultHeaderUComponent, CommingSoonComponent, UserIndexComponent, SigninComponent,SignupComponent, UserShowAllComponent, UserDetailsComponent, UserAddComponent, UserUpdateComponent, ReclamationShowAllComponent, ReclamationAddComponent, ReclamationUpdateComponent, ReclamationShowFilesComponent, ReclamationAddFileComponent, ReclamationChartsComponent, EventShowAllComponent, EventAddComponent, EventUpdateComponent, EventShowFilesComponent, EventChartsComponent, EventAddFileComponent, EventParticipantsComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, DefaultLayoutUComponent, DefaultFooterUComponent, DefaultHeaderUComponent, CommingSoonComponent, UserIndexComponent, SigninComponent,SignupComponent, UserShowAllComponent, UserDetailsComponent, UserAddComponent, UserUpdateComponent, ReclamationShowAllComponent, ReclamationAddComponent, ReclamationUpdateComponent, ReclamationShowFilesComponent, ReclamationAddFileComponent, ReclamationChartsComponent, EventShowAllComponent, EventAddComponent, EventUpdateComponent, EventShowFilesComponent, EventChartsComponent, EventAddFileComponent, EventParticipantsComponent, EventAddParticipantsComponent],
     imports: [
         BrowserModule,
         ScheduleModule,

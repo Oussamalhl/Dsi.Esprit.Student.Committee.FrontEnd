@@ -15,16 +15,23 @@
     font-size: 14px;
     width: 100%;
   }
+  .mat-column-type {
 
-  td {
-    font-palette: dark;
-    font-size: 15px;
+    width: 200px;
+
   }
 
-  th {
+  table td {
+    font-palette: dark;
+    font-size: 15px;
     width: max-content;
-    font-size: 23px;
+  }
+
+  table th {
+    width: max-content;
+    font-size: 25px;
     color: black;
+
   }
 
   .mat-form-field + .mat-form-field {
@@ -111,7 +118,7 @@
                   </ng-container>
                   <ng-container matColumnDef="status">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by status">
-                      status
+                      Status
                     </th>
                     <td mat-cell *matCellDef="let element"> {{element.status}} </td>
                   </ng-container>

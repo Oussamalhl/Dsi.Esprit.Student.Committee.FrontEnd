@@ -80,5 +80,14 @@ export class EventService {
   GetParticipants(idEvent:number) {
     return this._http.get<any>(API_URL + 'getParticipations?idEvent='+idEvent);
   }
+  GetParticipatables(idEvent:number) {
+    return this._http.get<any>(API_URL + 'getParticipatables?idEvent='+idEvent);
+  }
+  ParticipateUser(idEvent: number,username: string){
+    return this._http.post<any>(API_URL + 'addUserEventa?idEvent='+idEvent+'&username='+username,{});
+  }
+  GetEventClubs(idEvent:number) {
+    return this._http.get<string[]>(API_URL + 'getEventClubs?idEvent='+idEvent);
+  }
 
 }
