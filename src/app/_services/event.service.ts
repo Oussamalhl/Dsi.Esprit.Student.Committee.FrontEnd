@@ -77,4 +77,8 @@ export class EventService {
   GetUserEvent(idUser:number,idEvent:number) {
     return this._http.get<number>(API_URL + 'showallEvents?idUser='+idUser+'&idEvent='+idEvent);
   }
+  GetParticipants(idEvent:number) {
+    return this._http.get<any>(API_URL + 'getParticipations?idEvent='+idEvent);
+  }
+
 }

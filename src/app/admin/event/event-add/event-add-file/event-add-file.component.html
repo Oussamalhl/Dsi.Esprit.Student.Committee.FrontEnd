@@ -1,6 +1,7 @@
 <div class="position-relative" *ngIf="uploaded">
-  <c-toaster placement="top-end" position="absolute" >
-    <c-toast [autohide]="true" [delay]="5000" [fade]="false" [visible]="true" [fade]="true" class="align-items-center text-white border-0" color="success">
+  <c-toaster placement="top-end" position="absolute">
+    <c-toast [autohide]="true" [delay]="5000" [fade]="false" [visible]="true" [fade]="true"
+             class="align-items-center text-white border-0" color="success">
       <c-toast-header [closeButton]="false">
         <svg cIcon="" name="cil-check" size="xl">
         </svg>
@@ -14,7 +15,8 @@
 </div>
 <div class="position-relative" *ngIf="empty">
   <c-toaster placement="top-end" position="absolute">
-    <c-toast [autohide]="true" [delay]="5000" [fade]="false" [visible]="true" [fade]="true"  class="align-items-center text-white border-0" color="danger">
+    <c-toast [autohide]="true" [delay]="5000" [fade]="false" [visible]="true" [fade]="true"
+             class="align-items-center text-white border-0" color="danger">
       <c-toast-header [closeButton]="false">
         <svg cIcon="" name="cil-file" size="xl">
         </svg>
@@ -29,7 +31,7 @@
 <c-breadcrumb [style]="'--cui-breadcrumb-divider:\'>\''">
   <c-breadcrumb-item url="/admin">Home</c-breadcrumb-item>
   <c-breadcrumb-item [active]="false">Events</c-breadcrumb-item>
-  <c-breadcrumb-item url="/admin/events" >Show Events</c-breadcrumb-item>
+  <c-breadcrumb-item url="/admin/events">Show Events</c-breadcrumb-item>
   <c-breadcrumb-item [active]="false">Show Files</c-breadcrumb-item>
   <c-breadcrumb-item [active]="false">Add Files</c-breadcrumb-item>
 
@@ -90,7 +92,7 @@
 
                 <c-col [md]="8">
                   <button cButton variant="outline" class="me-1 btn btn-outline-info"
-                          type="reset" [routerLink]="['/admin/events']" >
+                          type="reset" [routerLink]="['/admin/events']">
                     Done Uploading
                   </button>
                 </c-col>

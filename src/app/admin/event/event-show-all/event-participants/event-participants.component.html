@@ -1,0 +1,128 @@
+<c-breadcrumb [style]="'--cui-breadcrumb-divider:\'>\''">
+  <c-breadcrumb-item url="/admin">Home</c-breadcrumb-item>
+  <c-breadcrumb-item [active]="false">Events</c-breadcrumb-item>
+  <c-breadcrumb-item url="/admin/events">Show Events</c-breadcrumb-item>
+  <c-breadcrumb-item>Event Participants</c-breadcrumb-item>
+
+</c-breadcrumb>
+<style>
+  table {
+    width: 100%;
+    table-layout: auto;
+  }
+
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  td {
+    font-palette: dark;
+    font-size: 15px;
+  }
+
+  th {
+    width: max-content;
+    font-size: 23px;
+    color: black;
+  }
+
+  .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+
+</style>
+<div class="position-relative" *ngIf="generated">
+  <c-toaster placement="top-end" position="absolute" >
+    <c-toast [autohide]="true" [delay]="5000" [fade]="false" [visible]="true" [fade]="true" class="align-items-center text-white border-0" color="success">
+      <c-toast-header [closeButton]="false">
+        <svg cIcon="" name="cil-check" size="xl">
+        </svg>
+
+        Badge Generated
+
+      </c-toast-header>
+      <c-toast-body>The Badge(s) is/are generated and Sent via Email !</c-toast-body>
+    </c-toast>
+  </c-toaster>
+</div>
+<div class="body flex-grow-1 px-3">
+  <c-container breakpoint="lg" class="h-auto container-lg" _nghost-qgx-c92="">
+    <c-row _ngcontent-qgx-c191="" _nghost-qgx-c96="" class="row">
+      <c-col _ngcontent-qgx-c204="" xs="12" _nghost-qgx-c94="" class="col-12">
+        <c-card _ngcontent-qgx-c204="" class="mb-4 card">
+          <c-card-header _ngcontent-qgx-c204="" class="card-header">
+
+            <strong _ngcontent-qgx-c204 class="h3">Event "{{name}}" Participants</strong>
+
+          </c-card-header>
+          <c-card-body _ngcontent-qgx-c204="" class="card-body">
+            <c-container>
+              <mat-form-field appearance="standard">
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Insert Keyword" #input>
+              </mat-form-field>
+              <br>
+              <div style="display: block;
+              overflow-x: scroll;
+              white-space: nowrap;">
+                <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+                  <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef>
+                      <mat-checkbox (change)="$event ? masterToggle() : null"
+                                    [checked]="selection.hasValue() && isAllSelected()"
+                                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                    [aria-label]="checkboxLabel()">
+                      </mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                      <mat-checkbox (click)="$event.stopPropagation()"
+                                    (change)="$event ? selection.toggle(row) : null"
+                                    [checked]="selection.isSelected(row)"
+                                    [aria-label]="checkboxLabel(row)">
+                      </mat-checkbox>
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="username" sticky>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by FirstName">
+                      Username
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element[0]}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by LastName">
+                      Email
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element[1]}}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="club">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Username">
+                      Club
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element[2]}} </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                  </tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+                <button cButton class="me-1" color="danger" type="submit" class="me-1 active btn btn-outline-primary"
+                        aria-pressed="true" variant="outline" (click)="RemoveParticipant()">
+                  Remove Participant(s)
+                </button>
+                <button cButton class="me-1" color="info" type="submit" class="me-1 active btn btn-outline-primary"
+                        aria-pressed="true" variant="outline" (click)="GenerateBadge()">
+                  Send Badge
+                </button>
+              </div>
+            </c-container>
+          </c-card-body>
+        </c-card>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>

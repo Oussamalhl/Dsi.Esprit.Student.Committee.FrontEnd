@@ -32,6 +32,7 @@ import {EventUpdateComponent} from "./admin/event/event-update/event-update.comp
 import {EventShowFilesComponent} from "./admin/event/event-show-all/event-show-files/event-show-files.component";
 import {EventChartsComponent} from "./admin/event/event-charts/event-charts.component";
 import {EventAddFileComponent} from "./admin/event/event-add/event-add-file/event-add-file.component";
+import {EventParticipantsComponent} from "./admin/event/event-show-all/event-participants/event-participants.component";
 
 const routes: Routes = [
 
@@ -123,6 +124,10 @@ const routes: Routes = [
       {
         path: 'events/:id/Files',
         component: EventShowFilesComponent,
+      },
+      {
+        path: 'events/:id/participants',
+        component: EventParticipantsComponent,
       },
       {
         path: 'events/charts',

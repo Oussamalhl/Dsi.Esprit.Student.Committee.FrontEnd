@@ -90,6 +90,8 @@ import { EventUpdateComponent } from './admin/event/event-update/event-update.co
 import { EventShowFilesComponent } from './admin/event/event-show-all/event-show-files/event-show-files.component';
 import { EventChartsComponent } from './admin/event/event-charts/event-charts.component';
 import { EventAddFileComponent } from './admin/event/event-add/event-add-file/event-add-file.component';
+import { EventParticipantsComponent } from './admin/event/event-show-all/event-participants/event-participants.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 
@@ -103,7 +105,7 @@ const APP_CONTAINERS = [
   DefaultLayoutComponent,
 ];
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, DefaultLayoutUComponent, DefaultFooterUComponent, DefaultHeaderUComponent, CommingSoonComponent, UserIndexComponent, SigninComponent,SignupComponent, UserShowAllComponent, UserDetailsComponent, UserAddComponent, UserUpdateComponent, ReclamationShowAllComponent, ReclamationAddComponent, ReclamationUpdateComponent, ReclamationShowFilesComponent, ReclamationAddFileComponent, ReclamationChartsComponent, EventShowAllComponent, EventAddComponent, EventUpdateComponent, EventShowFilesComponent, EventChartsComponent, EventAddFileComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, DefaultLayoutUComponent, DefaultFooterUComponent, DefaultHeaderUComponent, CommingSoonComponent, UserIndexComponent, SigninComponent,SignupComponent, UserShowAllComponent, UserDetailsComponent, UserAddComponent, UserUpdateComponent, ReclamationShowAllComponent, ReclamationAddComponent, ReclamationUpdateComponent, ReclamationShowFilesComponent, ReclamationAddFileComponent, ReclamationChartsComponent, EventShowAllComponent, EventAddComponent, EventUpdateComponent, EventShowFilesComponent, EventChartsComponent, EventAddFileComponent, EventParticipantsComponent],
     imports: [
         BrowserModule,
         ScheduleModule,
@@ -154,7 +156,8 @@ const APP_CONTAINERS = [
         MatSelectModule,
         CarouselModule,
         ToastModule,
-        ChartjsModule
+        ChartjsModule,
+        MatCheckboxModule
 
 
     ],
