@@ -2,7 +2,7 @@
   <c-breadcrumb-item url="/admin">Home</c-breadcrumb-item>
   <c-breadcrumb-item [active]="false">Events</c-breadcrumb-item>
   <c-breadcrumb-item url="/admin/events">Show Events</c-breadcrumb-item>
-  <c-breadcrumb-item [routerLink]="'/admin/events/'+id+'/participants'" >Event Participants</c-breadcrumb-item>
+  <c-breadcrumb-item [routerLink]="'/admin/events/'+id+'/participants'">Event Participants</c-breadcrumb-item>
   <c-breadcrumb-item [active]="true">Events Add Participants</c-breadcrumb-item>
 
 </c-breadcrumb>
@@ -34,8 +34,9 @@
 
 </style>
 <div class="position-relative" *ngIf="generated">
-  <c-toaster placement="top-end" position="absolute" >
-    <c-toast [autohide]="true" [delay]="5000" [fade]="false" [visible]="true" [fade]="true" class="align-items-center text-white border-0" color="success">
+  <c-toaster placement="top-end" position="absolute">
+    <c-toast [autohide]="true" [delay]="5000" [fade]="false" [visible]="true" [fade]="true"
+             class="align-items-center text-white border-0" color="success">
       <c-toast-header [closeButton]="false">
         <svg cIcon="" name="cil-check" size="xl">
         </svg>
@@ -55,8 +56,15 @@
           <c-card-header _ngcontent-qgx-c204="" class="card-header">
 
             <strong _ngcontent-qgx-c204 class="h3">Add Participants to Event: "{{name}}" </strong>
-            <br>
-            <strong _ngcontent-qgx-c204 class="h3">Clubs Involved in this Event: "{{e.clubs}}" </strong>
+            <br><br>
+            <strong _ngcontent-qgx-c204 class="h2">Clubs involved in this Event: "{{e.clubs}}" </strong>
+            <ul>
+              <div *ngFor="let c in e.clubs;index as i">
+                <li>
+                  {{c}}
+                </li>
+              </div>
+            </ul>
 
           </c-card-header>
           <c-card-body _ngcontent-qgx-c204="" class="card-body">

@@ -10,7 +10,7 @@ export class event{
   eventLocation!:string;
   eventMotive!:string;
   type!:string;
-  status!:Boolean;
+  status!:string;
   places!: number;
   tags !:string[];
   files!:eventFile[];

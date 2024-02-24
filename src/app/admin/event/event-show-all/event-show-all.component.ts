@@ -33,7 +33,7 @@ export class EventShowAllComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private ES: EventService, private _Activatedroute: ActivatedRoute, private _router: Router, private _liveAnnouncer: LiveAnnouncer) {
+  constructor(private ES: EventService, private _router: Router, private _liveAnnouncer: LiveAnnouncer) {
 
   }
 

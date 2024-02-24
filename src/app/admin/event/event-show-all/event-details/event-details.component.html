@@ -1,0 +1,88 @@
+<c-breadcrumb [style]="'--cui-breadcrumb-divider:\'>\''">
+  <c-breadcrumb-item url="/admin">Home</c-breadcrumb-item>
+  <c-breadcrumb-item url="/admin/events" >Events</c-breadcrumb-item>
+  <c-breadcrumb-item [active]="false">Event Details</c-breadcrumb-item>
+</c-breadcrumb>
+<style>
+  .example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+  }
+
+  .example-radio-button {
+    margin: 5px;
+  }
+</style>
+<div class="body flex-grow-1 px-3">
+  <c-container breakpoint="lg" class="h-auto container-lg" _nghost-qgx-c92="">
+
+    <c-row _ngcontent-qgx-c191="" _nghost-qgx-c96="" class="row">
+      <c-col _ngcontent-qgx-c191="" xs="12" _nghost-qgx-c94="" class="col-12">
+        <c-card _ngcontent-qgx-c191="" class="mb-4 card">
+          <c-card-header _ngcontent-qgx-c191="" class="card-header">
+            <strong _ngcontent-qgx-c191="" class="h3">Event Details of "{{name}}"</strong>
+          </c-card-header>
+          <c-card-body _ngcontent-qgx-c191="" class="card-body">
+            <div class="body flex-grow-1 px-3">
+
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h3 class="card-title">{{name}}</h3>
+                  <h4 class="card-subtitle mb-2 text-body-secondary">Starts: {{e.eventDateStart}} at {{e.eventTime}} <br>Ends: {{e.eventDateEnd}}</h4>
+                  <p class="card-text">{{e.description}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Event Location: {{e.eventLocation}}</li>
+                  <li class="list-group-item">Places: {{e.places}}</li>
+                  <li class="list-group-item">Event Motive: {{e.eventMotive}}</li>
+                  <li class="list-group-item">Type: {{e.type}}</li>
+                  <li class="list-group-item">Status: {{e.status}}</li>
+<!--                  <li class="list-group-item"><b>Clubs involved:</b></li>-->
+                  <ul class="list-group "> <b>Clubs involved:</b>
+                    <li *ngFor="let c of e.clubs;index as i" class="list-group-item">{{c}}</li>
+                  </ul>
+<!--                  <li class="list-group-item">Tags:</li>-->
+                  <ul class="list-group "> <b>Tags:</b>
+                      <li *ngFor="let t of e.tags;index as i" class="list-group-item">{{t}}</li>
+                  </ul>
+                </ul>
+                <c-row>
+                  <c-carousel *ngIf="src.length>=1" [dark]="true" [wrap]="false">
+                    <c-carousel-indicators></c-carousel-indicators>
+                    <c-carousel-inner>
+                      <c-carousel-item *ngFor="let src of src;index as i">
+                        <img
+                          [src]="src"
+                          class="d-block w-100"
+                          loading="lazy"/>
+                        <c-carousel-caption class="d-none d-md-block">
+                        </c-carousel-caption>
+                      </c-carousel-item>
+                    </c-carousel-inner>
+                    <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
+                    <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
+                  </c-carousel>
+                </c-row>
+
+
+                <div class="card-body">
+                  <a [routerLink]="['showUser/'+id]" class="card-link">Participants</a>
+                  <a [routerLink]="['showUser/'+id]" class="card-link">Edit</a>
+                </div>
+              </div>
+
+
+            </div>
+          </c-card-body>
+        </c-card>
+      </c-col>
+
+    </c-row>
+    <c-row _ngcontent-qgx-c191="" _nghost-qgx-c96="" class="row">
+
+    </c-row>
+
+  </c-container>
+</div>

@@ -36,6 +36,7 @@ import {EventParticipantsComponent} from "./admin/event/event-show-all/event-par
 import {
   EventAddParticipantsComponent
 } from "./admin/event/event-show-all/event-participants/event-add-participants/event-add-participants.component";
+import {EventDetailsComponent} from "./admin/event/event-show-all/event-details/event-details.component";
 
 const routes: Routes = [
 
@@ -135,6 +136,10 @@ const routes: Routes = [
       {
         path: 'events/:id/participants/Addparticipants',
         component: EventAddParticipantsComponent,
+      },
+      {
+        path: 'events/:id/eventDetails',
+        component: EventDetailsComponent,
       },
       {
         path: 'events/charts',
