@@ -139,7 +139,7 @@
                 <c-col [md]="3">
                   <mat-form-field class="example-chip-list" appearance="fill">
                     <mat-label>Select Tags</mat-label>
-                    <mat-chip-list #chipList aria-label="Tag selection">
+                    <mat-chip-list #tagList aria-label="Tag selection">
                       <mat-chip
                         *ngFor="let t of selectedTags"
                         (removed)="remove(t)">
@@ -152,14 +152,42 @@
                         placeholder="New Tag..."
                         #tagInput
                         [formControl]="tagCtrl"
-                        [matAutocomplete]="auto"
-                        [matChipInputFor]="chipList"
+                        [matAutocomplete]="autoTag"
+                        [matChipInputFor]="tagList"
                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                        (matChipInputTokenEnd)="add($event)">
+                        (matChipInputTokenEnd)="addTag($event)">
                     </mat-chip-list>
-                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                    <mat-autocomplete #autoTag="matAutocomplete" (optionSelected)="selectedTag($event)">
                       <mat-option *ngFor="let tag of filteredTags| async" [value]="tag">
                         {{tag}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </c-col>
+                <c-col [md]="3">
+                  <mat-form-field class="example-chip-list" appearance="fill">
+                    <mat-label>Select Clubs</mat-label>
+                    <mat-chip-list #clubList aria-label="Club selection">
+                      <mat-chip
+                        *ngFor="let c of selectedClubs"
+                        (removed)="remove(c)">
+                        {{c}}
+                        <button matChipRemove>
+                          <mat-icon>cancel</mat-icon>
+                        </button>
+                      </mat-chip>
+                      <input
+                        placeholder="Clubs..."
+                        #clubInput
+                        [formControl]="clubCtrl"
+                        [matAutocomplete]="autoClub"
+                        [matChipInputFor]="clubList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        (matChipInputTokenEnd)="addClub($event)">
+                    </mat-chip-list>
+                    <mat-autocomplete #autoClub="matAutocomplete" (optionSelected)="selectedClub($event)">
+                      <mat-option *ngFor="let club of filteredClubs| async" [value]="club">
+                        {{club}}
                       </mat-option>
                     </mat-autocomplete>
                   </mat-form-field>

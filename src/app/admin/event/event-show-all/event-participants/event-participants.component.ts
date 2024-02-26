@@ -75,13 +75,13 @@ export class EventParticipantsComponent implements OnInit {
 
   RemoveParticipant(){
     this.selection.selected.forEach(u=>{
-      //this.FeS.GetParticipantEventFeedBack(u.id,this.id).subscribe();
+      this.ES.deleteUserEvent(u[0]).subscribe();
     })
 
     setTimeout(() => this.reload(), 2500);  }
   GenerateBadge(){
     this.selection.selected.forEach(u=>{
-      this.ES.ParticipantBadge(this.id,Number(u[0])).subscribe(res=>console.log(u[0] +"Badge generated"));
+      this.ES.ParticipantBadge(this.id,u[0]).subscribe(res=>console.log(u[0] +"Badge generated"));
     })
     this.generated=true;
     setTimeout(() => this.reload(), 2500);  }

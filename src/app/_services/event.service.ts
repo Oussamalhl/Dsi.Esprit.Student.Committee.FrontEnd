@@ -23,6 +23,9 @@ export class EventService {
   removeEvent(id:number){
     return this._http.delete<event>(API_URL + 'deleteEvent?idEvent='+id);
   }
+  deleteUserEvent(username:string){
+    return this._http.delete(API_URL + 'deleteUserEvent?username='+username);
+  }
   GetEvent(id:number):Observable<event>{
     return this._http.get<event>(API_URL + 'showEvent?idEvent='+ id);
   }
@@ -33,28 +36,15 @@ export class EventService {
     return this._http.get<string[]>(API_URL + 'getTags');
   }
 
-  EventOfTheMonth():Observable<event[]>{
-    return this._http.get<event[]>("http://localhost:8081/Event-of-the-month");
+  ParticipantBadge(id:number,user:string){
+    return this._http.get(API_URL+"generateParticipantBadge/"+id+"/"+user);
   }
-  EventByStatus(stat:string){
-    return this._http.get<event[]>("http://localhost:8081/Event-by-status/"+stat);
+  GenerateBadge(id:number,user:string){
+    return this._http.get<event[]>("generateParticipantBadge/"+id+"/"+user);
   }
-  EventByType(type:string){
-    return this._http.get<event[]>("http://localhost:8081/Event-by-type/"+type);
+  addClubEvent(id:number,clubs:string[]){
+    return this._http.post<any>(API_URL +"addClubEvent?idEvent="+id,clubs);
   }
-
-  ParticipantBadge(eid:number,uid:number){
-    return this._http.get<event[]>("http://localhost:8081/generateParticipantBadge/"+eid+"/"+uid);
-  }
-  GenerateBadge(eid:number,uid:number,type:string){
-    return this._http.get<event[]>("http://localhost:8081/generateBadge/"+eid+"/"+uid+"/"+type);
-  }
-
-
-
-
-
-
 
 
   GetEventFiles(id:number):Observable<eventFile[]> {
@@ -68,9 +58,7 @@ export class EventService {
   RemoveEventFile(id:number, fid:number){
     return this._http.delete<eventFile>(API_URL + id + "/deleteFile/" + fid);
   }
-  GetUsersList() {
-    return this._http.get<User[]>("http://localhost:8081/donation/getAllUsers");
-  }
+
   GetUser(idUser:number,idEvent:number){
     return this._http.get<event[]>(API_URL + 'showallEvents?idUser='+idUser+'&idEvent='+idEvent)
   }
@@ -88,6 +76,9 @@ export class EventService {
   }
   GetEventClubs(idEvent:number) {
     return this._http.get<string[]>(API_URL + 'getEventClubs?idEvent='+idEvent);
+  }
+  GetClubs() {
+    return this._http.get<string[]>(API_URL + 'getClubs');
   }
 
 }

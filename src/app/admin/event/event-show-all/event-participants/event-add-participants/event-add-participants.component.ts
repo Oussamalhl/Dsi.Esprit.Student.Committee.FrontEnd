@@ -77,27 +77,18 @@ export class EventAddParticipantsComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row[0] + 1}`;
   }
 
-  RemoveParticipant() {
-    this.selection.selected.forEach(u => {
-      //this.FeS.GetParticipantEventFeedBack(u.id,this.id).subscribe();
-    })
-
-    setTimeout(() => this.reload(), 2500);
-  }
-
   Participate(username: string) {
     console.log(username + this.id)
-    this.ES.ParticipateUser(this.id, username).subscribe(res =>
-      setTimeout(() => this.reload(), 2500)
-    )
-  }
+    this.ES.ParticipateUser(this.id, username).subscribe()
+    setTimeout(() => this.reload(), 2500)
 
-  GenerateBadge() {
-    this.selection.selected.forEach(u => {
-      this.ES.ParticipantBadge(this.id, Number(u[0])).subscribe(res => console.log(u[0] + "Badge generated"));
+  }
+  ParticipateMany() {
+    this.selection.selected.forEach(u=>{
+      this.ES.ParticipateUser(this.id, u[0]).subscribe()
     })
-    this.generated = true;
-    setTimeout(() => this.reload(), 2500);
+    setTimeout(() => this.reload(), 2500)
+
   }
 
   ngOnInit(): void {

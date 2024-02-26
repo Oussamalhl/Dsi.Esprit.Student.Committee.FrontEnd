@@ -57,9 +57,9 @@
 
             <strong _ngcontent-qgx-c204 class="h3">Add Participants to Event: "{{name}}" </strong>
             <br><br>
-            <strong _ngcontent-qgx-c204 class="h2">Clubs involved in this Event: "{{e.clubs}}" </strong>
+            <strong _ngcontent-qgx-c204 class="h4">Clubs involved in this Event: </strong>
             <ul>
-              <div *ngFor="let c in e.clubs;index as i">
+              <div *ngFor="let c of e.clubs;index as i">
                 <li>
                   {{c}}
                 </li>
@@ -164,13 +164,9 @@
                   </tr>
                 </table>
                 <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
-                <button cButton class="me-1" color="danger" type="submit" class="me-1 active btn btn-outline-primary"
-                        aria-pressed="true" variant="outline" (click)="RemoveParticipant()">
-                  Remove Participant(s)
-                </button>
                 <button cButton class="me-1" color="info" type="submit" class="me-1 active btn btn-outline-primary"
-                        aria-pressed="true" variant="outline" (click)="GenerateBadge()">
-                  Send Badge
+                        aria-pressed="true" variant="outline" (click)="ParticipateMany()">
+                  Participate Selected Users
                 </button>
               </div>
             </c-container>

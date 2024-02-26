@@ -23,7 +23,12 @@ export class EventUpdateComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tags:string[]=[];
   tagCtrl= new FormControl();
+  clubCtrl = new FormControl();
   filteredTags:Observable<string[]>;
+  filteredClubs: Observable<string[]>;
+  selectedClubs: string[] = [];
+  clubs:string[]=[];
+
   selectedTags:string[]=[];
   ngForm=new FormGroup({
     type: new FormControl(null)
@@ -34,14 +39,22 @@ export class EventUpdateComponent implements OnInit {
       startWith(null),
       map((tag: string | null) => (tag ? this._filter(tag) : this.tags.slice())),
     );
+    this.filteredClubs = this.clubCtrl.valueChanges.pipe(
+      startWith(null),
+      map((club: string | null) => (club ? this._filterClubs(club) : this.clubs.slice())),
+    );
   }
   @ViewChild('tagInput') tagInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('clubInput') clubInput!: ElementRef<HTMLInputElement>;
 
   UpdateEvent(e:event) {
 
     e.tags=this.selectedTags;
     console.log(e.type);
     if (this.ngForm.valid){
+      this.ES.addClubEvent(this.id,this.selectedClubs).subscribe(res=>{
+        console.log(e + "Clubs has been updated");
+      })
       this.ES.updateEvent(e).subscribe(res=>{
         console.log(e + "Has been updated");
       })
@@ -63,6 +76,9 @@ export class EventUpdateComponent implements OnInit {
         this.e = res;
         this.selectedTags=this.e.tags;
       });
+      this.ES.GetEventClubs(this.id).subscribe(res=>{
+        this.selectedClubs=res
+      })
     }
   }
   add(event: MatChipInputEvent): void {
@@ -97,7 +113,28 @@ export class EventUpdateComponent implements OnInit {
 
     return this.tags.filter(t => t.toLowerCase().includes(filterValue));
   }
+  addClub(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
 
+    if (value) {
+      this.selectedClubs.push(value);
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+
+    this.clubCtrl.setValue(null);
+  }
+  selectedClub(event: MatAutocompleteSelectedEvent): void {
+    this.selectedClubs.push(event.option.viewValue);
+    this.tagInput.nativeElement.value = '';
+    this.clubCtrl.setValue(null);
+  }
+  private _filterClubs(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.clubs.filter(t => t.toLowerCase().includes(filterValue));
+  }
 
 
   ngOnInit(): void {
@@ -105,8 +142,12 @@ export class EventUpdateComponent implements OnInit {
       console.log(res);
       this.tags=res;
     })
-
+    this.ES.GetClubs().subscribe(res=>{
+      console.log(res);
+      this.clubs=res;
+    })
     this.reset()
-  }
+
+    }
 
 }

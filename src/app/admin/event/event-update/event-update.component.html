@@ -165,6 +165,34 @@
                   </mat-form-field>
                 </c-col>
                 <c-col [md]="3">
+                  <mat-form-field class="example-chip-list" appearance="fill">
+                    <mat-label>Select Clubs</mat-label>
+                    <mat-chip-list #clubList aria-label="Club selection">
+                      <mat-chip
+                        *ngFor="let c of selectedClubs"
+                        (removed)="remove(c)">
+                        {{c}}
+                        <button matChipRemove>
+                          <mat-icon>cancel</mat-icon>
+                        </button>
+                      </mat-chip>
+                      <input
+                        placeholder="Clubs..."
+                        #clubInput
+                        [formControl]="clubCtrl"
+                        [matAutocomplete]="autoClub"
+                        [matChipInputFor]="clubList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        (matChipInputTokenEnd)="addClub($event)">
+                    </mat-chip-list>
+                    <mat-autocomplete #autoClub="matAutocomplete" (optionSelected)="selectedClub($event)">
+                      <mat-option *ngFor="let club of filteredClubs| async" [value]="club">
+                        {{club}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </c-col>
+                <c-col [md]="3">
                   <mat-form-field appearance="fill">
                     <mat-select [(ngModel)]="e.type" [ngModelOptions]="{standalone: true}" required>
                       <mat-option *ngFor="let t of type" [value]="t">
