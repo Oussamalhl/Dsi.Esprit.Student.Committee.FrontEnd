@@ -15,12 +15,12 @@ import {MatChipInputEvent} from "@angular/material/chips";
 export class ReclamationAddComponent implements OnInit {
 
   r: Reclamation = new Reclamation();
-  selectedType!:string
-  status=['OPEN', 'CLOSED'];
-  type=['CLUB', 'EVENT','OTHER'];
-  targets!:string[]
+  selectedType!: string
+  status = ['OPEN', 'CLOSED'];
+  type = ['CLUB', 'EVENT', 'OTHER'];
+  targets!: string[]
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  ngForm=new FormGroup({
+  ngForm = new FormGroup({
     type: new FormControl(null)
   })
 
@@ -28,27 +28,31 @@ export class ReclamationAddComponent implements OnInit {
 
   }
 
-  addReclamation(r:Reclamation) {
+  addReclamation(r: Reclamation) {
 
-    if (this.ngForm.valid){
-      this.RS.AddReclamation(r).subscribe(res=>{
+    if (this.ngForm.valid) {
+      this.RS.AddReclamation(r).subscribe(res => {
         console.log(res.name + "Has been added");
       })
     }
-    this._router.navigateByUrl("admin/reclamations");
+    setTimeout(() => this._router.navigateByUrl("admin/reclamations"), 1000);
   }
-getTargets(type:string){
-  console.log("type: "+type);
-      this.RS.GetReclamationTargets(type).subscribe(e=>{
-        this.targets=[]
-          this.targets=e
-        //e.forEach(t=>console.log("targets: "+t))
-        //console.log("targets: "+e);
 
-      })
-  //return this.targets
+  getTargets(type: string) {
+    console.log("type: " + type);
+    this.RS.GetReclamationTargets(type).subscribe(e => {
+      this.targets = []
+      this.targets = e
+      console.log("this type: " + e);
 
-}
+      //e.forEach(t=>console.log("targets: "+t))
+      //console.log("targets: "+e);
+
+    })
+    //return this.targets
+
+  }
+
   ngOnInit(): void {
 
   }

@@ -70,7 +70,7 @@ export const navItems: INavData[] = [
     ]
   },
   {
-    name: 'EVENTS',
+    name: 'Events',
     url: '/admin/events',
     iconComponent: { name: 'cil-bullhorn' },
     children: [
@@ -81,182 +81,15 @@ export const navItems: INavData[] = [
       {
         name: 'show Events',
         url: '/admin/events'
-      }
-    ]
-  },
-  {
-    name: 'Reclamations',
-    url: '/admin/fundraisers',
-    iconComponent: { name: 'cil-notes' },
-    children: [
-      {
-        name: 'addFundraiser',
-        url: '/admin/fundraiser/add'
       },
       {
-        name: 'showFundraiser',
-        url: '/admin/fundraiser/show'
+        name: 'Event Charts',
+        url: '/admin/events/charts',
+        iconComponent: { name: 'cil-chart' }
       }
     ]
-  },
-  {
-    name: 'SUBSCRIPTIONS',
-    iconComponent: { name: 'cil-star' },
-    url: '/admin/subscription',
-    children: [
-      {
-        name: 'addSubscription',
-        url: '/admin/subscription/add',
-        badge: {
-          color: 'success',
-          text: 'FREE'
-        }
-      },
-      {
-        name: 'showSubscription',
-        url: '/admin/subscription/show'
-      }
-    ]
-  },
-  {
-    name: 'PACKS',
-    url: '/admin/pack',
-    iconComponent: { name: 'cil-bell' },
-    children: [
-      {
-        name: 'addPack',
-        url: '/admin/pack/add'
-      },
-      {
-        name: 'showPack',
-        url: '/admin/pack/show'
-      }
-    ]
-  },
-  {
-    name: 'COURSES',
-    iconComponent: { name: 'cil-star' },
-    url: '/admin/course',
-    children: [
-      {
-        name: 'addCourse',
-        url: '/admin/course/add',
-        badge: {
-          color: 'success',
-          text: 'FREE'
-        }
-      },
-      {
-        name: 'showCourse',
-        url: '/admin/course/show'
-      }
-    ]
-  },
-  {
-    name: 'COMPLAINTS',
-    iconComponent: { name: 'cil-star' },
-    url: '/admin/complaint',
-    children: [
-      {
-        name: 'addComplaint',
-        url: '/admin/complaint/add',
-        badge: {
-          color: 'success',
-          text: 'FREE'
-        }
-      },
-      {
-        name: 'showComplaint',
-        url: '/admin/complaint/show'
-      }
-    ]
-  },
-  {
-    name: 'ChatBot',
-    iconComponent: { name: 'cil-star' },
-    url: '/admin/chatbot',
   },
 
-  {
-    name: 'ExpertInterview',
-    iconComponent: { name: 'cil-star' },
-    url: '/admin/expertinterview',
-    children: [
-      {
-        name: 'Add ExpertInterview',
-        url: '/admin/expertinterview/add'
-      },
-      {
-        name: 'Show ExpertInterview',
-        url: '/admin/expertinterview/show',
-        badge: {
-          color: 'success',
-          text: 'FREE'
-        },
-      },
-      {
-        name: 'Best Ratings',
-        url: '/admin/expertinterview/bestrating'
-      },
-    ]
-  },
-  {
-    name: 'OFFERS',
-    iconComponent: { name: 'cil-star' },
-    url: '/admin/offer',
-    children: [
-      {
-        name: 'addOffer',
-        url: '/admin/offer/add',
-        badge: {
-          color: 'success',
-          text: 'FREE'
-        }
-      },
-      {
-        name: 'showOffer',
-        url: '/admin/offer/show'
-      }
-    ]
-  },
-  {
-    name: 'INTERVIEWS',
-    iconComponent: { name: 'cil-star' },
-    url: '/admin/interview',
-    children: [
-      {
-        name: 'addInterview',
-        url: '/admin/interview/add',
-        badge: {
-          color: 'success',
-          text: 'FREE'
-        }
-      },
-      {
-        name: 'showInterview',
-        url: '/admin/interview/show'
-      }
-    ]
-  },
-  {
-    name: 'POSTS',
-    iconComponent: { name: 'cil-star' },
-    url: '/admin/post',
-    children: [
-      {
-        name: 'addPost',
-        url: '/admin/post/add',
-        badge: {
-          color: 'success',
-          text: 'FREE'
-        }
-      },
-      {
-        name: 'showPost',
-        url: '/admin/post/show'
-      }
-    ]
-  },
   {
     name: 'ADS',
     iconComponent: { name: 'cil-star' },

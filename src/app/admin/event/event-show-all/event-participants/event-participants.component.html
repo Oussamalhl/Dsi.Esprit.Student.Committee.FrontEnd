@@ -35,11 +35,13 @@
 <div class="d-flex justify-content-center">
   <button mat-raised-button [routerLink]="['Addparticipants']"
           color="primary">
-    Add Participants</button>
+    Add Participants
+  </button>
 </div>
 <div class="position-relative" *ngIf="generated">
-  <c-toaster placement="top-end" position="absolute" >
-    <c-toast [autohide]="true" [delay]="5000" [fade]="false" [visible]="true" [fade]="true" class="align-items-center text-white border-0" color="success">
+  <c-toaster placement="top-end" position="absolute">
+    <c-toast [autohide]="true" [delay]="5000" [fade]="false" [visible]="true" [fade]="true"
+             class="align-items-center text-white border-0" color="success">
       <c-toast-header [closeButton]="false">
         <svg cIcon="" name="cil-check" size="xl">
         </svg>
@@ -111,7 +113,7 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Username">
                       Confirmation
                     </th>
-                    <td mat-cell *matCellDef="let element"> {{element[3].isConfirmed ? 'Confirmed':'Not Done'}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element[3].isConfirmed ? 'Confirmed' : 'Not Done'}} </td>
                   </ng-container>
 
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -125,6 +127,11 @@
                         aria-pressed="true" variant="outline" (click)="RemoveParticipant()">
                   Remove Participant(s)
                 </button>
+                <mat-checkbox
+                  (change)="mailCheckboxSelected($event)"
+                  label="Notify by Mail?">
+                </mat-checkbox>
+                <br>
                 <button cButton class="me-1" color="info" type="submit" class="me-1 active btn btn-outline-primary"
                         aria-pressed="true" variant="outline" (click)="GenerateBadge()">
                   Send Badge

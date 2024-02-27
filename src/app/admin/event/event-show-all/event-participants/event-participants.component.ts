@@ -8,6 +8,7 @@ import {MatSort, Sort} from "@angular/material/sort";
 import {EventService} from "../../../../_services/event.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {LiveAnnouncer} from "@angular/cdk/a11y";
+import {MatCheckboxChange} from "@angular/material/checkbox";
 
 @Component({
   selector: 'app-event-participants',
@@ -16,25 +17,29 @@ import {LiveAnnouncer} from "@angular/cdk/a11y";
 })
 export class EventParticipantsComponent implements OnInit {
 
-  e:event=new event();
-  id!:number;
-  name:string="";
+  e: event = new event();
+  id!: number;
+  name: string = "";
   participants: string[][] = [];
-  displayedColumns: string[] = ['select', 'username', 'email', 'club','confirmation'];
+  displayedColumns: string[] = ['select', 'username', 'email', 'club', 'confirmation'];
   dataSource = new MatTableDataSource<string[]>(this.participants);
   u: User = new User();
   selection = new SelectionModel<string[]>(true, []);
-  generated:boolean=false;
+  mailCheck: Boolean = false;
+  generated: boolean = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  constructor(private ES: EventService, private _Activatedroute: ActivatedRoute, private _router: Router, private _liveAnnouncer: LiveAnnouncer) { }
+
+  constructor(private ES: EventService, private _Activatedroute: ActivatedRoute, private _router: Router, private _liveAnnouncer: LiveAnnouncer) {
+  }
 
   //@delay(1000)
   reload() {
-    this.generated=false;
+    this.generated = false;
     this.selection = new SelectionModel<string[]>(true, []);
     this.ngOnInit();
   }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -51,10 +56,16 @@ export class EventParticipantsComponent implements OnInit {
       this._liveAnnouncer.announce('Sorting cleared');
     }
   }
+
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
+  }
+
+  mailCheckboxSelected(event: MatCheckboxChange) {
+    this.mailCheck = event.checked;
+    console.log("Mailcheckbox:" + this.mailCheck)
   }
 
   masterToggle() {
@@ -73,18 +84,29 @@ export class EventParticipantsComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row[0] + 1}`;
   }
 
-  RemoveParticipant(){
-    this.selection.selected.forEach(u=>{
-      this.ES.deleteUserEvent(u[0]).subscribe();
-    })
+  RemoveParticipant() {
+    if (this.mailCheck) {
+      this.selection.selected.forEach(u => {
+        this.ES.deleteUserEventM(this.id,u[0]).subscribe();
+      })
+      setTimeout(() => this.reload(), 2500);
+    }
+    else {
+      this.selection.selected.forEach(u => {
+        this.ES.deleteUserEvent(u[0]).subscribe();
+      })
+      setTimeout(() => this.reload(), 2500);
+    }
+  }
 
-    setTimeout(() => this.reload(), 2500);  }
-  GenerateBadge(){
-    this.selection.selected.forEach(u=>{
-      this.ES.ParticipantBadge(this.id,u[0]).subscribe(res=>console.log(u[0] +"Badge generated"));
+
+  GenerateBadge() {
+    this.selection.selected.forEach(u => {
+      this.ES.ParticipantBadge(this.id, u[0]).subscribe(res => console.log(u[0] + "Badge generated"));
     })
-    this.generated=true;
-    setTimeout(() => this.reload(), 2500);  }
+    this.generated = true;
+    setTimeout(() => this.reload(), 2500);
+  }
 
   ngOnInit(): void {
     this.id = Number(this._Activatedroute.snapshot.paramMap.get("id"));
@@ -92,10 +114,10 @@ export class EventParticipantsComponent implements OnInit {
       this.ES.GetEvent(this.id).subscribe(res => {
         console.log(res);
         this.e = res;
-        this.name=res.name;
-        this.ES.GetParticipants(this.id).subscribe(res=>{
+        this.name = res.name;
+        this.ES.GetParticipants(this.id).subscribe(res => {
           console.log(res);
-          this.participants=res;
+          this.participants = res;
           this.dataSource = new MatTableDataSource<string[]>(this.participants);
           if (this.participants != []) {
             this.dataSource.paginator = this.paginator;

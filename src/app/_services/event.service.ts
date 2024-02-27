@@ -26,6 +26,9 @@ export class EventService {
   deleteUserEvent(username:string){
     return this._http.delete(API_URL + 'deleteUserEvent?username='+username);
   }
+  deleteUserEventM(eventId:number,username:string){
+    return this._http.delete(API_URL + 'deleteUserEventm?eventId='+eventId+'&username='+username);
+  }
   GetEvent(id:number):Observable<event>{
     return this._http.get<event>(API_URL + 'showEvent?idEvent='+ id);
   }
@@ -79,6 +82,22 @@ export class EventService {
   }
   GetClubs() {
     return this._http.get<string[]>(API_URL + 'getClubs');
+  }
+
+  countAllEventByMonth():Observable<any> {
+
+    return this._http.get<any>(API_URL + 'countAllEvByMonth')
+
+  }
+  countEventStatusByYear():Observable<any> {
+
+    return this._http.get<any>(API_URL + 'countEvStatusByYear')
+
+  }
+  countEventTypeByYear():Observable<any> {
+
+    return this._http.get<any>(API_URL + 'countEvTypeByYear')
+
   }
 
 }
