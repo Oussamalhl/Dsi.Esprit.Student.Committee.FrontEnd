@@ -17,9 +17,11 @@ export class EventChartsComponent implements OnInit {
   eventCount!: number[][]
   eventStatusCount!: any[][]
   eventTypeCount!: any[][]
+  bestYearlyEvents!: any[][]
   dataMonths: any
   dataStatus: any
   dataTypes: any
+  dataBests: any
   selectedYear!: number
   yearlyCount = 0
   virtualCount = 0
@@ -28,6 +30,10 @@ export class EventChartsComponent implements OnInit {
   ongoingCount = 0
   cancelledCount = 0
   endedCount = 0
+
+  allCount = 0
+  allConfirmed = 0
+  allParticipations = 0
 
   January = 0
   February = 0
@@ -44,7 +50,7 @@ export class EventChartsComponent implements OnInit {
 
   ngOnInit(): void {
     this.ES.countAllEventByMonth().subscribe(res => {
-      console.log(res);
+      //console.log(res);
       this.eventCount = res;
     });
 
@@ -55,6 +61,45 @@ export class EventChartsComponent implements OnInit {
     this.ES.countEventTypeByYear().subscribe(res => {
       //console.log(res)
       this.eventTypeCount = res;
+    })
+
+    this.ES.countAllEvents().subscribe(res => {
+      //console.log(res)
+      this.allCount = res;
+    })
+    this.ES.countAllEventsParticipations().subscribe(res => {
+      //console.log(res)
+      this.allParticipations = res;
+    })
+    this.ES.countAllConfirmedEvents().subscribe(res => {
+      //console.log(res)
+      this.allConfirmed = res;
+    })
+  }
+
+  bestOfYear(year: number) {
+    this.bestYearlyEvents = []
+    this.ES.bestEventsOfTheYear(year).subscribe(res => {
+      if (res.length > 0) {
+        this.bestYearlyEvents = res;
+        console.log("best of year: " + res[0][1])
+        console.log("this best of year: " + this.bestYearlyEvents)
+        this.dataBests = {
+          labels: [this.bestYearlyEvents[0][2], this.bestYearlyEvents[1][2], this.bestYearlyEvents[2][2], this.bestYearlyEvents[3][2], this.bestYearlyEvents[4][2]],
+          datasets: [
+            {
+              label: 'Type',
+              backgroundColor: ['#DD1B16', '#f57a3b', '#8ff53b', '#3b5af5', '#f57a3b'],
+              data: [this.bestYearlyEvents[0][1], this.bestYearlyEvents[1][1], this.bestYearlyEvents[2][1], this.bestYearlyEvents[3][1], this.bestYearlyEvents[4][1]]
+            }
+          ]
+        }
+        this.bestYearlyEvents = []
+
+        console.log("this best of year: " + this.bestYearlyEvents)
+
+      }
+
     })
 
   }
@@ -80,10 +125,13 @@ export class EventChartsComponent implements OnInit {
     this.endedCount = 0
     this.startedCount = 0
     this.ongoingCount = 0
+    this.bestYearlyEvents = [[], []]
+
+    this.bestOfYear(year);
 
     this.eventCount.forEach(e => {
       if (e.includes(year)) {
-        console.log('year: ' + e[0] + ' month: ' + e[1] + ' count: ' + e[2]);
+        //console.log('year: ' + e[0] + ' month: ' + e[1] + ' count: ' + e[2]);
         this.yearlyCount += e[2]
         e[1] == 1 ? this.January = e[2] :
           e[1] == 2 ? this.February = e[2] :
@@ -102,7 +150,7 @@ export class EventChartsComponent implements OnInit {
       }
       this.eventStatusCount.forEach(e => {
         if (e.includes(year)) {
-          console.log('year: ' + e[0] + ' status: ' + e[1] + ' count: ' + e[2]);
+          //console.log('year: ' + e[0] + ' status: ' + e[1] + ' count: ' + e[2]);
           e[1] === 'STARTED' ? this.startedCount = e[2] :
             e[1] == 'CANCELLED' ? this.cancelledCount = e[2] :
               e[1] == 'ONGOING' ? this.ongoingCount = e[2] :
@@ -114,7 +162,7 @@ export class EventChartsComponent implements OnInit {
       })
       this.eventTypeCount.forEach(e => {
         if (e.includes(year)) {
-          console.log('year: ' + e[0] + ' type: ' + e[1] + ' count: ' + e[2]);
+          //console.log('year: ' + e[0] + ' type: ' + e[1] + ' count: ' + e[2]);
           e[1] === 'VIRTUAL' ? this.virtualCount = e[2] :
             e[1] == 'INPERSON' ? this.inpersonCount = e[2] :
               console.log("")
@@ -139,7 +187,7 @@ export class EventChartsComponent implements OnInit {
       datasets: [
         {
           label: 'Status',
-          backgroundColor: ['#0fbbe1', '#d51807','#0741d5','#1bd507'],
+          backgroundColor: ['#0fbbe1', '#d51807', '#0741d5', '#1bd507'],
           data: [this.startedCount, this.cancelledCount, this.ongoingCount, this.endedCount]
         }
       ]
@@ -154,6 +202,7 @@ export class EventChartsComponent implements OnInit {
         }
       ]
     }
+
   }
 
 }

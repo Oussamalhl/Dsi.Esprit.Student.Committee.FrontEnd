@@ -1,9 +1,16 @@
+<c-col xs="2">
+  <b>Total Reclamations</b> (of all time)
+  <br/>
+  {{allReclamations}}
+</c-col>
+
 <c-row>
-  <c-col >
+  <c-col>
     <mat-form-field appearance="fill">
-      <mat-select [(ngModel)]="selectedYear" [ngModelOptions]="{standalone: true}" (ngModelChange)="filterCountByYear(selectedYear)" required>
+      <mat-select [(ngModel)]="selectedYear" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="filterCountByYear(selectedYear)" required>
         <mat-option>None</mat-option>
-        <mat-option *ngFor="let y of years" [value]="y" >
+        <mat-option *ngFor="let y of years" [value]="y">
           {{y}}
         </mat-option>
       </mat-select>

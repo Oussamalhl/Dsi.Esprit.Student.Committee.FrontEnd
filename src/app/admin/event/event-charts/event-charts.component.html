@@ -1,3 +1,25 @@
+<c-container>
+  <c-row>
+    <c-col xs="11"><b>Totals (of all time)</b></c-col>
+    <c-col xs="2">
+      Events
+      <br />
+      {{allCount}}
+    </c-col>
+    <c-col xs="2">
+      Participations
+      <br />
+      {{allParticipations}}
+    </c-col>
+    <c-col xs="2">
+      Confirmed
+      <br />
+      {{allConfirmed}}
+    </c-col>
+  </c-row>
+</c-container>
+
+
 <c-row>
   <c-col >
     <mat-form-field appearance="fill">
@@ -7,7 +29,7 @@
           {{y}}
         </mat-option>
       </mat-select>
-      <mat-label>Type</mat-label>
+      <mat-label>Year</mat-label>
       <mat-hint>Please pick up a date</mat-hint>
     </mat-form-field>
   </c-col>
@@ -16,7 +38,7 @@
   <c-col xs="12" lg="6">
     <c-card class="mb-4">
       <c-card-header>
-        Reclamation Count
+        Event Count
       </c-card-header>
       <c-card-body>
         <c-chart type="bar" [data]="dataMonths"></c-chart>
@@ -26,7 +48,7 @@
   <c-col xs="12" lg="6">
     <c-card class="mb-4">
       <c-card-header>
-        Reclamations Status
+        Event Status
       </c-card-header>
       <c-card-body>
         <c-chart type="pie" [data]="dataStatus"></c-chart>
@@ -36,10 +58,20 @@
   <c-col xs="12" lg="6">
     <c-card class="mb-4">
       <c-card-header>
-        Reclamations Types
+        Event Types
       </c-card-header>
       <c-card-body>
         <c-chart type="pie" [data]="dataTypes"></c-chart>
+      </c-card-body>
+    </c-card>
+  </c-col>
+  <c-col xs="12" lg="6">
+    <c-card class="mb-4">
+      <c-card-header>
+        Best Events of the Year {{selectedYear}}
+      </c-card-header>
+      <c-card-body>
+        <c-chart type="polarArea" [data]="dataBests"></c-chart>
       </c-card-body>
     </c-card>
   </c-col>

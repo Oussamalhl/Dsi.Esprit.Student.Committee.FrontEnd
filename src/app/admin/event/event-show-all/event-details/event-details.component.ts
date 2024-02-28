@@ -18,14 +18,37 @@ export class EventDetailsComponent implements OnInit {
   files: eventFile[] = [];
   retrievedImages: eventFile[] = [];
   src: any[] = []
+  dataParticipations!:any;
 
   constructor(private ES: EventService, private _router: Router, private _Activatedroute: ActivatedRoute, private sanitizer: DomSanitizer) { }
 
+  getConfirmations(){
+    this.ES.countEventParticipations(this.id).subscribe(resAll=>{
+      console.log("allParticipations "+resAll);
+      this.ES.countEventConfirmed(this.id).subscribe(resConfirmed=>{
+        console.log("allConfirmedParticipations "+resConfirmed);
+        this.dataParticipations = {
+          labels: ['Confirmed', 'Not Confirmed'],
+          datasets: [
+            {
+              label: 'Type',
+              backgroundColor: ['#2ea209', '#e12222'],
+              data: [resConfirmed, resAll-resConfirmed]
+            }
+          ]
+        }
+      })
+    })
+
+  }
+
   ngOnInit(): void {
     this.id = Number(this._Activatedroute.snapshot.paramMap.get("id"));
+    this.getConfirmations();
+
     if (this.id != null) {
       this.ES.GetEvent(this.id).subscribe(res => {
-        console.log(res);
+        //console.log(res);
         this.e = res;
         this.name = this.e.name;
         this.ES.GetEventClubs(res.id).subscribe(c=>this.e.clubs=c)
@@ -42,6 +65,7 @@ export class EventDetailsComponent implements OnInit {
           }
         })
       })
+
     }
   }
 

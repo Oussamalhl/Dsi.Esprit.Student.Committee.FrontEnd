@@ -28,6 +28,8 @@ export class ReclamationChartsComponent implements OnInit {
   eventsCount = 0
   otherCount = 0
 
+  allReclamations = 0
+
   January = 0
   February = 0
   March = 0
@@ -42,6 +44,12 @@ export class ReclamationChartsComponent implements OnInit {
   December = 0
 
   ngOnInit(): void {
+
+    this.RS.countAllReclamation().subscribe(res => {
+      console.log(res);
+      this.allReclamations = res;
+    });
+
     this.RS.countAllReclamationByMonth().subscribe(res => {
       console.log(res);
       this.reclamationCount = res;
