@@ -77,19 +77,19 @@ export class ReclamationService {
     return this.http.get<string[]>(API_URL + 'getTargets?type=' + type)
 
   }
-  countAllReclamationByMonth():Observable<any> {
+  countAllReclamationByMonth(year:number):Observable<any> {
 
-    return this.http.get<any>(API_URL + 'countAllRecByMonth')
-
-  }
-  countReclamationStatusByYear():Observable<any> {
-
-    return this.http.get<any>(API_URL + 'countRecStatusByYear')
+    return this.http.get<any>(API_URL + 'countAllRecByMonth?year='+year)
 
   }
-  countReclamationTypeByYear():Observable<any> {
+  countReclamationStatusByYear(year:number):Observable<any> {
 
-    return this.http.get<any>(API_URL + 'countRecTypeByYear')
+    return this.http.get<any>(API_URL + 'countRecStatusByYear?year='+year)
+
+  }
+  countReclamationTypeByYear(year:number):Observable<any> {
+
+    return this.http.get<any>(API_URL + 'countRecTypeByYear?year='+year)
 
   }
   countAllReclamation():Observable<number> {

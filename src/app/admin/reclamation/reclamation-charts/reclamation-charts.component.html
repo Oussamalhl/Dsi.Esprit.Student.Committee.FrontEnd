@@ -14,9 +14,14 @@
           {{y}}
         </mat-option>
       </mat-select>
-      <mat-label>Type</mat-label>
-      <mat-hint>Please pick up a date</mat-hint>
+      <mat-label>Year</mat-label>
+      <mat-hint>Please pick up a year</mat-hint>
     </mat-form-field>
+  </c-col>
+  <c-col xs="2">
+    <b>Total Reclamations</b> of {{selectedYear}}
+    <br/>
+    <b>{{yearlyCount}}</b>
   </c-col>
 </c-row>
 <c-row>
