@@ -100,21 +100,21 @@ export class EventService {
     return this._http.get<string[]>(API_URL + 'getClubs');
   }
 
-  countAllEventByMonth(): Observable<any> {
+  countAllEventByMonth(year:number): Observable<any> {
 
-    return this._http.get<any>(API_URL + 'countAllEvByMonth')
-
-  }
-
-  countEventStatusByYear(): Observable<any> {
-
-    return this._http.get<any>(API_URL + 'countEvStatusByYear')
+    return this._http.get<any>(API_URL + 'countAllEvByMonth?year='+year)
 
   }
 
-  countEventTypeByYear(): Observable<any> {
+  countEventStatusByYear(year:number): Observable<any> {
 
-    return this._http.get<any>(API_URL + 'countEvTypeByYear')
+    return this._http.get<any>(API_URL + 'countEvStatusByYear?year='+year)
+
+  }
+
+  countEventTypeByYear(year:number): Observable<any> {
+
+    return this._http.get<any>(API_URL + 'countEvTypeByYear?year='+year)
 
   }
 
