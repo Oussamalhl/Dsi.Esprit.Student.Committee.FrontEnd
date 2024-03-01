@@ -1,8 +1,7 @@
 <c-breadcrumb [style]="'--cui-breadcrumb-divider:\'>\''">
-  <c-breadcrumb-item url="/admin">Home</c-breadcrumb-item>
+  <c-breadcrumb-item [routerLink]="'/admin'" [active]="false">Home</c-breadcrumb-item>
   <c-breadcrumb-item [active]="false">Events</c-breadcrumb-item>
-  <c-breadcrumb-item url="/admin/events" [active]="true">Show Events</c-breadcrumb-item>
-
+  <c-breadcrumb-item [routerLink]="'/admin/events'" [active]="false">Show Events</c-breadcrumb-item>
 </c-breadcrumb>
 <style>
   table {

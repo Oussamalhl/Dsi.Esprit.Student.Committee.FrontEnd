@@ -94,6 +94,10 @@ import { EventParticipantsComponent } from './admin/event/event-show-all/event-p
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import { EventAddParticipantsComponent } from './admin/event/event-show-all/event-participants/event-add-participants/event-add-participants.component';
 import { EventDetailsComponent } from './admin/event/event-show-all/event-details/event-details.component';
+import { BrowseEventsComponent } from './user/browse-events/browse-events.component';
+import { UserEventDetailsComponent } from './user/browse-events/user-event-details/user-event-details.component';
+import { ClubEventsComponent } from './user/browse-events/club-events/club-events.component';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -107,8 +111,9 @@ const APP_CONTAINERS = [
   DefaultLayoutComponent,
 ];
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, DefaultLayoutUComponent, DefaultFooterUComponent, DefaultHeaderUComponent, CommingSoonComponent, UserIndexComponent, SigninComponent,SignupComponent, UserShowAllComponent, UserDetailsComponent, UserAddComponent, UserUpdateComponent, ReclamationShowAllComponent, ReclamationAddComponent, ReclamationUpdateComponent, ReclamationShowFilesComponent, ReclamationAddFileComponent, ReclamationChartsComponent, EventShowAllComponent, EventAddComponent, EventUpdateComponent, EventShowFilesComponent, EventChartsComponent, EventAddFileComponent, EventParticipantsComponent, EventAddParticipantsComponent, EventDetailsComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, DefaultLayoutUComponent, DefaultFooterUComponent, DefaultHeaderUComponent, CommingSoonComponent, UserIndexComponent, SigninComponent,SignupComponent, UserShowAllComponent, UserDetailsComponent, UserAddComponent, UserUpdateComponent, ReclamationShowAllComponent, ReclamationAddComponent, ReclamationUpdateComponent, ReclamationShowFilesComponent, ReclamationAddFileComponent, ReclamationChartsComponent, EventShowAllComponent, EventAddComponent, EventUpdateComponent, EventShowFilesComponent, EventChartsComponent, EventAddFileComponent, EventParticipantsComponent, EventAddParticipantsComponent, EventDetailsComponent, BrowseEventsComponent, UserEventDetailsComponent, ClubEventsComponent],
     imports: [
+      NgbCarouselModule,
         BrowserModule,
         ScheduleModule,
         BrowserAnimationsModule,

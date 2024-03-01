@@ -11,7 +11,19 @@
                 <span cInputGroupText>
                   <svg cIcon name="cilUser"></svg>
                 </span>
-                <input cFormControl type="username" id="username"  name="email" [(ngModel)]="user.username" class="form-input" placeholder="enter your username" required="required">
+                <input cFormControl type="text" id="username"  name="username" [(ngModel)]="user.username" class="form-input" placeholder="enter your username" required="required">
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilUser"></svg>
+                </span>
+                <input cFormControl type="text" id="firstname"  name="firstname" [(ngModel)]="user.firstName" class="form-input" placeholder="enter your firstname" required="required">
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilUser"></svg>
+                </span>
+                <input cFormControl type="text" id="lastname"  name="lastname" [(ngModel)]="user.lastName" class="form-input" placeholder="enter your lastname" required="required">
               </c-input-group>
               <c-input-group class="mb-3">
                 <span cInputGroupText>@</span>

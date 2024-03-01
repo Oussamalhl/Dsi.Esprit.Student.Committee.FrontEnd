@@ -1,0 +1,85 @@
+<br><br><br><br>
+
+<section class="causes-section overlay">
+  <div class="container">
+
+    <div class="kode-cause">
+
+      <div class="heading heading-4">
+        <h2 style="color: #fff;">Event {{name}} Details</h2>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div *ngIf="retrievedImages.length>=1">
+            <ngb-carousel>
+              <ng-template *ngFor="let img of src" ngbSlide>
+                <div class="picsum-img-wrapper">
+                  <img [src]="img"
+                        style="object-fit:scale-down">
+                </div>
+                <div class="carousel-caption">
+
+                </div>
+              </ng-template>
+            </ngb-carousel>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h2>{{e.name}}</h2>
+          <p>{{e.description}}</p>
+          <div class="col-md-6">
+            <ul class="evdetail-info">
+              <li><span><i class="fa fa-calendar"></i>Starts On</span> {{e.eventDateStart | date:'medium'}}</li>
+              <li><span><i class="fa fa-calendar"></i>Ends On</span> {{e.eventDateEnd | date:'medium' }}</li>
+              <li><span><i class="fa fa-clock-o"></i> Timing</span> {{e.eventTime }}</li>
+              <li><span><i class="fa fa-map-marker"></i> Where</span> {{e.eventLocation}}</li>
+            </ul>
+          </div>
+          <div class="kode-range"> Motive: {{e.eventMotive}}
+          </div>
+          <div class="kode-range"> Type: {{e.type}}</div>
+          <div class="kode-range"> Status: {{e.status}}</div>
+          <div class="kode-range"> Capacity: {{e.places}}</div>
+          <div class="kode-range"> Tags:
+            <mat-chip-list aria-label="Tags" *ngFor="let t of e.tags">
+              <mat-chip color="primary">{{t}}</mat-chip>
+            </mat-chip-list>
+          </div>
+          <span id="ex6CurrentSliderValLabel"></span>
+          <div class="donate-text">
+
+            <br><br>
+
+            <div class="kode-range"> Clubs Involved:
+              <mat-chip-list aria-label="Clubs" *ngFor="let c of e.clubs">
+                <mat-chip color="danger">{{c}}</mat-chip>
+              </mat-chip-list>
+            </div>
+
+            <br><br><br><br>
+
+            <p *ngIf="check">
+              <button class="btn-filled" (click)="Participate()">Participate</button>
+            </p>
+            <p *ngIf="check && this.today.toString()>this.e.eventDateEnd.toString()">
+              <button class="btn-filled" (click)="reroute()">Rate</button>
+            </p></div>
+          <br><br><br><br>
+          <p *ngIf="check"> WE APPRECIATE YOU FOR YOUR PARTICIPATION</p>
+            <h3 *ngIf="!check" style="color: #ec1010;">You cannot participate in this event.</h3>
+        </div>
+        <div class="col-md-12">
+          <div *ngIf="pdf.length>=1">
+            <div *ngFor="let f of pdf;index as i">
+              <object [data]=f target="_blank" rel="noopener noreferrer" type="application/pdf" width="100%"
+                      height="600px"></object>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</section>

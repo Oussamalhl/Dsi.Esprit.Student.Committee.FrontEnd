@@ -1,11 +1,10 @@
 <c-breadcrumb [style]="'--cui-breadcrumb-divider:\'>\''">
-  <c-breadcrumb-item url="/admin">Home</c-breadcrumb-item>
-  <c-breadcrumb-item [active]="true">Reclamations</c-breadcrumb-item>
-  <c-breadcrumb-item url="/admin/reclamations">Show Reclamations</c-breadcrumb-item>
-  <c-breadcrumb-item [active]="true">Show Files</c-breadcrumb-item>
-
-
+  <c-breadcrumb-item [routerLink]="'/admin'" [active]="false">Home</c-breadcrumb-item>
+  <c-breadcrumb-item [active]="false">Events</c-breadcrumb-item>
+  <c-breadcrumb-item [routerLink]="'/admin/events'" [active]="false">Show Events</c-breadcrumb-item>
+  <c-breadcrumb-item [routerLink]="'/admin/events/'+id+'/Files'" [active]="true">Show Files</c-breadcrumb-item>
 </c-breadcrumb>
+
 <div class="body flex-grow-1 px-3">
   <c-container breakpoint="lg" class="h-auto container-lg" _nghost-qgx-c92="">
     <c-row _ngcontent-qgx-c191="" _nghost-qgx-c96="" class="row">
@@ -64,7 +63,7 @@
                                     _ngcontent-qgx-c208
                                     class="me-1 btn btn-outline-danger ng-star-inserted"
                                     variant="outline"
-                                    (click)="RemovePdf(pdfFiles[i].fileId)"
+                                    (click)="Remove(pdfFiles[i].fileId)"
                             > Delete
                             </button>
                             <button cButton

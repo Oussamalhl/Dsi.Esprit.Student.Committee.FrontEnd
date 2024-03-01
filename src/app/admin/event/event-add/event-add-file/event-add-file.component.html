@@ -29,11 +29,11 @@
   </c-toaster>
 </div>
 <c-breadcrumb [style]="'--cui-breadcrumb-divider:\'>\''">
-  <c-breadcrumb-item url="/admin">Home</c-breadcrumb-item>
+  <c-breadcrumb-item [routerLink]="'/admin'" [active]="false">Home</c-breadcrumb-item>
   <c-breadcrumb-item [active]="false">Events</c-breadcrumb-item>
-  <c-breadcrumb-item url="/admin/events">Show Events</c-breadcrumb-item>
-  <c-breadcrumb-item [active]="false">Show Files</c-breadcrumb-item>
-  <c-breadcrumb-item [active]="false">Add Files</c-breadcrumb-item>
+  <c-breadcrumb-item [routerLink]="'/admin/events'" [active]="false">Show Events</c-breadcrumb-item>
+  <c-breadcrumb-item [routerLink]="'/admin/events/'+id+'/Files'" [active]="false">Show Files</c-breadcrumb-item>
+  <c-breadcrumb-item [active]="true">Add Files</c-breadcrumb-item>
 
 </c-breadcrumb>
 

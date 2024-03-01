@@ -12,19 +12,13 @@
         <div id="kode-responsive-navigation" class="dl-menuwrapper">
           <button class="dl-trigger">Open Menu</button>
           <ul class="dl-menu">
-            <li class="menu-item kode-parent-menu"><a href="index-2.html">Home</a>
+            <li class="menu-item kode-parent-menu"><a href="/">Home</a>
               <ul class="dl-submenu">
                 <li><a href="index-3.html">Home Layout 1</a></li>
                 <li><a href="index-boxed.html">Home Layout 2</a></li>
               </ul>
             </li>
             <li><a href="about-us.html">About Us</a></li>
-            <li class="menu-item kode-parent-menu"><a href="latest-news.html">Events</a>
-              <ul class="dl-submenu">
-                <li><a href="latest-news.html">ALL EVENTS</a></li>
-                <li><a href="latest-news-2.html" *ngIf="isLoggedIn">MY EVENTS</a></li>
-              </ul>
-            </li>
             <li class="menu-item kode-parent-menu"><a href="team.html">Our Team</a>
               <ul class="dl-submenu">
                 <li><a href="team-detail-2.html">Team Detail</a></li>
@@ -40,13 +34,6 @@
               </ul>
             </li>
 
-            <li class="menu-item kode-parent-menu"><a href="#">Courses</a>
-              <ul class="dl-submenu">
-                <li><a href="blog.html">All Courses</a></li>
-                <li><a href="blog-2.html" *ngIf="isLoggedIn">My Courses</a></li>
-
-              </ul>
-            </li>
             <li class="menu-item kode-parent-menu last"><a href="#">Pages</a>
               <ul class="dl-submenu">
                 <li><a href="under-construction.html">Under Cunstruction</a></li>
@@ -82,11 +69,6 @@
                 </li>
               </ul>
             </li>
-
-            <li><a routerLink="complaint/add">Contact Us</a></li>
-            <li><a routerLink="complaint/add">Complaints</a>
-
-            </li>
           </ul>
         </div>
         <!--NAVIGATION START-->
@@ -99,61 +81,38 @@
               </ul>
             </li>
             <li><a href="about-us.html">About Us</a></li>
-            <li class="menu-item kode-parent-menu"><a href="latest-news.html">Events</a>
-              <ul class="dl-submenu">
-                <li><a href="latest-news.html">ALL EVENTS</a></li>
-                <li><a href="latest-news-2.html" *ngIf="isLoggedIn">MY EVENTS</a></li>
-              </ul>
-            </li>
 
-            <li class="menu-item kode-parent-menu"><a href="team.html">Our Team</a>
-              <ul class="dl-submenu">
-                <li><a href="team-detail-2.html">Team Detail</a></li>
-              </ul>
-            </li>
-            <li class="menu-item kode-parent-menu"><a href="#">Forum</a>
-              <ul class="dl-submenu">
-                <li><a href="causes.html" *ngIf="isLoggedIn">All Posts</a></li>
-                <li><a href="causes-list-view.html" >All Ads</a></li>
-                <li><a href="cause-detail.html" *ngIf="isLoggedIn">My Post</a></li>
-                <li><a href="cause-detail.html" *ngIf="isLoggedIn">Chat Room</a></li>
-              </ul>
-            </li>
-
-            <li class="menu-item kode-parent-menu"><a href="#">Courses</a>
-              <ul class="dl-submenu">
-                <li><a href="blog.html">All Courses</a></li>
-                <li><a href="blog-2.html" *ngIf="isLoggedIn">My Courses</a></li>
-              </ul>
-            </li>
             <li class="menu-item kode-parent-menu last" *ngIf="showAdminBoard"><a href="#">Admin</a>
               <ul class="dl-submenu">
                 <li><a routerLink="admin">Dashboard</a></li>
               </ul>
             </li>
-            <li><a routerLink="expertinterview/show">Contact Us</a>
+            <li class="menu-item kode-parent-menu last" *ngIf="isLoggedIn"><a href="#">Events</a>
               <ul class="dl-submenu">
                 <li>
-                  <a routerLink="expertinterview/add">Expert Interview</a>
+                  <a routerLink="events">Show Events</a>
                 </li>
                 <li>
-                  <a routerLink="expertinterview/show">Manage Interviews</a>
+                  <a routerLink="events/club">Show Club Events</a>
                 </li>
-
+              </ul>
+            </li >
+            <li class="menu-item kode-parent-menu last"><a href="#" *ngIf="isLoggedIn">Reclamations</a>
+              <ul class="dl-submenu">
+                <li>
+                  <a routerLink="reclamations/show">Show Reclamations</a>
+                </li>
+                <li>
+                  <a routerLink="reclamations/add">Add Reclamations</a>
+                </li>
 
               </ul>
             </li>
-            <li><a routerLink="complaint/add">Complaints</a>
+            <li class="menu-item kode-parent-menu last"><a href="#">Contact Us</a>
               <ul class="dl-submenu">
-                <li>
-                  <a routerLink="complaint/show">Show Complaints</a>
-                </li>
-                <li>
-                  <a routerLink="complaint/add">Add Complaints</a>
-                </li>
 
               </ul>
-            </li>
+            </li >
           </ul>
         </div>
         <!--NAVIGATION END-->

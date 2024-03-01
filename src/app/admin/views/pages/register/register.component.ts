@@ -23,7 +23,7 @@ export class RegisterComponent {
   onSubmit(): void {
     //const { username, email, password } = this.user;
 
-    this.authService.register(this.user.username, this.user.email, this.user.password, this.user.sexe).subscribe({
+    this.authService.register(this.user.username,this.user.firstName,this.user.lastName, this.user.email, this.user.password, this.user.sexe).subscribe({
       next: data => {
         console.log(data);
         this.isSuccessful = true;

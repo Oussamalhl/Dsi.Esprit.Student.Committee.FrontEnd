@@ -1,4 +1,4 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {eventFile} from "../models/eventFile";
@@ -68,8 +68,8 @@ export class EventService {
     return this._http.post<eventFile>(API_URL + 'addFile/' + id, file, {observe: 'response'});
   }
 
-  RemoveEventFile(id: number, fid: number) {
-    return this._http.delete<eventFile>(API_URL + id + "/deleteFile/" + fid);
+  RemoveEventFile( fid: number) {
+    return this._http.delete<eventFile>(API_URL + 'deleteFile/' + fid);
   }
 
   GetUser(idUser: number, idEvent: number) {
@@ -91,6 +91,9 @@ export class EventService {
   ParticipateUser(idEvent: number, username: string) {
     return this._http.post<any>(API_URL + 'addUserEventa?idEvent=' + idEvent + '&username=' + username, {});
   }
+  Participate(idEvent: number) {
+    return this._http.post<any>(API_URL + 'addUserEvent?idEvent=' + idEvent, {});
+  }
 
   GetEventClubs(idEvent: number) {
     return this._http.get<string[]>(API_URL + 'getEventClubs?idEvent=' + idEvent);
@@ -98,6 +101,10 @@ export class EventService {
 
   GetClubs() {
     return this._http.get<string[]>(API_URL + 'getClubs');
+  }
+  GetUserClub() {
+    const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+    return this._http.get<string>(API_URL + 'getUserClub',{ headers, responseType: 'text' as 'json'});
   }
 
   countAllEventByMonth(year:number): Observable<any> {

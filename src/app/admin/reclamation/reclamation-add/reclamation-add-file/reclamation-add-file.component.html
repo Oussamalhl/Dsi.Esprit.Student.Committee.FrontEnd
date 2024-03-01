@@ -28,9 +28,9 @@
 </div>
 <c-breadcrumb [style]="'--cui-breadcrumb-divider:\'>\''">
   <c-breadcrumb-item url="/admin">Home</c-breadcrumb-item>
-  <c-breadcrumb-item [active]="false">Reclamations</c-breadcrumb-item>
+  <c-breadcrumb-item [active]="true">Reclamations</c-breadcrumb-item>
   <c-breadcrumb-item url="/admin/reclamations" >Show Reclamations</c-breadcrumb-item>
-  <c-breadcrumb-item [active]="false">Show Files</c-breadcrumb-item>
+  <c-breadcrumb-item [routerLink]="'/admin/reclamations/'+id+'/Files'" [active]="true">Show Files</c-breadcrumb-item>
   <c-breadcrumb-item [active]="false">Add Files</c-breadcrumb-item>
 
 </c-breadcrumb>

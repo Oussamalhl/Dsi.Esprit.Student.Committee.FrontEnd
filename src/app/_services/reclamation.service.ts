@@ -68,8 +68,8 @@ export class ReclamationService {
     return this.http.post<reclamationFile>(API_URL + 'addFile/' + id, file, {observe: 'response'});
   }
 
-  RemoveReclamationFile(id: number, fid: number) {
-    return this.http.delete<reclamationFile>(API_URL + id + "/deleteFile/" + fid);
+  RemoveReclamationFile(fid: number) {
+    return this.http.delete<reclamationFile>(API_URL + "deleteFile/" + fid);
   }
 
   GetReclamationTargets(type: string):Observable<string[]> {
