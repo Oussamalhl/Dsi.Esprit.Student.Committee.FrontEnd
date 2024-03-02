@@ -6,6 +6,7 @@ import {TokenStorageService} from "../../../_services/token-storage.service";
 import {EventService} from "../../../_services/event.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DomSanitizer} from "@angular/platform-browser";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-user-event-details',
@@ -32,8 +33,12 @@ export class UserEventDetailsComponent implements OnInit {
   src: any[] = []
   userClub!: string
   participatable!: boolean
+  rating:number=0
+  form = new FormGroup({
+    rating: new FormControl()
+  });
+  constructor(private fb: FormBuilder, private ES: EventService, private _router: Router, private _Activatedroute: ActivatedRoute, private sanitizer: DomSanitizer) {
 
-  constructor(private ES: EventService, private _router: Router, private _Activatedroute: ActivatedRoute, private sanitizer: DomSanitizer) {
   }
 
   reroute() {
@@ -46,7 +51,11 @@ export class UserEventDetailsComponent implements OnInit {
     // } else this._router.navigateByUrl("/signin");
 
   }
-
+  onSubmit(){
+    this.rating = this.form.value.rating ?  this.form.value.rating : 0;
+    this.ES.RateEvent(this.rating,this.id).subscribe(res=>console.log(res))
+    console.log("rating: "+this.rating)
+  }
   Participate() {
     if (!this.check)
       this._router.navigateByUrl("/events");
@@ -83,18 +92,10 @@ export class UserEventDetailsComponent implements OnInit {
 
     this.id = Number(this._Activatedroute.snapshot.paramMap.get("id"));
     if (this.id != null) {
-
-      this.ES.GetUserClub().subscribe(res => {
-        this.userClub = res
-        console.log("User Club: " + this.userClub)
-        this.check = this.e.clubs.includes(this.userClub);
-        console.log("Check: " + this.check)
-        if (this.check) {
-          this.ES.getUserCheck(this.id).subscribe(res =>{
-            this.participatable = res;
-            console.log("participatable: "+res);
-          } )
-        }
+      this.ES.EventRate(this.id).subscribe(res=> {
+        this.rating=res;
+        console.log("rated: "+this.rating)
+        this.form.controls['rating'].setValue(this.rating);
       })
 
       this.ES.GetEvent(this.id).subscribe(res => {
@@ -106,7 +107,18 @@ export class UserEventDetailsComponent implements OnInit {
           this.e.clubs = c;
           console.log("Event Clubs: " + c);
         })
-
+        this.ES.GetUserClub().subscribe(res => {
+          this.userClub = res
+          console.log("User Club: " + this.userClub)
+          this.check = this.e.clubs.includes(this.userClub);
+          console.log("Check: " + this.check)
+          if (this.check) {
+            this.ES.getUserCheck(this.id).subscribe(res =>{
+              this.participatable = res;
+              console.log("participatable: "+res);
+            } )
+          }
+        })
       });
 
 

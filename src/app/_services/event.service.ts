@@ -91,9 +91,14 @@ export class EventService {
     return this._http.post<any>(API_URL + 'addUserEventa?idEvent=' + idEvent + '&username=' + username, {});
   }
   Participate(idEvent: number) {
-    return this._http.post<any>(API_URL + 'addUserEvent?idEvent=' + idEvent, {});
+    return this._http.post<any>(API_URL + 'rateEvent?idEvent=' + idEvent, {});
   }
-
+  RateEvent(Rating:number,idEvent: number) {
+    return this._http.post<any>(API_URL + 'rateEvent?idEvent=' + idEvent+'&Rating='+Rating, {});
+  }
+  EventRate(idEvent: number) {
+    return this._http.get<any>(API_URL + 'userEvRate?idEvent=' + idEvent);
+  }
   GetEventClubs(idEvent: number) {
     return this._http.get<string[]>(API_URL + 'getEventClubs?idEvent=' + idEvent);
   }

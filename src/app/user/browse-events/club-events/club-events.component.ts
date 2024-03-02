@@ -5,6 +5,7 @@ import {EventService} from "../../../_services/event.service";
 import {DomSanitizer} from "@angular/platform-browser";
 import {TokenStorageService} from "../../../_services/token-storage.service";
 import {Router} from "@angular/router";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-club-events',
@@ -26,7 +27,11 @@ export class ClubEventsComponent implements OnInit {
   clubId!:number
   participatable!:boolean
   participatables:boolean[]=[]
-  constructor( private _router: Router,private ES:EventService, private sanitizer: DomSanitizer) { }
+
+  constructor( private _router: Router,private ES:EventService, private sanitizer: DomSanitizer) {
+
+  }
+
 
   // checkParticipation(idEvent:number){
   //   this.ES.getUserCheck(idEvent).subscribe(res =>{
