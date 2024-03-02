@@ -54,7 +54,7 @@ export class UserEventDetailsComponent implements OnInit {
       this.ES.Participate(this.id).subscribe(res => console.log("participation confirmed"));
       this._router.navigateByUrl("/events");
     }
-    ;
+
   }
 
   reload() {

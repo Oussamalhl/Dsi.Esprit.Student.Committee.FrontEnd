@@ -4,6 +4,7 @@ import {eventFile} from "../../../models/eventFile";
 import {EventService} from "../../../_services/event.service";
 import {DomSanitizer} from "@angular/platform-browser";
 import {TokenStorageService} from "../../../_services/token-storage.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-club-events',
@@ -24,13 +25,22 @@ export class ClubEventsComponent implements OnInit {
   tmp: any;
   clubId!:number
   participatable!:boolean
-  constructor(private ES:EventService, private sanitizer: DomSanitizer) { }
+  participatables:boolean[]=[]
+  constructor( private _router: Router,private ES:EventService, private sanitizer: DomSanitizer) { }
 
-  checkParticipation(idEvent:number){
-    this.ES.getUserCheck(idEvent).subscribe(res =>{
-      console.log("participatable: "+res);
-      return this.participatable = res;
-    } )
+  // checkParticipation(idEvent:number){
+  //   this.ES.getUserCheck(idEvent).subscribe(res =>{
+  //     console.log("participatable: "+res);
+  //     return this.participatable=res;
+  //   } )
+  //   return this.participatable
+  // }
+  Participate(idEvent:number) {
+
+      this.ES.Participate(idEvent).subscribe(res => console.log("participation confirmed"));
+      window.location.reload()
+
+
   }
 
   ngOnInit(): void {
@@ -40,6 +50,18 @@ export class ClubEventsComponent implements OnInit {
       this.ES.GetClubEvents(this.clubId).subscribe(res => {
         console.log("club events: "+res);
         this.ClubEventsList = res;
+        this.ClubEventsList.forEach(e=>{
+          this.ES.getUserCheck(e.id).subscribe(res =>{
+
+            this.participatable=res
+            console.log("participatable: "+this.participatable);
+              this.participatables.push(this.participatable);
+              console.log("participatables: "+this.participatables)
+
+          } )
+
+        })
+
       })
 
     })
