@@ -2,7 +2,6 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {eventFile} from "../models/eventFile";
-import {User} from "../models/User";
 import {event} from "../models/event";
 
 const API_URL = 'http://localhost:8084/api/event/';
@@ -102,10 +101,20 @@ export class EventService {
   GetClubs() {
     return this._http.get<string[]>(API_URL + 'getClubs');
   }
+  GetClubEvents(idClub:number) {
+    return this._http.get<event[]>(API_URL + 'getClubEvents?idClub='+idClub);
+  }
   GetUserClub() {
     const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
     return this._http.get<string>(API_URL + 'getUserClub',{ headers, responseType: 'text' as 'json'});
   }
+  GetUserClubId() {
+    return this._http.get<number>(API_URL + 'getUserClubId');
+  }
+  getUserCheck(idEvent:number) {
+    return this._http.get<boolean>(API_URL + 'getUserCheck?idEvent='+idEvent);
+  }
+
 
   countAllEventByMonth(year:number): Observable<any> {
 

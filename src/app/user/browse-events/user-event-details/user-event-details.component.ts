@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {eventFile} from "../../../models/eventFile";
 import {User} from "../../../models/User";
 import {event} from "../../../models/event";
@@ -30,7 +30,8 @@ export class UserEventDetailsComponent implements OnInit {
   check: boolean = false;
   end!: string;
   src: any[] = []
-  userClub!:string
+  userClub!: string
+  participatable!: boolean
 
   constructor(private ES: EventService, private _router: Router, private _Activatedroute: ActivatedRoute, private sanitizer: DomSanitizer) {
   }
@@ -50,13 +51,15 @@ export class UserEventDetailsComponent implements OnInit {
     if (!this.check)
       this._router.navigateByUrl("/events");
     else {
-      this.ES.Participate(this.id).subscribe(res=>console.log("participation confirmed"));
+      this.ES.Participate(this.id).subscribe(res => console.log("participation confirmed"));
       this._router.navigateByUrl("/events");
-    };
+    }
+    ;
   }
+
   reload() {
     this.pdf = [];
-    this.retrievedImages=[]
+    this.retrievedImages = []
     this.ES.GetEventFiles(this.id).subscribe(res => {
       this.files = res;
       //console.log(res);
@@ -66,7 +69,7 @@ export class UserEventDetailsComponent implements OnInit {
           this.pdf.push(this.secured);
           this.pdfFiles.push(f);
 
-        } else if (f.fileName.includes(".png") || f.fileName.includes(".jpg")){
+        } else if (f.fileName.includes(".png") || f.fileName.includes(".jpg")) {
           this.retrievedImages.push(f);
           this.src.push(this.sanitizer.bypassSecurityTrustResourceUrl("data:image/png;base64," + f.picByte))
         }
@@ -78,25 +81,32 @@ export class UserEventDetailsComponent implements OnInit {
 
   ngOnInit(): void {
 
-
     this.id = Number(this._Activatedroute.snapshot.paramMap.get("id"));
     if (this.id != null) {
+
+      this.ES.GetUserClub().subscribe(res => {
+        this.userClub = res
+        console.log("User Club: " + this.userClub)
+        this.check = this.e.clubs.includes(this.userClub);
+        console.log("Check: " + this.check)
+        if (this.check) {
+          this.ES.getUserCheck(this.id).subscribe(res =>{
+            this.participatable = res;
+            console.log("participatable: "+res);
+          } )
+        }
+      })
+
       this.ES.GetEvent(this.id).subscribe(res => {
-        console.log("Event: "+res.id);
+        console.log("Event: " + res.id);
         this.e = res;
         this.name = this.e.name;
         this.end = res.eventDateEnd.toString();
-        this.ES.GetEventClubs(this.id).subscribe(c=>{
-          this.e.clubs=c;
-          console.log("Event Clubs: "+c);
+        this.ES.GetEventClubs(this.id).subscribe(c => {
+          this.e.clubs = c;
+          console.log("Event Clubs: " + c);
         })
-        this.ES.GetUserClub().subscribe(res=>{
-          this.userClub=res
-          console.log("User Club: "+this.userClub)
-          this.check = this.e.clubs.includes(this.userClub);
-          console.log("Check: "+this.check)
 
-        })
       });
 
 

@@ -12,7 +12,8 @@ export class User {
   tel!:string;
   roles!:Role[];
   sexe!:boolean;
-  reclamations!:Reclamation[]
+  reclamations!:Reclamation[];
+  clubId!:number;
 
 
 }

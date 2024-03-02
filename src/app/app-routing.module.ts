@@ -39,6 +39,7 @@ import {
 import {EventDetailsComponent} from "./admin/event/event-show-all/event-details/event-details.component";
 import {BrowseEventsComponent} from "./user/browse-events/browse-events.component";
 import {UserEventDetailsComponent} from "./user/browse-events/user-event-details/user-event-details.component";
+import {ClubEventsComponent} from "./user/browse-events/club-events/club-events.component";
 
 const routes: Routes = [
 
@@ -63,6 +64,10 @@ const routes: Routes = [
       {
         path : 'events',
         component : BrowseEventsComponent
+      },
+      {
+        path : 'events/club',
+        component : ClubEventsComponent
       },
       {
         path : 'events/details/:id',

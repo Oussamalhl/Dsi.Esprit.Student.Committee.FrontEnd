@@ -1,1 +1,38 @@
-<p>club-events works!</p>
+<br><br><br><br>
+<div class="container">
+  <div class="heading heading-4">
+    <h2 style="color: rgba(119,11,89,0.84);">Browse Events</h2>
+  </div>
+  <input
+    _ngcontent-qgx-c208
+    aria-describedby="button-addon2"
+    aria-label="Recipient's username"
+    cFormControl
+    type="text"
+    [(ngModel)]="keyword"
+    placeholder="Search by keyword" [ngModelOptions]="{standalone: true}"
+
+  />
+  <br><br>
+  <div *ngFor="let e of ClubEventsList;index as i;">
+    <div>
+      <div class="col-md-4">
+        <div class="kode-event-list-2">
+                    <div class="kode-thumb"><a [routerLink]="['/Events',e.id]">
+
+                      <img *ngIf="checkParticipation(e.id)"
+                           width="120"
+                           height="60"
+                           src="/assets/join-us.jpg">
+                      <img *ngIf="!checkParticipation(e.id)" src="/assets/esprit-20-Small.jpg">
+                    </a>
+                    </div>
+        </div>
+        <div  class="kode-text"><h2>{{e.name}}</h2>
+          <strong class="title">Category: {{e.eventMotive}}</strong>
+          <p class="title">{{e.description}}</p>
+          <a _ngcontent-ejo-c211="" [routerLink]="['details',e.id]" class="btn-filled">Read more</a></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -58,14 +58,15 @@
 
             <br><br><br><br>
 
-            <p *ngIf="check">
+            <p *ngIf="check && participatable">
               <button class="btn-filled" (click)="Participate()">Participate</button>
             </p>
-            <p *ngIf="check && this.today.toString()>this.e.eventDateEnd.toString()">
-              <button class="btn-filled" (click)="reroute()">Rate</button>
-            </p></div>
+<!--            <p *ngIf="check && this.today.toString()>this.e.eventDateEnd.toString()">-->
+<!--              <button class="btn-filled" (click)="reroute()">Rate</button>-->
+<!--            </p>-->
+          </div>
           <br><br><br><br>
-          <p *ngIf="check"> WE APPRECIATE YOU FOR YOUR PARTICIPATION</p>
+          <p *ngIf="!participatable && check"> WE APPRECIATE YOU FOR YOUR PARTICIPATION</p>
             <h3 *ngIf="!check" style="color: #ec1010;">You cannot participate in this event.</h3>
         </div>
         <div class="col-md-12">
