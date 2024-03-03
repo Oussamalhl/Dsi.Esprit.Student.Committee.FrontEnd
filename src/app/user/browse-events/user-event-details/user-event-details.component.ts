@@ -19,14 +19,11 @@ export class UserEventDetailsComponent implements OnInit {
   id!: number;
   files!: eventFile[];
   secured: any;
-  isLoggedIn = false;
   pdf: any[] = [];
   pdfFiles: eventFile[] = [];
   retrievedImages: eventFile[] = [];
   username = "";
-  u: User = new User();
   e: event = new event();
-  participants: User[] = [];
   today = new Date();
   check: boolean = false;
   end!: string;
@@ -34,6 +31,8 @@ export class UserEventDetailsComponent implements OnInit {
   userClub!: string
   participatable!: boolean
   rating:number=0
+  isDone:boolean=false
+  isConfirmed:boolean=false
   form = new FormGroup({
     rating: new FormControl()
   });
@@ -41,16 +40,6 @@ export class UserEventDetailsComponent implements OnInit {
 
   }
 
-  reroute() {
-    // if (this.tokenStorage.getToken()) {
-    //   this.isLoggedIn = true;
-    //   this.username = this.tokenStorage.getUser().username;
-    //   this.DS.GetUserDonor(this.username).subscribe(res => this.u = res);
-    //   console.log(this.u);
-    //   this._router.navigateByUrl("/Events/" + this.id + "/Rate");
-    // } else this._router.navigateByUrl("/signin");
-
-  }
   onSubmit(){
     this.rating = this.form.value.rating ?  this.form.value.rating : 0;
     this.ES.RateEvent(this.rating,this.id).subscribe(res=>console.log(res))
@@ -59,9 +48,22 @@ export class UserEventDetailsComponent implements OnInit {
   Participate() {
     if (!this.check)
       this._router.navigateByUrl("/events");
-    else {
+    else if(this.participatable && this.check) {
       this.ES.Participate(this.id).subscribe(res => console.log("participation confirmed"));
-      this._router.navigateByUrl("/events");
+      this._router.navigate(['/events/details/'+this.id]).then(() => {
+        window.location.reload();
+      })
+    }
+
+  }
+  CancelParticipation() {
+    if (!this.check)
+      this._router.navigateByUrl("/events/club");
+    else if(!this.participatable && this.check) {
+      this.ES.deleteUserEvent(this.id).subscribe(res => console.log("participation canceled"));
+      this._router.navigate(['/events/details/'+this.id]).then(() => {
+        window.location.reload();
+      })
     }
 
   }
@@ -89,7 +91,7 @@ export class UserEventDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.isDone=false
     this.id = Number(this._Activatedroute.snapshot.paramMap.get("id"));
     if (this.id != null) {
       this.ES.EventRate(this.id).subscribe(res=> {
@@ -117,6 +119,10 @@ export class UserEventDetailsComponent implements OnInit {
               this.participatable = res;
               console.log("participatable: "+res);
             } )
+            this.ES.EventConfirmation(this.id).subscribe(res=>{
+              this.isConfirmed=res
+              console.log("Confirmed: "+res);
+            })
           }
         })
       });
@@ -125,7 +131,7 @@ export class UserEventDetailsComponent implements OnInit {
     }
 
     this.reload();
-
+    this.isDone=true;
 
   }
 

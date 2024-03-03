@@ -14,34 +14,33 @@
 
   />
   <br><br>
-  <div *ngFor="let e of ClubEventsList;index as i;">
-    <div>
-      <div class="col-md-4">
-        <div *ngIf="participatables[i]" class="kode-event-list-2">
-          <div class="kode-thumb"><a (click)="Participate(e.id)">
-            <img
-                 width="120"
-                 height="60"
-                 src="/assets/join-us.jpg">
-          </a>
+    <div  *ngFor="let e of ClubEventsList;index as i;">
+      <div *ngIf="participatables.length==ClubEventsList.length">
+        <div class="col-md-4">
+          <div *ngIf="participatables[i]" class="kode-event-list-2">
+            <div class="kode-thumb"><a (click)="Participate(e.id)">
+              <img
+                width="120"
+                height="60"
+                src="/assets/join-us.jpg">
+            </a>
+            </div>
           </div>
-        </div>
 
-
-        <div *ngIf="!participatables[i]" class="kode-event-list">
-          <div class="kode-thumb"><a [routerLink]="['/Events',e.id]">
-            <img
-              width="120"
-              height="60"
-              src="/assets/joined.jpg">
-          </a>
+          <div *ngIf="!participatables[i]" class="kode-event-list">
+            <div class="kode-thumb"><a [routerLink]="['/Events',e.id]">
+              <img
+                width="120"
+                height="60"
+                src="/assets/joined.jpg">
+            </a>
+            </div>
           </div>
+          <div class="kode-text"><h2>{{e.name}}</h2>
+            <strong class="title">Category: {{e.eventMotive}}</strong>
+            <p class="title">{{e.description}}</p>
+            <a _ngcontent-ejo-c211="" [routerLink]="['/events/details',e.id]" class="btn-filled">Read more</a></div>
         </div>
-        <div class="kode-text"><h2>{{e.name}}</h2>
-          <strong class="title">Category: {{e.eventMotive}}</strong>
-          <p class="title">{{e.description}}</p>
-          <a _ngcontent-ejo-c211="" [routerLink]="['/events/details',e.id]" class="btn-filled">Read more</a></div>
       </div>
     </div>
-  </div>
 </div>

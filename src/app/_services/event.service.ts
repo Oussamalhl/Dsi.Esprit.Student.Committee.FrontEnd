@@ -26,8 +26,11 @@ export class EventService {
     return this._http.delete<event>(API_URL + 'deleteEvent?idEvent=' + id);
   }
 
-  deleteUserEvent(username: string) {
-    return this._http.delete(API_URL + 'deleteUserEvent?username=' + username);
+  deleteUserEvent(idEvent:number) {
+    return this._http.delete(API_URL + 'deleteUserEvent?idEvent=' + idEvent);
+  }
+  deleteUserEventAdm(idEvent:number,username:string) {
+    return this._http.delete(API_URL + 'deleteUserEventa?idEvent=' + idEvent+ '&username=' + username);
   }
 
   deleteUserEventM(eventId: number, username: string) {
@@ -91,13 +94,16 @@ export class EventService {
     return this._http.post<any>(API_URL + 'addUserEventa?idEvent=' + idEvent + '&username=' + username, {});
   }
   Participate(idEvent: number) {
-    return this._http.post<any>(API_URL + 'rateEvent?idEvent=' + idEvent, {});
+    return this._http.post<any>(API_URL + 'addUserEvent?idEvent=' + idEvent, {});
   }
   RateEvent(Rating:number,idEvent: number) {
     return this._http.post<any>(API_URL + 'rateEvent?idEvent=' + idEvent+'&Rating='+Rating, {});
   }
   EventRate(idEvent: number) {
     return this._http.get<any>(API_URL + 'userEvRate?idEvent=' + idEvent);
+  }
+  EventConfirmation(idEvent: number) {
+    return this._http.get<any>(API_URL + 'userEvConf?idEvent=' + idEvent);
   }
   GetEventClubs(idEvent: number) {
     return this._http.get<string[]>(API_URL + 'getEventClubs?idEvent=' + idEvent);

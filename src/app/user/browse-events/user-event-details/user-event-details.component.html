@@ -8,7 +8,7 @@
       <div class="heading heading-4">
         <h2 style="color: #fff;">Event {{name}} Details</h2>
       </div>
-      <div class="row-cols-md-6">
+      <div *ngIf="isDone" class="row-cols-md-6">
         <div class="col-md-6">
           <div *ngIf="retrievedImages.length>=1">
             <ngb-carousel>
@@ -58,13 +58,16 @@
 
             <br><br><br><br>
 
-            <p *ngIf="check && participatable">
+            <p *ngIf="check && participatable && e.status!='ENDED'">
               <button class="btn-filled" (click)="Participate()">Participate</button>
+            </p>
+            <p *ngIf="check && !participatable && e.status!='ENDED'">
+              <button style="background-color: #2e6da4" class="btn-filled" (click)="CancelParticipation()">Cancel Participation</button>
             </p>
             <!--            <p *ngIf="check && this.today.toString()>this.e.eventDateEnd.toString()">-->
             <!--              -->
             <!--            </p>-->
-            <form style="background-color:transparent" [formGroup]="form" (ngSubmit)="onSubmit()" cForm cRow class="needs-validation">
+            <form *ngIf="e.status=='ENDED'" style="background-color:transparent" [formGroup]="form" (ngSubmit)="onSubmit()" cForm cRow class="needs-validation">
 
 
                 <div class="col-md-6">
@@ -77,7 +80,7 @@
 
           </div>
           <br><br><br><br>
-          <p *ngIf="!participatable && check"> WE APPRECIATE YOU FOR YOUR PARTICIPATION</p>
+          <p *ngIf="check && !participatable"> WE APPRECIATE YOU FOR YOUR PARTICIPATION</p>
           <h3 *ngIf="!check" style="color: #ec1010;">You cannot participate in this event.</h3>
 
         </div>

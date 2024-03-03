@@ -93,7 +93,7 @@ export class EventParticipantsComponent implements OnInit {
     }
     else {
       this.selection.selected.forEach(u => {
-        this.ES.deleteUserEvent(u[0]).subscribe();
+        this.ES.deleteUserEventAdm(this.id,u[0]).subscribe();
       })
       setTimeout(() => this.reload(), 2500);
     }

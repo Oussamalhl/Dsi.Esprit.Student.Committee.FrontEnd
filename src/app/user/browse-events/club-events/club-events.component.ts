@@ -43,12 +43,15 @@ export class ClubEventsComponent implements OnInit {
   Participate(idEvent:number) {
 
       this.ES.Participate(idEvent).subscribe(res => console.log("participation confirmed"));
-      window.location.reload()
+    this._router.navigate(['/events/club']).then(() => {
+      window.location.reload();
+    })
 
 
   }
 
   ngOnInit(): void {
+    this.participatables=[]
     this.ES.GetUserClubId().subscribe(res=>{
       this.clubId=res;
       console.log("clubid:"+res)
@@ -70,8 +73,6 @@ export class ClubEventsComponent implements OnInit {
       })
 
     })
-
-
 
   }
 
