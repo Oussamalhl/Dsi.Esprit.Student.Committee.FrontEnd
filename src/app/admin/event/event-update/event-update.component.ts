@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {event} from "../../../models/event";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {FormControl, FormGroup} from "@angular/forms";
@@ -7,6 +7,7 @@ import {EventService} from "../../../_services/event.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatChipInputEvent} from "@angular/material/chips";
 import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-event-update',
@@ -14,6 +15,10 @@ import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
   styleUrls: ['./event-update.component.scss']
 })
 export class EventUpdateComponent implements OnInit {
+
+  isLoading = false;
+  isSending = false;
+  sent = false;
 
   e: event = new event();
   id!:number;
@@ -34,7 +39,7 @@ export class EventUpdateComponent implements OnInit {
     type: new FormControl(null)
   })
 
-  constructor(private ES: EventService, private _Activatedroute: ActivatedRoute, private _router: Router) {
+  constructor(private ES: EventService, private _Activatedroute: ActivatedRoute, private _router: Router, private dialog: MatDialog) {
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
       map((tag: string | null) => (tag ? this._filter(tag) : this.tags.slice())),
@@ -46,18 +51,37 @@ export class EventUpdateComponent implements OnInit {
   }
   @ViewChild('tagInput') tagInput!: ElementRef<HTMLInputElement>;
   @ViewChild('clubInput') clubInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('dialogRef', {static: true}) dialogRef!: TemplateRef<any>;
+
+  openDialog() {
+    let dialog = this.dialog.open(this.dialogRef);
+  }
 
   UpdateEvent(e:event) {
+    this.isSending = true;
+    let dialog = this.dialog.open(this.dialogRef);
 
     e.tags=this.selectedTags;
+    e.clubs=this.selectedClubs;
     console.log(e.type);
     if (this.ngForm.valid){
-      this.ES.addClubEvent(this.id,this.selectedClubs).subscribe(res=>{
-        console.log(e + "Clubs has been updated");
+      this.ES.addClubEvent(this.id,e.clubs).subscribe(res=>{
+        console.log(res + "Clubs has been added to Event");
       })
-      this.ES.updateEvent(e).subscribe(res=>{
-        console.log(e + "Has been updated");
-      })
+      this.ES.updateEvent(e).subscribe(res => {
+
+          console.log(res);
+          this.isSending = false;
+          this.sent = true;
+          dialog.addPanelClass('success-dialog');
+        },
+        (err) => {
+          console.log(err);
+          this.isSending = false;
+          this.sent = false;
+          dialog.addPanelClass('fail-dialog')
+        }
+      )
     }
 
     setTimeout(() => this.reroute(), 1000);
@@ -94,14 +118,20 @@ export class EventUpdateComponent implements OnInit {
     this.tagCtrl.setValue(null);
   }
 
-  remove(tag: string): void {
+  removeTag(tag: string): void {
     const index = this.selectedTags.indexOf(tag);
 
     if (index >= 0) {
       this.selectedTags.splice(index, 1);
     }
   }
+  removeClub(tag: string): void {
+    const index = this.selectedClubs.indexOf(tag);
 
+    if (index >= 0) {
+      this.selectedClubs.splice(index, 1);
+    }
+  }
   selected(event: MatAutocompleteSelectedEvent): void {
     this.selectedTags.push(event.option.viewValue);
     this.tagInput.nativeElement.value = '';

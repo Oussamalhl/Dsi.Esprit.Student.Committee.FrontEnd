@@ -94,7 +94,7 @@ export class UserEventDetailsComponent implements OnInit {
     if (this.id != null) {
       this.ES.EventRate(this.id).subscribe(res=> {
         this.rating=res;
-        console.log("rated: "+this.rating)
+        console.log("rated: "+res)
         this.form.controls['rating'].setValue(this.rating);
       })
 

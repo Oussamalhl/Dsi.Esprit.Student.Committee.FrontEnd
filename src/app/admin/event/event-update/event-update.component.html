@@ -143,7 +143,7 @@
                     <mat-chip-list #chipList aria-label="Tag selection">
                       <mat-chip
                         *ngFor="let t of selectedTags"
-                        (removed)="remove(t)">
+                        (removed)="removeTag(t)">
                         {{t}}
                         <button matChipRemove>
                           <mat-icon>cancel</mat-icon>
@@ -171,7 +171,7 @@
                     <mat-chip-list #clubList aria-label="Club selection">
                       <mat-chip
                         *ngFor="let c of selectedClubs"
-                        (removed)="remove(c)">
+                        (removed)="removeClub(c)">
                         {{c}}
                         <button matChipRemove>
                           <mat-icon>cancel</mat-icon>
@@ -230,3 +230,12 @@
 
   </c-container>
 </div>
+<ng-template #dialogRef style="background-color: #ac2925" >
+  <h1 mat-dialog-title>{{isSending ? "Sending" : "Finished"}}</h1>
+  <mat-option *ngIf="isSending" class="is-loading"><mat-spinner diameter="50"></mat-spinner></mat-option>
+  <h2 *ngIf="!isSending" mat-dialog-content>{{sent ? "Successfully Updated":"Update Failed"}}</h2>
+  <div *ngIf="!isSending" mat-dialog-actions>
+    <button class="btn btn-primary" mat-button mat-dialog-close>Close</button>
+  </div>
+
+</ng-template>

@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {User} from "../../../models/User";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {FormControl, FormGroup} from "@angular/forms";
@@ -8,6 +8,7 @@ import {UserService} from "../../../_services/user.service";
 import {MatChipInputEvent} from "@angular/material/chips";
 import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 import {Role} from "../../../models/Role";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-user-add',
@@ -15,6 +16,11 @@ import {Role} from "../../../models/Role";
   styleUrls: ['./user-add.component.scss']
 })
 export class UserAddComponent implements OnInit {
+
+  isLoading = false;
+  isSending = false;
+  sent = false;
+
   u: User = new User();
   role: Role[]=[]
   sexe=['Homme','Femme'];
@@ -27,23 +33,42 @@ export class UserAddComponent implements OnInit {
     type: new FormControl(null)
   })
 
-  constructor(private US: UserService, private _Activatedroute: ActivatedRoute, private _router: Router) {
+  constructor(private US: UserService, private _Activatedroute: ActivatedRoute, private _router: Router, private dialog: MatDialog) {
     this.filteredRoles = this.tagCtrl.valueChanges.pipe(
       startWith(null),
       map((tag: string | null) => (tag ? this._filter(tag) : this.roles.slice())),
     );
   }
   @ViewChild('roleInput') roleInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('dialogRef', {static: true}) dialogRef!: TemplateRef<any>;
+
+  openDialog() {
+    let dialog = this.dialog.open(this.dialogRef);
+  }
 
   addUser(u:User) {
+
+    this.isSending = true;
+    let dialog = this.dialog.open(this.dialogRef);
+
     let role : Role[]=[]
     this.selectedRoles.forEach(e=>role.push(new Role(e)))
     u.roles=role;
     console.log(u.roles);
     if (this.ngForm.valid){
-      this.US.AddUser(u).subscribe(res=>{
-        console.log(u + "Has been added");
-      })
+      this.US.AddUser(u).subscribe(res => {
+          console.log(res);
+          this.isSending = false;
+          this.sent = true;
+          dialog.addPanelClass('success-dialog');
+        },
+        (err) => {
+          console.log(err);
+          this.isSending = false;
+          this.sent = false;
+          dialog.addPanelClass('fail-dialog')
+        }
+      )
       setTimeout(() => this._router.navigateByUrl("admin/users"),1000);
     }
   }

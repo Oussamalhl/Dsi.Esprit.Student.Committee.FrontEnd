@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Reclamation} from "../../../models/Reclamation";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {FormControl, FormGroup} from "@angular/forms";
@@ -6,6 +6,7 @@ import {ReclamationService} from "../../../_services/reclamation.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {map, startWith} from "rxjs";
 import {MatChipInputEvent} from "@angular/material/chips";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-reclamation-update',
@@ -13,6 +14,11 @@ import {MatChipInputEvent} from "@angular/material/chips";
   styleUrls: ['./reclamation-update.component.scss']
 })
 export class ReclamationUpdateComponent implements OnInit {
+
+  isLoading = false;
+  isSending = false;
+  sent = false;
+
   r: Reclamation = new Reclamation();
   id!:number;
   selectedType!:string
@@ -23,17 +29,30 @@ export class ReclamationUpdateComponent implements OnInit {
   ngForm=new FormGroup({
     type: new FormControl(null)
   })
-  constructor(private RS: ReclamationService, private _Activatedroute: ActivatedRoute, private _router: Router) {
+  constructor(private RS: ReclamationService, private _Activatedroute: ActivatedRoute, private _router: Router, private dialog: MatDialog) {
 
   }
   @ViewChild('tagInput') tagInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('dialogRef', {static: true}) dialogRef!: TemplateRef<any>;
 
   UpdateReclamation(r:Reclamation) {
-
+    this.isSending = true;
+    let dialog = this.dialog.open(this.dialogRef);
     if (this.ngForm.valid){
-      this.RS.updateReclamation(r).subscribe(res=>{
-        console.log(r + "Has been updated");
-      })
+      this.RS.updateReclamation(r).subscribe(res => {
+
+          console.log(res);
+          this.isSending = false;
+          this.sent = true;
+          dialog.addPanelClass('success-dialog');
+        },
+        (err) => {
+          console.log(err);
+          this.isSending = false;
+          this.sent = false;
+          dialog.addPanelClass('fail-dialog')
+        }
+      )
     }
     setTimeout(() => this.reroute(), 1000);
   }
