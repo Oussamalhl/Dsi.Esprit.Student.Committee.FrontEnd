@@ -118,20 +118,21 @@ export class UserEventDetailsComponent implements OnInit {
             this.ES.getUserCheck(this.id).subscribe(res =>{
               this.participatable = res;
               console.log("participatable: "+res);
-            } )
-            this.ES.EventConfirmation(this.id).subscribe(res=>{
-              this.isConfirmed=res
-              console.log("Confirmed: "+res);
+              if(!this.participatable){
+                this.ES.EventConfirmation(this.id).subscribe(res=>{
+                  this.isConfirmed=res
+                  console.log("Confirmed: "+res);
+                })
+              }
             })
           }
         })
-      });
-
-
+      })
+      this.isDone=true;
     }
 
     this.reload();
-    this.isDone=true;
+
 
   }
 

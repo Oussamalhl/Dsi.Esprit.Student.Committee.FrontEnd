@@ -28,6 +28,9 @@ export class ReclamationService {
   getReclamation(id: number) {
     return this.http.get<Reclamation>(API_URL + 'showReclamation?idReclamation=' + id);
   }
+  getUserReclamations() {
+    return this.http.get<Reclamation[]>(API_URL + 'showURec');
+  }
 
   getUser(id: number) {
     var subject = new Subject<User>();

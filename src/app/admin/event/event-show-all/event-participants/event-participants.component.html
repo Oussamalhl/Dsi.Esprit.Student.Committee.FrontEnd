@@ -113,7 +113,7 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Username">
                       Confirmation
                     </th>
-                    <td mat-cell *matCellDef="let element"> {{element[3].isConfirmed ? 'Confirmed' : 'Not Done'}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element[3] ? 'Confirmed' : 'Not Done'}} </td>
                   </ng-container>
 
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

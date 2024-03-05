@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {event} from "../../../models/event";
 import {eventFile} from "../../../models/eventFile";
 import {EventService} from "../../../_services/event.service";
@@ -19,16 +19,16 @@ export class ClubEventsComponent implements OnInit {
   search!: boolean;
   e!: event;
   keyword!: string;
-  files: eventFile[]=[];
+  files: eventFile[] = [];
   url!: URL;
   paths: any[] = [];
   secured: any;
   tmp: any;
-  clubId!:number
-  participatable!:boolean
-  participatables:boolean[]=[]
+  participatable!: boolean
+  participatables: boolean[] = []
+  isDone: boolean = false
 
-  constructor( private _router: Router,private ES:EventService, private sanitizer: DomSanitizer) {
+  constructor(private _router: Router, private ES: EventService, private sanitizer: DomSanitizer) {
 
   }
 
@@ -40,9 +40,9 @@ export class ClubEventsComponent implements OnInit {
   //   } )
   //   return this.participatable
   // }
-  Participate(idEvent:number) {
+  Participate(idEvent: number) {
 
-      this.ES.Participate(idEvent).subscribe(res => console.log("participation confirmed"));
+    this.ES.Participate(idEvent).subscribe(res => console.log("participation confirmed"));
     this._router.navigate(['/events/club']).then(() => {
       window.location.reload();
     })
@@ -51,27 +51,25 @@ export class ClubEventsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.participatables=[]
-    this.ES.GetUserClubId().subscribe(res=>{
-      this.clubId=res;
-      console.log("clubid:"+res)
-      this.ES.GetClubEvents(this.clubId).subscribe(res => {
-        console.log("club events: "+res);
+    this.isDone = false
+    this.participatables = []
+    this.ES.GetUserClubId().subscribe(res => {
+
+      console.log("clubid:" + res)
+      this.ES.GetClubEvents(res).subscribe(res => {
+        console.log("club events: " + res);
         this.ClubEventsList = res;
-        this.ClubEventsList.forEach(e=>{
-          this.ES.getUserCheck(e.id).subscribe(res =>{
+        this.ClubEventsList.forEach(e => {
+          this.ES.getUserCheck(e.id).subscribe(res => {
+            //console.log("participatable: " + res);
+            this.participatables.push(res);
+            //console.log("participatables: " + this.participatables)
 
-            this.participatable=res
-            console.log("participatable: "+this.participatable);
-              this.participatables.push(this.participatable);
-              console.log("participatables: "+this.participatables)
-
-          } )
+          })
 
         })
-
+        this.isDone = true
       })
-
     })
 
   }

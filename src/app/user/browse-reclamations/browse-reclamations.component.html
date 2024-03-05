@@ -1,0 +1,97 @@
+<br><br><br><br>
+<style>
+  table {
+    width: 100%;
+    table-layout: auto;
+    text-align: center;
+  }
+
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  td {
+    font-palette: dark;
+    font-size: 15px;
+  }
+
+  th {
+    width: max-content;
+    font-size: 23px;
+    color: black;
+  }
+
+  .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+
+</style>
+<div class="container">
+  <div class="heading heading-4">
+    <h2 style="color: rgba(119,11,89,0.84);">My Reclamations </h2>
+  </div>
+  <mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Insert Keyword" #input>
+  </mat-form-field>
+  <br>
+  <div style="display: block;
+              overflow-x: scroll;
+              white-space: nowrap;">
+    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" >
+      <ng-container matColumnDef="reclamation">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Event"> Reclamation
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <a href="#" class="btn-filled" [routerLink]="['/reclamation/details',element.id]">Click For Details</a></td>
+      </ng-container>
+      <ng-container matColumnDef="name" sticky>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name"> Name
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by description">
+          Description
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.description}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by date">
+          Date
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.date}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by type">
+          Type
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+      </ng-container>
+      <ng-container matColumnDef="target">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by target">
+          Target
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.target}} </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Status">
+          Status
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.status ? "Closed" : "Open"}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+    <br>
+  </div>
+</div>

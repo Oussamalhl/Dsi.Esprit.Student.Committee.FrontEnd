@@ -58,11 +58,20 @@
 
             <br><br><br><br>
 
-            <p *ngIf="check && participatable && e.status!='ENDED'">
-              <button class="btn-filled" (click)="Participate()">Participate</button>
+            <p >
+              <button
+                [hidden]="!(check && e.status!='ENDED' && participatable)"
+                [disabled]="!(check && e.status!='ENDED' && participatable)"
+                class="btn-filled"
+                (click)="Participate()">Participate</button>
             </p>
-            <p *ngIf="check && !participatable && e.status!='ENDED'">
-              <button style="background-color: #2e6da4" class="btn-filled" (click)="CancelParticipation()">Cancel Participation</button>
+            <p>
+              <button
+                style="background-color: #2e6da4"
+                class="btn-filled"
+                [hidden]="!(check && e.status!='ENDED' && !participatable)"
+                [disabled]="!(check && e.status!='ENDED' && !participatable)"
+                (click)="CancelParticipation()">Cancel Participation</button>
             </p>
             <!--            <p *ngIf="check && this.today.toString()>this.e.eventDateEnd.toString()">-->
             <!--              -->
@@ -80,8 +89,15 @@
 
           </div>
           <br><br><br><br>
-          <p *ngIf="check && !participatable"> WE APPRECIATE YOU FOR YOUR PARTICIPATION</p>
-          <h3 *ngIf="!check" style="color: #ec1010;">You cannot participate in this event.</h3>
+          <h3 [hidden]="check"style="color: #ec1010;">You cannot participate in this event.</h3>
+          <div [hidden]="!(check && !participatable && !isConfirmed)">
+            <p style="color: #f13535;">Your Participation is not confirmed yet.</p>
+            <p> WE APPRECIATE YOU FOR YOUR PARTICIPATION</p>
+          </div>
+          <div [hidden]="!(check && !participatable && isConfirmed)">
+            <p> Your Participation is <b style="color: #00d084">CONFIRMED</b></p>
+          </div>
+
 
         </div>
 

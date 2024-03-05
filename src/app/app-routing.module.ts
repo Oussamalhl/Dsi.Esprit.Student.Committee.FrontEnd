@@ -40,6 +40,10 @@ import {EventDetailsComponent} from "./admin/event/event-show-all/event-details/
 import {BrowseEventsComponent} from "./user/browse-events/browse-events.component";
 import {UserEventDetailsComponent} from "./user/browse-events/user-event-details/user-event-details.component";
 import {ClubEventsComponent} from "./user/browse-events/club-events/club-events.component";
+import {BrowseReclamationsComponent} from "./user/browse-reclamations/browse-reclamations.component";
+import {
+  UserReclamationDetailsComponent
+} from "./user/browse-reclamations/user-reclamation-details/user-reclamation-details.component";
 
 const routes: Routes = [
 
@@ -60,6 +64,14 @@ const routes: Routes = [
       {
         path : '',
         component : UserIndexComponent
+      },
+      {
+        path : 'reclamations',
+        component : BrowseReclamationsComponent
+      },
+      {
+        path : 'reclamation/details/:id',
+        component : UserReclamationDetailsComponent
       },
       {
         path : 'events',
