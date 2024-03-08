@@ -83,16 +83,6 @@
                     <mat-label>Target</mat-label>
                   </mat-form-field>
                 </c-col>
-                <c-col [md]="3">
-                  <mat-form-field appearance="fill">
-                    <mat-select [(ngModel)]="r.user" name="user" required>
-                      <mat-option *ngFor="let t of targets" [value]="t">
-                        {{t}}
-                      </mat-option>
-                    </mat-select>
-                    <mat-label>User</mat-label>
-                  </mat-form-field>
-                </c-col>
                 <br>
                 <c-col [md]="6">
                   <div cFormFloating>
@@ -109,16 +99,6 @@
                   </div>
                 </c-col>
                 <br>
-                <c-col [md]="3">
-                  <mat-form-field appearance="fill">
-                    <mat-select [(ngModel)]="r.status" [ngModelOptions]="{standalone: true}" required>
-                      <mat-option *ngFor="let s of status" [value]="s ==='CLOSED'">
-                        {{s}}
-                      </mat-option>
-                    </mat-select>
-                    <mat-label>Status</mat-label>
-                  </mat-form-field>
-                </c-col>
 
 
                 <c-col [md]="12" ></c-col>
@@ -126,7 +106,7 @@
                 <c-col [sm]>
 
                   <button cButton class="me-1" color="primary" type="submit" class="me-1 active btn btn-outline-primary"
-                          aria-pressed="true" variant="outline" (click)="addReclamation(r,r.user.username)">
+                          aria-pressed="true" variant="outline" (click)="addReclamation(r)">
                     Submit
                   </button>
                   <button cButton variant="outline" class="me-1 btn btn-outline-secondary"

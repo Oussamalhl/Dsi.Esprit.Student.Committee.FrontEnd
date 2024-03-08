@@ -100,6 +100,8 @@ import { ClubEventsComponent } from './user/browse-events/club-events/club-event
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowseReclamationsComponent } from './user/browse-reclamations/browse-reclamations.component';
 import { UserReclamationDetailsComponent } from './user/browse-reclamations/user-reclamation-details/user-reclamation-details.component';
+import { UserReclamationAddComponent } from './user/browse-reclamations/user-reclamation-add/user-reclamation-add.component';
+import { UserReclamationFilesAddComponent } from './user/browse-reclamations/user-reclamation-add/user-reclamation-files-add/user-reclamation-files-add.component';
 
 
 
@@ -113,7 +115,7 @@ const APP_CONTAINERS = [
   DefaultLayoutComponent,
 ];
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, DefaultLayoutUComponent, DefaultFooterUComponent, DefaultHeaderUComponent, CommingSoonComponent, UserIndexComponent, SigninComponent,SignupComponent, UserShowAllComponent, UserDetailsComponent, UserAddComponent, UserUpdateComponent, ReclamationShowAllComponent, ReclamationAddComponent, ReclamationUpdateComponent, ReclamationShowFilesComponent, ReclamationAddFileComponent, ReclamationChartsComponent, EventShowAllComponent, EventAddComponent, EventUpdateComponent, EventShowFilesComponent, EventChartsComponent, EventAddFileComponent, EventParticipantsComponent, EventAddParticipantsComponent, EventDetailsComponent, BrowseEventsComponent, UserEventDetailsComponent, ClubEventsComponent, BrowseReclamationsComponent, UserReclamationDetailsComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, DefaultLayoutUComponent, DefaultFooterUComponent, DefaultHeaderUComponent, CommingSoonComponent, UserIndexComponent, SigninComponent,SignupComponent, UserShowAllComponent, UserDetailsComponent, UserAddComponent, UserUpdateComponent, ReclamationShowAllComponent, ReclamationAddComponent, ReclamationUpdateComponent, ReclamationShowFilesComponent, ReclamationAddFileComponent, ReclamationChartsComponent, EventShowAllComponent, EventAddComponent, EventUpdateComponent, EventShowFilesComponent, EventChartsComponent, EventAddFileComponent, EventParticipantsComponent, EventAddParticipantsComponent, EventDetailsComponent, BrowseEventsComponent, UserEventDetailsComponent, ClubEventsComponent, BrowseReclamationsComponent, UserReclamationDetailsComponent, UserReclamationAddComponent, UserReclamationFilesAddComponent],
     imports: [
       NgbCarouselModule,
         BrowserModule,

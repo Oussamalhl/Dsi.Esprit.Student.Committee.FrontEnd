@@ -1,19 +1,19 @@
-import {Component, ElementRef, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Reclamation} from "../../../models/Reclamation";
-import {COMMA, ENTER} from "@angular/cdk/keycodes";
-import {FormControl, FormGroup} from "@angular/forms";
-import {map, Observable, startWith} from "rxjs";
+import {User} from "../../../models/User";
+import {TokenStorageService} from "../../../_services/token-storage.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ReclamationService} from "../../../_services/reclamation.service";
-import {MatChipInputEvent} from "@angular/material/chips";
+import {COMMA, ENTER} from "@angular/cdk/keycodes";
+import {FormControl, FormGroup} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 
 @Component({
-  selector: 'app-reclamation-add',
-  templateUrl: './reclamation-add.component.html',
-  styleUrls: ['./reclamation-add.component.scss']
+  selector: 'app-user-reclamation-add',
+  templateUrl: './user-reclamation-add.component.html',
+  styleUrls: ['./user-reclamation-add.component.scss']
 })
-export class ReclamationAddComponent implements OnInit {
+export class UserReclamationAddComponent implements OnInit {
 
   isLoading = false;
   isSending = false;
@@ -37,12 +37,12 @@ export class ReclamationAddComponent implements OnInit {
   openDialog() {
     let dialog = this.dialog.open(this.dialogRef);
   }
-  addReclamation(r: Reclamation,username:string) {
+  addReclamation(r: Reclamation) {
     this.isSending = true;
     let dialog = this.dialog.open(this.dialogRef);
 
     if (this.ngForm.valid) {
-      this.RS.AddReclamationAdmin(r,username).subscribe(res => {
+      this.RS.AddReclamation(r).subscribe(res => {
 
           console.log(res);
           this.isSending = false;
@@ -57,7 +57,7 @@ export class ReclamationAddComponent implements OnInit {
         }
       )
     }
-    setTimeout(() => this._router.navigateByUrl("admin/reclamations"), 1000);
+    setTimeout(() => this._router.navigateByUrl("reclamations"), 1000);
   }
 
   getTargets(type: string) {

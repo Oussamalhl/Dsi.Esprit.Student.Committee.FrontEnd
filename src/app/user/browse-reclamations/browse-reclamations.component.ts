@@ -19,11 +19,10 @@ export class BrowseReclamationsComponent implements OnInit {
   username="" ;
   u!:User;
   reclamationList:Reclamation[]=[];
-  displayedColumns: string[] = ['reclamation','name', 'description', 'date','type','target','status'];
+  displayedColumns: string[] = ['reclamation','name', 'description', 'date','type','target','status','files','update','remove'];
   dataSource = new MatTableDataSource<Reclamation>(this.reclamationList);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
 
   constructor(private RS:ReclamationService, private _liveAnnouncer: LiveAnnouncer) { }
 
@@ -43,18 +42,24 @@ export class BrowseReclamationsComponent implements OnInit {
       this._liveAnnouncer.announce('Sorting cleared');
     }
   }
+  Delete(id: number) {
+    this.RS.deleteReclamation(id).subscribe(res => console.log("Reclamation Deleted"));
+    setTimeout(() => this.reload(), 1000);
+  }
 
-  ngOnInit(): void {
-    this.RS.getUserReclamations().subscribe(res=>{
+  reload() {
+    this.RS.getUserReclamations().subscribe(res => {
       console.log(res);
-      this.reclamationList=res;
+      this.reclamationList = res;
       this.dataSource = new MatTableDataSource<Reclamation>(this.reclamationList);
       if (this.reclamationList != []) {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       }
-    })
+    });
+  }
+  ngOnInit(): void {
+    this.reload();
     console.log(this.u);
-
   }
 }

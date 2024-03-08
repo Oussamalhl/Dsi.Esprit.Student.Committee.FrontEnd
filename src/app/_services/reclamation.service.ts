@@ -20,7 +20,9 @@ export class ReclamationService {
   AddReclamation(r: Reclamation): Observable<Reclamation> {
     return this.http.post<Reclamation>(API_URL + 'addreclamation', r);
   }
-
+  AddReclamationAdmin(r: Reclamation,username:string): Observable<Reclamation> {
+    return this.http.post<Reclamation>(API_URL + 'addreclamation?username='+username, r);
+  }
   getAllReclamations(): Observable<Reclamation[]> {
     return this.http.get<Reclamation[]>(API_URL + 'showallReclamations');
   }

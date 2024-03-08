@@ -44,6 +44,13 @@ import {BrowseReclamationsComponent} from "./user/browse-reclamations/browse-rec
 import {
   UserReclamationDetailsComponent
 } from "./user/browse-reclamations/user-reclamation-details/user-reclamation-details.component";
+import {
+  UserReclamationAddComponent
+} from "./user/browse-reclamations/user-reclamation-add/user-reclamation-add.component";
+
+import {
+  UserReclamationFilesAddComponent
+} from "./user/browse-reclamations/user-reclamation-add/user-reclamation-files-add/user-reclamation-files-add.component";
 
 const routes: Routes = [
 
@@ -68,6 +75,14 @@ const routes: Routes = [
       {
         path : 'reclamations',
         component : BrowseReclamationsComponent
+      },
+      {
+        path: 'reclamations/:id/Files/add',
+        component: UserReclamationFilesAddComponent
+      },
+      {
+        path : 'reclamations/add',
+        component : UserReclamationAddComponent
       },
       {
         path : 'reclamation/details/:id',

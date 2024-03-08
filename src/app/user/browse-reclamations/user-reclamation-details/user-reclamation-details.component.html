@@ -1,1 +1,66 @@
-<p>user-reclamation-details works!</p>
+<br><br><br><br>
+
+<section class="causes-section overlay">
+  <div class="container">
+
+    <div class="kode-cause">
+
+      <div class="heading heading-4">
+        <h2 style="color: #fff;">Reclamation {{name}} Details</h2>
+      </div>
+      <div class="row-cols-md-6">
+        <div class="col-md-6">
+          <div *ngIf="retrievedImages.length>=1">
+            <ngb-carousel>
+              <ng-template *ngFor="let img of src" ngbSlide>
+                <div class="picsum-img-wrapper">
+                  <img [src]="img"
+                       style="object-fit:scale-down">
+                </div>
+                <div class="carousel-caption">
+
+                </div>
+              </ng-template>
+            </ngb-carousel>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h2>{{r.name}}</h2>
+          <div class="col-md-6">
+            <ul class="evdetail-info">
+              <li><span><i class="fa fa-calendar"></i>Posted on: </span> {{r.date | date:'medium'}}</li>
+            </ul>
+          </div>
+          <h4>Description: </h4>
+          <p>{{r.description}}</p>
+          <div class="kode-range"> Type: {{r.type}}</div>
+          <div class="kode-range"> Status: {{r.status}}</div>
+          <div class="kode-range"> Target: {{r.target}}</div>
+
+          <span id="ex6CurrentSliderValLabel"></span>
+          <div class="donate-text">
+
+            <br><br>
+
+          </div>
+          <br><br><br><br>
+
+        </div>
+
+        <div class="col-md-2">
+          <div *ngIf="pdf.length>=1">
+            <div *ngFor="let f of pdf;index as i">
+              <object [data]=f target="_blank" rel="noopener noreferrer" type="application/pdf" width="100%"
+                      height="600px"></object>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
