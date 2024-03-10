@@ -749,7 +749,7 @@ header{
 ===========================================
 */
 .causes-section{
-	background-image:url(images/causes-bg.jpg);
+	background-image:url(images/esprit-20.jpg);
 	position:relative;
 	background-size: cover;
 	background-attachment:fixed;
@@ -762,7 +762,7 @@ header{
 	height:100%;
 	width:100%;
 	opacity:0.9;
-	background-color: #000;
+	background-color: rgba(156, 1, 38, 0.31);
 }
 .causes-section .kode-cause{
 	float:left;

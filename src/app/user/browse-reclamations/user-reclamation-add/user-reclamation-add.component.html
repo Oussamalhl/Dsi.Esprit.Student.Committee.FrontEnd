@@ -1,8 +1,3 @@
-<c-breadcrumb [style]="'--cui-breadcrumb-divider:\'>\''">
-  <c-breadcrumb-item url="/admin">Home</c-breadcrumb-item>
-  <c-breadcrumb-item url="/admin/reclamations" >Reclamations</c-breadcrumb-item>
-  <c-breadcrumb-item url="/admin/reclamations/addReclamation" [active]="true">Add Reclamation</c-breadcrumb-item>
-</c-breadcrumb>
 <style>
   .example-radio-group {
     display: flex;
@@ -15,123 +10,121 @@
     margin: 5px;
   }
 </style>
-<div class="body flex-grow-1 px-3">
-  <c-container breakpoint="lg" class="h-auto container-lg" _nghost-qgx-c92="">
-
-    <c-row _ngcontent-qgx-c191="" _nghost-qgx-c96="" class="row">
-      <c-col _ngcontent-qgx-c191="" xs="12" _nghost-qgx-c94="" class="col-12">
-        <c-card _ngcontent-qgx-c191="" class="mb-4 card">
-          <c-card-header _ngcontent-qgx-c191="" class="card-header">
-            <strong _ngcontent-qgx-c191="" class="h3">Add Reclamation</strong>
-          </c-card-header>
-          <c-card-body _ngcontent-qgx-c191="" class="card-body">
-            <div class="body flex-grow-1 px-3">
-
-              <form #browserDefaultsForm="ngForm"
-                    class="row g-3"
-                    cForm
-                    cRow
-                    ngNativeValidate>
-
-                <c-col [md]="6">
-                  <div cFormFloating>
-
-                    <input type="text"
-                           cFormControl
-                           id="nameInput"
-                           placeholder="Enter Reclamation Name "
-                           [(ngModel)]="r.name"
-                           [ngModelOptions]="{standalone: true}"
-                           required=true
-                    />
-
-                    <label cLabel for="nameInput">Reclamation Name</label>
-                  </div>
-                </c-col>
-
-                <c-col [md]="3">
-                  <mat-form-field appearance="fill">
-                    <mat-select [(ngModel)]="r.type" [ngModelOptions]="{standalone: true}" (ngModelChange)="getTargets(r.type)" required>
-                      <mat-option>None</mat-option>
-                      <mat-option *ngFor="let t of type" [value]="t" >
-                        {{t}}
-                      </mat-option>
-                    </mat-select>
-                    <mat-label>Type</mat-label>
-                    <mat-hint>Please pick up your reclamation type here</mat-hint>
-                  </mat-form-field>
-                </c-col>
-
-                <div>
-
-                </div>
-                <div [ngSwitch]="r.type">
-                  <div *ngSwitchCase="'CLUB'">CLUB reclamation</div>
-                  <div *ngSwitchCase="'EVENT'">EVENT reclamation</div>
-                  <div *ngSwitchCase="'EVENT'">Other reclamation</div>
-                </div>
 
 
-                <br>
-                <c-col [md]="3">
-                  <mat-form-field appearance="fill">
-                    <mat-select [(ngModel)]="r.target" name="targets" required>
-                      <mat-option *ngFor="let t of targets" [value]="t">
-                        {{t}}
-                      </mat-option>
-                    </mat-select>
-                    <mat-label>Target</mat-label>
-                  </mat-form-field>
-                </c-col>
-                <br>
-                <c-col [md]="6">
-                  <div cFormFloating>
+<form #browserDefaultsForm="ngForm"
+      ngNativeValidate>
+  <section  class="causes-section overlay">
+    <div class="container">
+      <div class="kode-cause" style="color: #d0005e">
+        <br><br><br><br>
+        <div class="row-cols-md-6" >
+          <div class="col-md-7">
+            <div cFormFloating>
+                    <input
+                      cFormControl
+                      id="name"
+                      placeholder="Enter Name "
+                      [(ngModel)]="r.name"
+                      [ngModelOptions]="{standalone: true}">
+              <label cLabel for="Description">Reclamation Name</label>
+            </div>
+          </div>
 
+          <div class="col-md-6">
+            <div class="kode-range">
+                <mat-form-field  appearance="outline">
+                  <mat-select  [(ngModel)]="r.type" [ngModelOptions]="{standalone: true}"
+                               (ngModelChange)="getTargets(r.type)" required>
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let t of type" [value]="t">
+                      {{t}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-label>Type</mat-label>
+                  <mat-hint>Please pick up your reclamation type here</mat-hint>
+                </mat-form-field>
+
+            </div>
+          </div>
+        </div>
+
+<!--        <div [ngSwitch]="r.type">-->
+<!--          <div *ngSwitchCase="'CLUB'">CLUB reclamation</div>-->
+<!--          <div *ngSwitchCase="'EVENT'">EVENT reclamation</div>-->
+<!--          <div *ngSwitchCase="'EVENT'">Other reclamation</div>-->
+<!--        </div>-->
+<!--        style="background-color: rgba(16,1,156,0.31);border: 2px solid;"-->
+        <div id="reclamationTypeForm" class="kode-cause">
+          <br><br>
+        <div class="heading heading-4">
+          <h2 id="reclamationTypeHeader" style="color: #fff;"></h2>
+        </div>
+        <div class="row-cols-md-6">
+          <div class="col-md-6">
+            <div class="kode-range">
+              <mat-form-field appearance="outline">
+                <mat-select [ngModelOptions]="{standalone: true}" [(ngModel)]="r.target" name="targets" required>
+                  <mat-option *ngFor="let t of targets" [value]="t">
+                    {{t}}
+                  </mat-option>
+                </mat-select>
+                <mat-label>Target</mat-label>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="col-md-8">
+            <div cFormFloating>
                     <textarea
                       cFormControl
                       id="Description"
+                      rows="8"
+                      style="min-height: 100px;max-height: 400px"
                       placeholder="Enter Description "
                       [(ngModel)]="r.description"
-                      [ngModelOptions]="{standalone: true}"
-                    ></textarea>
-
-                    <label cLabel for="Description">Reclamation Description</label>
-                  </div>
-                </c-col>
-                <br>
-
-
-                <c-col [md]="12" ></c-col>
-                <br><br>
-                <c-col [sm]>
-
-                  <button cButton class="me-1" color="primary" type="submit" class="me-1 active btn btn-outline-primary"
-                          aria-pressed="true" variant="outline" (click)="addReclamation(r)">
-                    Submit
-                  </button>
-                  <button cButton variant="outline" class="me-1 btn btn-outline-secondary"
-                          type="reset">
-                    Reset
-                  </button>
-                </c-col>
-              </form>
+                      [ngModelOptions]="{standalone: true}">
+                    </textarea>
+              <label cLabel for="Description">Reclamation Description</label>
+              <br><br><br>
 
             </div>
-          </c-card-body>
-        </c-card>
-      </c-col>
 
-    </c-row>
-    <c-row _ngcontent-qgx-c191="" _nghost-qgx-c96="" class="row">
+          </div>
+        </div>
+          <!--                        <div class="col-md-6">-->
 
-    </c-row>
+          <!--                        </div>-->
+          <!--                        <div class="col-md-6">-->
 
-  </c-container>
-</div>
-<ng-template #dialogRef style="background-color: #ac2925" >
+          <!--                        </div>-->
+        </div>
+        <button cButton class="me-1" color="primary" type="submit" class="me-1 active btn btn-outline-primary"
+                aria-pressed="true" variant="outline" (click)="addReclamation(r)">
+          Submit
+        </button>
+        <button cButton variant="outline" class="me-1 btn btn-outline-secondary"
+                type="reset">
+          Reset
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+  <br><br>
+
+
+  <br>
+
+</form>
+
+<ng-template #dialogRef style="background-color: #ac2925">
   <h1 mat-dialog-title>{{isSending ? "Sending" : "Finished"}}</h1>
-  <mat-option *ngIf="isSending" class="is-loading"><mat-spinner diameter="50"></mat-spinner></mat-option>
-  <h2 *ngIf="!isSending" mat-dialog-content>{{sent ? "Successfully Added":"Add Failed"}}</h2>
+  <mat-option *ngIf="isSending" class="is-loading">
+    <mat-spinner diameter="50"></mat-spinner>
+  </mat-option>
+  <h2 *ngIf="!isSending" mat-dialog-content>{{sent ? "Successfully Added" : "Add Failed"}}</h2>
   <div *ngIf="!isSending" mat-dialog-actions>
     <button class="btn btn-primary" mat-button mat-dialog-close>Close</button>
   </div>

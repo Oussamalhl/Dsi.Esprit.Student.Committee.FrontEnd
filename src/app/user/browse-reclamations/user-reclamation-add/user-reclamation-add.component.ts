@@ -21,7 +21,6 @@ export class UserReclamationAddComponent implements OnInit {
 
   r: Reclamation = new Reclamation();
   selectedType!: string
-  status = ['OPEN', 'CLOSED'];
   type = ['CLUB', 'EVENT', 'OTHER'];
   targets!: string[]
   separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -62,6 +61,29 @@ export class UserReclamationAddComponent implements OnInit {
 
   getTargets(type: string) {
     console.log("type: " + type);
+    switch (type){
+      case 'CLUB':{
+        document.getElementById("reclamationTypeForm")!.style.backgroundColor = "rgba(16,1,156,0.31)" ;
+        document.getElementById("reclamationTypeForm")!.style.border = "2px solid";
+        document.getElementById("reclamationTypeHeader")!.innerText = "Your voice can only make our clubs do better.";
+
+        break
+      }
+      case 'EVENT':{
+        document.getElementById("reclamationTypeForm")!.style.backgroundColor = "rgba(156,1,1,0.31)" ;
+        document.getElementById("reclamationTypeForm")!.style.border = "2px solid";
+        document.getElementById("reclamationTypeHeader")!.innerText = "Your voice can only make our event organizers do better.";
+
+        break
+      }
+      case 'OTHER':{
+        document.getElementById("reclamationTypeForm")!.style.backgroundColor = "rgba(72,49,62,0.31)" ;
+        document.getElementById("reclamationTypeForm")!.style.border = "2px solid";
+        document.getElementById("reclamationTypeHeader")!.innerText = "What's on your mind?";
+
+      }
+    }
+
     this.RS.GetReclamationTargets(type).subscribe(e => {
       this.targets = []
       this.targets = e
