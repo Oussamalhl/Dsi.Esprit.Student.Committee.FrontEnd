@@ -67,6 +67,7 @@ export class EventAddComponent implements OnInit {
     e.clubs = this.selectedClubs;
     if (this.ngForm.valid) {
       this.ES.AddEvent(e).subscribe(res => {
+        //console.log(res.id)
           this.ES.addClubEvent(res.id,e.clubs).subscribe(res=>{
             console.log(res + "Clubs has been added to Event");
           })

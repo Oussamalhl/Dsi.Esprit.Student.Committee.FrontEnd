@@ -14,68 +14,68 @@
 
 <form #browserDefaultsForm="ngForm"
       ngNativeValidate>
-  <section  class="causes-section overlay">
+  <section class="causes-section overlay">
     <div class="container">
       <div class="kode-cause" style="color: #d0005e">
         <br><br><br><br>
-        <div class="row-cols-md-6" >
+        <div class="row-cols-md-6">
           <div class="col-md-7">
             <div cFormFloating>
-                    <input
-                      cFormControl
-                      id="name"
-                      placeholder="Enter Name "
-                      [(ngModel)]="r.name"
-                      [ngModelOptions]="{standalone: true}">
+              <input
+                cFormControl
+                id="name"
+                placeholder="Enter Name "
+                [(ngModel)]="r.name"
+                [ngModelOptions]="{standalone: true}">
               <label cLabel for="Description">Reclamation Name</label>
             </div>
           </div>
 
           <div class="col-md-6">
             <div class="kode-range">
-                <mat-form-field  appearance="outline">
-                  <mat-select  [(ngModel)]="r.type" [ngModelOptions]="{standalone: true}"
-                               (ngModelChange)="getTargets(r.type)" required>
-                    <mat-option>None</mat-option>
-                    <mat-option *ngFor="let t of type" [value]="t">
-                      {{t}}
-                    </mat-option>
-                  </mat-select>
-                  <mat-label>Type</mat-label>
-                  <mat-hint>Please pick up your reclamation type here</mat-hint>
-                </mat-form-field>
-
-            </div>
-          </div>
-        </div>
-
-<!--        <div [ngSwitch]="r.type">-->
-<!--          <div *ngSwitchCase="'CLUB'">CLUB reclamation</div>-->
-<!--          <div *ngSwitchCase="'EVENT'">EVENT reclamation</div>-->
-<!--          <div *ngSwitchCase="'EVENT'">Other reclamation</div>-->
-<!--        </div>-->
-<!--        style="background-color: rgba(16,1,156,0.31);border: 2px solid;"-->
-        <div id="reclamationTypeForm" class="kode-cause">
-          <br><br>
-        <div class="heading heading-4">
-          <h2 id="reclamationTypeHeader" style="color: #fff;"></h2>
-        </div>
-        <div class="row-cols-md-6">
-          <div class="col-md-6">
-            <div class="kode-range">
               <mat-form-field appearance="outline">
-                <mat-select [ngModelOptions]="{standalone: true}" [(ngModel)]="r.target" name="targets" required>
-                  <mat-option *ngFor="let t of targets" [value]="t">
+                <mat-select [(ngModel)]="r.type" [ngModelOptions]="{standalone: true}"
+                            (ngModelChange)="getTargets(r.type)" required>
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let t of type" [value]="t">
                     {{t}}
                   </mat-option>
                 </mat-select>
-                <mat-label>Target</mat-label>
+                <mat-label>Type</mat-label>
+                <mat-hint>Please pick up your reclamation type here</mat-hint>
               </mat-form-field>
+
             </div>
           </div>
+        </div>
 
-          <div class="col-md-8">
-            <div cFormFloating>
+        <!--        <div [ngSwitch]="r.type">-->
+        <!--          <div *ngSwitchCase="'CLUB'">CLUB reclamation</div>-->
+        <!--          <div *ngSwitchCase="'EVENT'">EVENT reclamation</div>-->
+        <!--          <div *ngSwitchCase="'EVENT'">Other reclamation</div>-->
+        <!--        </div>-->
+        <!--        style="background-color: rgba(16,1,156,0.31);border: 2px solid;"-->
+        <div id="reclamationTypeForm" class="kode-cause">
+          <br><br>
+          <div class="heading heading-4">
+            <h2 id="reclamationTypeHeader" style="color: #fff;"></h2>
+          </div>
+          <div class="row-cols-md-6">
+            <div class="col-md-6">
+              <div class="kode-range">
+                <mat-form-field appearance="outline">
+                  <mat-select [ngModelOptions]="{standalone: true}" [(ngModel)]="r.target" name="targets" required>
+                    <mat-option *ngFor="let t of targets" [value]="t">
+                      {{t}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-label>Target</mat-label>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="col-md-8">
+              <div cFormFloating>
                     <textarea
                       cFormControl
                       id="Description"
@@ -85,30 +85,72 @@
                       [(ngModel)]="r.description"
                       [ngModelOptions]="{standalone: true}">
                     </textarea>
-              <label cLabel for="Description">Reclamation Description</label>
-              <br><br><br>
+                <label cLabel for="Description">Reclamation Description</label>
+                <br><br><br>
+
+              </div>
 
             </div>
+          </div>
+          <div class="col-md-6">
+            <div class="body flex-grow-1 px-3">
+              <c-container breakpoint="lg" class="h-auto container-lg" _nghost-qgx-c92="">
 
+                <c-row _ngcontent-qgx-c191="" _nghost-qgx-c96="" class="row">
+                  <c-col _ngcontent-qgx-c191="" xs="12" _nghost-qgx-c94="" class="col-4">
+                    <c-card _ngcontent-qgx-c191="" class="mb-4 card">
+                      <c-card-header cTextColor="high-emphasis" cBgColor="danger" _ngcontent-qgx-c191=""
+                                     class="card-header">
+                        <strong _ngcontent-qgx-c191="" class="h3">Upload Reclamation "{{r.name}}" File(s)</strong>
+                      </c-card-header>
+                      <c-card-body _ngcontent-qgx-c191="" class="card-body">
+                        <div class="body flex-grow-1 px-3">
+                          <form #browserDefaultsForm="ngForm"
+
+                                class="row g-3"
+                                cForm
+                                cRow
+                                ngNativeValidate>
+                            <c-col [md]="6">
+                              <label cLabel for="FileInput" class="h6">Upload Files</label>
+
+                              <c-input-group>
+
+                                <input aria-describedby="inputGroupFileAddon04"
+                                       aria-label="Upload"
+                                       cFormControl
+                                       name="fileu"
+                                       multiple="false"
+                                       id="FileInput"
+                                       type="file"
+                                       accept=".pdf,.png, .jpg, .jpeg, .svg"
+                                       (change)="onFileChange($event)">
+                              </c-input-group>
+                            </c-col>
+                            <br><br><br><br><br><br><br><br><br><br>
+                          </form>
+                        </div>
+                      </c-card-body>
+                    </c-card>
+                  </c-col>
+                </c-row>
+              </c-container>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <button cButton class="me-1" color="primary" type="submit"
+                    aria-pressed="true" variant="outline" (click)="addReclamation(r)">
+              Submit
+            </button>
+            <button cButton variant="outline" class="me-1 btn btn-outline-secondary"
+                    type="reset">
+              Reset
+            </button>
           </div>
         </div>
-          <!--                        <div class="col-md-6">-->
-
-          <!--                        </div>-->
-          <!--                        <div class="col-md-6">-->
-
-          <!--                        </div>-->
-        </div>
-        <button cButton class="me-1" color="primary" type="submit" class="me-1 active btn btn-outline-primary"
-                aria-pressed="true" variant="outline" (click)="addReclamation(r)">
-          Submit
-        </button>
-        <button cButton variant="outline" class="me-1 btn btn-outline-secondary"
-                type="reset">
-          Reset
-        </button>
       </div>
     </div>
+
 
   </section>
 
@@ -118,6 +160,41 @@
   <br>
 
 </form>
+
+<!--FILE UPLOAD-->
+
+<br><br><br>
+<div class="position-relative" *ngIf="uploaded">
+  <c-toaster placement="top-end" position="absolute">
+    <c-toast [autohide]="true" [delay]="5000" [visible]="true" [fade]="true"
+             class="align-items-center text-white border-0" color="success">
+      <c-toast-header [closeButton]="false">
+        <svg cIcon="" name="cil-check" size="xl">
+        </svg>
+
+        File Upload Confirmation
+
+      </c-toast-header>
+      <c-toast-body>Your File has been Uploaded Successfully !</c-toast-body>
+    </c-toast>
+  </c-toaster>
+</div>
+<div class="position-relative" *ngIf="empty">
+  <c-toaster placement="top-end" position="absolute">
+    <c-toast [autohide]="true" [delay]="5000" [fade]="false" [visible]="true" [fade]="true"
+             class="align-items-center text-white border-0" color="danger">
+      <c-toast-header [closeButton]="false">
+        <svg cIcon="" name="cil-file" size="xl">
+        </svg>
+
+        File Upload Error
+
+      </c-toast-header>
+      <c-toast-body>Please Choose File !</c-toast-body>
+    </c-toast>
+  </c-toaster>
+</div>
+
 
 <ng-template #dialogRef style="background-color: #ac2925">
   <h1 mat-dialog-title>{{isSending ? "Sending" : "Finished"}}</h1>
