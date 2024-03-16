@@ -103,4 +103,10 @@ export class ReclamationService {
 
   }
 
+  countReclamationTargetByYear(year:number):Observable<any> {
+
+    return this.http.get<any>(API_URL + 'countRecTargetByYear?year='+year)
+
+  }
+
 }

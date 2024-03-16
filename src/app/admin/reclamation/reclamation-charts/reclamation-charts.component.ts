@@ -18,9 +18,12 @@ export class ReclamationChartsComponent implements OnInit {
   reclamationCount!: number[][]
   reclamationStatusCount!: number[][]
   reclamationsTypeCount!: any[][]
+  reclamationsTargetCount!: any[][]
   dataMonths: any
   dataStatus: any
   dataTypes: any
+  dataTargets: any
+  datasets: any
   selectedYear!: number
   yearlyCount = 0
   yearlyProcessed = 0
@@ -72,33 +75,45 @@ export class ReclamationChartsComponent implements OnInit {
     this.RS.countAllReclamationByMonth(year).subscribe(res => {
       //console.log(res);
       this.reclamationCount = res;
-      this.reclamationCount.forEach(e=>{
-        console.log(' month: ' + e[0] + ' count: ' + e[1]);
+      this.reclamationCount.forEach(e => {
+        //console.log(' month: ' + e[0] + ' count: ' + e[1]);
         this.yearlyCount += e[1]
-        switch (e[0]){
-          case 1:this.January = e[1];
+        switch (e[0]) {
+          case 1:
+            this.January = e[1];
             break;
-          case 2:this.February = e[1];
+          case 2:
+            this.February = e[1];
             break;
-          case 3:this.March = e[1];
+          case 3:
+            this.March = e[1];
             break;
-          case 4:this.April = e[1];
+          case 4:
+            this.April = e[1];
             break;
-          case 5:this.May = e[1];
+          case 5:
+            this.May = e[1];
             break;
-          case 6:this.June = e[1];
+          case 6:
+            this.June = e[1];
             break;
-          case 7:this.July = e[1];
+          case 7:
+            this.July = e[1];
             break;
-          case 8:this.August = e[1];
+          case 8:
+            this.August = e[1];
             break;
-          case 9:this.September = e[1];
+          case 9:
+            this.September = e[1];
             break;
-          case 10:this.October = e[1];
+          case 10:
+            this.October = e[1];
             break;
-          case 11:this.November = e[1];
+          case 11:
+            this.November = e[1];
             break;
-          case 12:this.December = e[1];
+          case 12:
+            this.December = e[1];
             break;
         }
       })
@@ -138,11 +153,11 @@ export class ReclamationChartsComponent implements OnInit {
       //console.log(res)
       this.reclamationsTypeCount = res;
       this.reclamationsTypeCount.forEach(e => {
-          //console.log('type: ' + e[0] + ' count: ' + e[1]);
-          e[0] === 'EVENT' ? this.eventsCount = e[1] :
-            e[0] == 'CLUB' ? this.clubsCount = e[1] :
-              e[0] == 'OTHER' ? this.otherCount = e[1] :
-                console.log('null: ' + e)
+        //console.log('type: ' + e[0] + ' count: ' + e[1]);
+        e[0] === 'EVENT' ? this.eventsCount = e[1] :
+          e[0] == 'CLUB' ? this.clubsCount = e[1] :
+            e[0] == 'OTHER' ? this.otherCount = e[1] :
+              console.log('null: ' + e)
       })
 
       this.dataTypes = {
@@ -157,9 +172,39 @@ export class ReclamationChartsComponent implements OnInit {
       }
     })
 
+    this.RS.countReclamationTargetByYear(year).subscribe(res => {
+      //console.log(res)
+      this.reclamationsTargetCount = res;
+      this.datasets = {
+        backgroundColor: [],
+        data: []
+      }
+      this.dataTargets = {
+        labels: [],
+        datasets: [
+          {
+            label: 'Target',
+            backgroundColor: [],
+            data: []
+          }
+        ]
+      }
+
+      this.reclamationsTargetCount.forEach(e => {
+        this.datasets.data.push(e[1]);
+        this.datasets.backgroundColor.push('#DD1B16')
+        this.dataTargets.labels.push(e[0])
+        // this.dataTargets.labels.datasets.data.push(e[1])
+        // this.dataTargets.labels.datasets.backgroundColor.push('#DD1B16')
+      })
+      this.dataTargets.datasets.push(this.datasets.backgroundColor)
+      this.dataTargets.datasets.push(this.datasets.data)
+
+      console.log(this.dataTargets)
+    })
+
     //console.log('yearly count: ' + this.yearlyCount)
     //console.log('yearly processed: ' + this.yearlyProcessed)
-
 
 
   }
