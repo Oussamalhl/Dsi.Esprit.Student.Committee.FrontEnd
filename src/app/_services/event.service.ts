@@ -108,7 +108,6 @@ export class EventService {
   GetEventClubs(idEvent: number) {
     return this._http.get<string[]>(API_URL + 'getEventClubs?idEvent=' + idEvent);
   }
-
   GetClubs() {
     return this._http.get<string[]>(API_URL + 'getClubs');
   }

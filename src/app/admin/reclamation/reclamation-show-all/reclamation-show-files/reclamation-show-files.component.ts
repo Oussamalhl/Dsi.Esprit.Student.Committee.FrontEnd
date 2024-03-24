@@ -29,7 +29,7 @@ export class ReclamationShowFilesComponent implements OnInit {
     this.RS.RemoveReclamationFile(id).subscribe(res => {
       //console.log(res);
       console.log("File Deleted");
-      setTimeout(() => this.reload(), 1000);
+      setTimeout(() => window.location.reload(), 1000);
     });
 
 

@@ -157,7 +157,7 @@
 <ng-template #dialogRef style="background-color: #ac2925" >
   <h1 mat-dialog-title>{{isSending ? "Sending" : "Finished"}}</h1>
   <mat-option *ngIf="isSending" class="is-loading"><mat-spinner diameter="50"></mat-spinner></mat-option>
-  <h2 *ngIf="!isSending" mat-dialog-content>{{sent ? "Successfully Added":"Add Failed"}}</h2>
+  <h2 *ngIf="!isSending" mat-dialog-content>{{sent ? "Successfully Updated":"Update Failed"}}</h2>
   <div *ngIf="!isSending" mat-dialog-actions>
     <button class="btn btn-primary" mat-button mat-dialog-close>Close</button>
   </div>

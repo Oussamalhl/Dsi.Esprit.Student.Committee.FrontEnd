@@ -6,7 +6,7 @@ import {User} from "../models/User";
 import {UserService} from "./user.service";
 import {reclamationFile} from "../models/reclamationFile";
 
-const API_URL = 'http://localhost:9092/reclamationservice-ms/api/reclamation/';
+const API_URL = 'http://localhost:8083/api/reclamation/';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class ReclamationService {
     return this.http.post<Reclamation>(API_URL + 'addreclamation', r);
   }
   AddReclamationAdmin(r: Reclamation,username:string): Observable<Reclamation> {
-    return this.http.post<Reclamation>(API_URL + 'addreclamation?username='+username, r);
+    return this.http.post<Reclamation>(API_URL + 'addreclamationa?username='+username, r);
   }
   getAllReclamations(): Observable<Reclamation[]> {
     return this.http.get<Reclamation[]>(API_URL + 'showallReclamations');
@@ -33,7 +33,9 @@ export class ReclamationService {
   getUserReclamations() {
     return this.http.get<Reclamation[]>(API_URL + 'showURec');
   }
-
+  GetUsers() {
+    return this.http.get<string[]>(API_URL + 'getusers');
+  }
   getUser(id: number) {
     var subject = new Subject<User>();
     let user: User;

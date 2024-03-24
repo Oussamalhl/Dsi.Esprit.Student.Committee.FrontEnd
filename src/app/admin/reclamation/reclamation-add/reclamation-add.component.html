@@ -83,14 +83,42 @@
                     <mat-label>Target</mat-label>
                   </mat-form-field>
                 </c-col>
+<!--                <c-col [md]="3">-->
+<!--                  <mat-form-field appearance="fill">-->
+<!--                    <mat-select [(ngModel)]="r.user" name="user" required>-->
+<!--                      <mat-option *ngFor="let t of targets" [value]="t">-->
+<!--                        {{t}}-->
+<!--                      </mat-option>-->
+<!--                    </mat-select>-->
+<!--                    <mat-label>User(s)</mat-label>-->
+<!--                  </mat-form-field>-->
+<!--                </c-col>-->
                 <c-col [md]="3">
-                  <mat-form-field appearance="fill">
-                    <mat-select [(ngModel)]="r.user" name="user" required>
-                      <mat-option *ngFor="let t of targets" [value]="t">
-                        {{t}}
+                  <mat-form-field class="example-chip-list" appearance="fill">
+                    <mat-label>Select Users</mat-label>
+                    <mat-chip-list #userList aria-label="User selection">
+                      <mat-chip
+                        *ngFor="let u of selectedUsers"
+                        (removed)="removeUser(u)">
+                        {{u}}
+                        <button matChipRemove>
+                          <mat-icon>cancel</mat-icon>
+                        </button>
+                      </mat-chip>
+                      <input
+                        placeholder="Select User.."
+                        #userInput
+                        [formControl]="userCtrl"
+                        [matAutocomplete]="autoUser"
+                        [matChipInputFor]="userList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        (matChipInputTokenEnd)="addUser($event)">
+                    </mat-chip-list>
+                    <mat-autocomplete #autoUser="matAutocomplete" (optionSelected)="selectedUser($event)">
+                      <mat-option *ngFor="let user of filteredUsers| async" [value]="user">
+                        {{user}}
                       </mat-option>
-                    </mat-select>
-                    <mat-label>User(s)</mat-label>
+                    </mat-autocomplete>
                   </mat-form-field>
                 </c-col>
                 <br>
@@ -126,7 +154,7 @@
                 <c-col [sm]>
 
                   <button cButton class="me-1" color="primary" type="submit" class="me-1 active btn btn-outline-primary"
-                          aria-pressed="true" variant="outline" (click)="addReclamation(r,r.user.username)">
+                          aria-pressed="true" variant="outline" (click)="addReclamation(r)">
                     Submit
                   </button>
                   <button cButton variant="outline" class="me-1 btn btn-outline-secondary"

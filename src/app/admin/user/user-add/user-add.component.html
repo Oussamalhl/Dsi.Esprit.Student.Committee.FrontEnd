@@ -32,7 +32,6 @@
                     cForm
                     cRow
                     ngNativeValidate>
-
                 <c-col [md]="6">
                   <div cFormFloating>
 
@@ -52,6 +51,38 @@
                 <c-col [md]="6">
                   <div cFormFloating>
 
+                    <input type="text"
+                           cFormControl
+                           id="firstName"
+                           placeholder="Enter FirstName "
+                           [(ngModel)]="u.firstName"
+                           [ngModelOptions]="{standalone: true}"
+                           required
+                    />
+
+                    <label cLabel for="firstName">First Name</label>
+                  </div>
+                </c-col>
+                <br>
+                <c-col [md]="6">
+                  <div cFormFloating>
+
+                    <input type="text"
+                           cFormControl
+                           id="lastName"
+                           placeholder="Enter Last Name "
+                           [(ngModel)]="u.lastName"
+                           [ngModelOptions]="{standalone: true}"
+                           required
+                    />
+
+                    <label cLabel for="lastName">Last Name</label>
+                  </div>
+                </c-col>
+                <br>
+                <c-col [md]="6">
+                  <div cFormFloating>
+
                     <input type="password"
                            cFormControl
                            id="Password"
@@ -60,7 +91,7 @@
                            required
                     />
 
-                    <label cLabel for="Password">User Password</label>
+                    <label cLabel for="password">User Password</label>
                   </div>
                 </c-col>
                 <c-col [md]="6">
@@ -75,7 +106,7 @@
                            required
                     />
 
-                    <label cLabel for="nameInput">Email</label>
+                    <label cLabel for="email">Email</label>
                   </div>
                 </c-col>
                 <br>

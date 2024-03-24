@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ReclamationService} from "../../../_services/reclamation.service";
 import {MatChipInputEvent} from "@angular/material/chips";
 import {MatDialog} from "@angular/material/dialog";
+import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 
 @Component({
   selector: 'app-reclamation-add',
@@ -28,21 +29,28 @@ export class ReclamationAddComponent implements OnInit {
   ngForm = new FormGroup({
     type: new FormControl(null)
   })
-
+  users: string[] = [];
+  userCtrl = new FormControl();
+  filteredUsers!: Observable<string[]>;
+  selectedUsers: string[] = [];
   constructor(private RS: ReclamationService, private _Activatedroute: ActivatedRoute, private _router: Router, private dialog: MatDialog) {
-
+    this.filteredUsers = this.userCtrl.valueChanges.pipe(
+      startWith(null),
+      map((user: string | null) => (user ? this._filterUsers(user) : this.users.slice())),
+    );
   }
   @ViewChild('dialogRef', {static: true}) dialogRef!: TemplateRef<any>;
+  @ViewChild('userInput') userInput!: ElementRef<HTMLInputElement>;
 
   openDialog() {
     let dialog = this.dialog.open(this.dialogRef);
   }
-  addReclamation(r: Reclamation,username:string) {
+  addReclamation(r: Reclamation) {
     this.isSending = true;
     let dialog = this.dialog.open(this.dialogRef);
 
     if (this.ngForm.valid) {
-      this.RS.AddReclamationAdmin(r,username).subscribe(res => {
+      this.selectedUsers.forEach(u=>this.RS.AddReclamationAdmin(r,u).subscribe(res => {
 
           console.log(res);
           this.isSending = false;
@@ -54,8 +62,21 @@ export class ReclamationAddComponent implements OnInit {
           this.isSending = false;
           this.sent = false;
           dialog.addPanelClass('fail-dialog')
-        }
-      )
+        }))
+      // this.RS.AddReclamationAdmin(r,username).subscribe(res => {
+      //
+      //     console.log(res);
+      //     this.isSending = false;
+      //     this.sent = true;
+      //     dialog.addPanelClass('success-dialog');
+      //   },
+      //   (err) => {
+      //     console.log(err);
+      //     this.isSending = false;
+      //     this.sent = false;
+      //     dialog.addPanelClass('fail-dialog')
+      //   }
+      // )
     }
     setTimeout(() => this._router.navigateByUrl("admin/reclamations"), 1000);
   }
@@ -75,8 +96,46 @@ export class ReclamationAddComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
+  addUser(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
 
+    if (value) {
+      this.selectedUsers.push(value);
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+
+    this.userCtrl.setValue(null);
+  }
+
+
+  removeUser(user: string): void {
+    const index = this.selectedUsers.indexOf(user);
+
+    if (index >= 0) {
+      this.selectedUsers.splice(index, 1);
+    }
+  }
+
+  selectedUser(event: MatAutocompleteSelectedEvent): void {
+    this.selectedUsers.push(event.option.viewValue);
+    this.userInput.nativeElement.value = '';
+    this.userCtrl.setValue(null);
+  }
+
+  private _filterUsers(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.users.filter(u => u.toLowerCase().includes(filterValue));
+  }
+
+
+  ngOnInit(): void {
+    this.RS.GetUsers().subscribe(res => {
+      console.log(res);
+      this.users = res;
+    })
   }
 
 }
