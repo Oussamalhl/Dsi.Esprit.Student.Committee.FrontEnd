@@ -22,6 +22,8 @@ export class EventChartsComponent implements OnInit {
   dataStatus: any
   dataTypes: any
   dataBests: any
+  datasets: any
+
   selectedYear!: number
   allCount = 0
   allConfirmed = 0
@@ -65,33 +67,40 @@ export class EventChartsComponent implements OnInit {
   }
 
   bestOfYear(year: number) {
-    this.bestYearlyEvents = [[], []]
+
     this.ES.bestEventsOfTheYear(year).subscribe(res => {
-      if (res.length == 5) {
-
-        this.bestYearlyEvents = res;
-        //console.log("best of year: " + res[0][1])
-        //console.log("this best of year: " + this.bestYearlyEvents)
-        this.dataBests = {
-          labels: [this.bestYearlyEvents[0][2], this.bestYearlyEvents[1][2], this.bestYearlyEvents[2][2], this.bestYearlyEvents[3][2], this.bestYearlyEvents[4][2]],
-          datasets: [
-            {
-              label: 'Club',
-              backgroundColor: ['#f5573b', '#543bf5', '#3bf5ae', '#c7f53b', '#9b42f5'],
-              data: [this.bestYearlyEvents[0][1], this.bestYearlyEvents[1][1], this.bestYearlyEvents[2][1], this.bestYearlyEvents[3][1], this.bestYearlyEvents[4][1]]
-            }
-          ]
-        }
-        this.bestYearlyEvents = []
-
-        //console.log("this best of year: " + this.bestYearlyEvents)
-
+      //console.log(res)
+      this.bestYearlyEvents = res;
+      this.datasets = {
+        backgroundColor: [],
+        data: []
+      }
+      this.dataBests = {
+        labels: [],
+        datasets: [
+          {
+            label: 'Event',
+            backgroundColor: [],
+            data: []
+          }
+        ]
       }
 
+      this.bestYearlyEvents.forEach(e => {
+        this.datasets.data.push(e[1]);
+        this.datasets.backgroundColor.push('#' + Math.floor(Math.random()*16777215).toString(16))
+        this.dataBests.labels.push(e[2])
+        // this.dataTargets.labels.datasets.data.push(e[1])
+        // this.dataTargets.labels.datasets.backgroundColor.push('#DD1B16')
+      })
+      this.dataBests.datasets.fill(this.datasets)
+      // this.dataTargets.datasets.push(this.datasets.data)
 
+      console.log(this.dataBests)
     })
 
   }
+
 
   filterCountByYear(year: number) {
 
