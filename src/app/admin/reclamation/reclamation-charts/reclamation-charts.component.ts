@@ -192,13 +192,13 @@ export class ReclamationChartsComponent implements OnInit {
 
       this.reclamationsTargetCount.forEach(e => {
         this.datasets.data.push(e[1]);
-        this.datasets.backgroundColor.push('#DD1B16')
+        this.datasets.backgroundColor.push('#' + Math.floor(Math.random()*16777215).toString(16))
         this.dataTargets.labels.push(e[0])
         // this.dataTargets.labels.datasets.data.push(e[1])
         // this.dataTargets.labels.datasets.backgroundColor.push('#DD1B16')
       })
-      this.dataTargets.datasets.push(this.datasets.backgroundColor)
-      this.dataTargets.datasets.push(this.datasets.data)
+      this.dataTargets.datasets.fill(this.datasets)
+      // this.dataTargets.datasets.push(this.datasets.data)
 
       console.log(this.dataTargets)
     })

@@ -23,7 +23,7 @@ export class EventUpdateComponent implements OnInit {
   e: event = new event();
   id!:number;
   motives=['EDUCATION', 'LEGAL', 'CHARITY', 'SOCIAL', 'HEALTH', 'COMMUNITY', 'EMPLOYMENT', 'OTHER'];
-  status=['OPEN', 'CLOSED', 'CANCELLED','ONGOING'];
+  status=['OPEN', 'CLOSED', 'CANCELLED','ONGOING', 'ENDED'];
   type=['INPERSON', 'VIRTUAL'];
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tags:string[]=[];
