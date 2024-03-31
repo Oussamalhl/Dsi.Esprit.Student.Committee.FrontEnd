@@ -51,6 +51,13 @@ import {
 import {
   UserReclamationFilesAddComponent
 } from "./user/browse-reclamations/user-reclamation-add/user-reclamation-files-add/user-reclamation-files-add.component";
+import {ClubShowAllComponent} from "./admin/club/club-show-all/club-show-all.component";
+import {ClubAddComponent} from "./admin/club/club-add/club-add.component";
+import {ClubAddFileComponent} from "./admin/club/club-add/club-add-file/club-add-file.component";
+import {ClubChartsComponent} from "./admin/club/club-charts/club-charts.component";
+import {ClubDetailsComponent} from "./admin/club/club-show-all/club-details/club-details.component";
+import {ClubShowFilesComponent} from "./admin/club/club-show-all/club-show-files/club-show-files.component";
+import {ClubUpdateComponent} from "./admin/club/club-update/club-update.component";
 
 const routes: Routes = [
 
@@ -191,7 +198,34 @@ const routes: Routes = [
         path: 'events/:id/Files/add',
         component: EventAddFileComponent,
       },
-
+      {
+        path: 'clubs',
+        component: ClubShowAllComponent
+      },
+      {
+        path: 'clubs/addClub',
+        component: ClubAddComponent
+      },
+      {
+        path: 'clubs/updateClub/:id',
+        component: ClubUpdateComponent
+      },
+      {
+        path: 'clubs/:id/Files',
+        component: ClubShowFilesComponent,
+      },
+      {
+        path: 'clubs/:id/clubDetails',
+        component: ClubDetailsComponent,
+      },
+      {
+        path: 'clubs/charts',
+        component: ClubChartsComponent,
+      },
+      {
+        path: 'clubs/:id/Files/add',
+        component: ClubAddFileComponent,
+      },
       {
         path: '',
         loadChildren: () =>

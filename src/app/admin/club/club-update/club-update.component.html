@@ -1,0 +1,133 @@
+<c-breadcrumb [style]="'--cui-breadcrumb-divider:\'>\''">
+  <c-breadcrumb-item url="/admin">Home</c-breadcrumb-item>
+  <c-breadcrumb-item url="/admin/reclamations" >Reclamations</c-breadcrumb-item>
+  <c-breadcrumb-item [active]="false">Update Reclamation</c-breadcrumb-item>
+</c-breadcrumb>
+<style>
+  .example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+  }
+
+  .example-radio-button {
+    margin: 5px;
+  }
+</style>
+<div class="body flex-grow-1 px-3">
+  <c-container breakpoint="lg" class="h-auto container-lg" _nghost-qgx-c92="">
+
+    <c-row _ngcontent-qgx-c191="" _nghost-qgx-c96="" class="row">
+      <c-col _ngcontent-qgx-c191="" xs="12" _nghost-qgx-c94="" class="col-12">
+        <c-card _ngcontent-qgx-c191="" class="mb-4 card">
+          <c-card-header _ngcontent-qgx-c191="" class="card-header">
+            <strong _ngcontent-qgx-c191="" class="h3">Update Club "{{c.name}}"</strong>
+          </c-card-header>
+          <c-card-body _ngcontent-qgx-c191="" class="card-body">
+            <div class="body flex-grow-1 px-3">
+
+
+              <br><br><br>
+              <form #browserDefaultsForm="ngForm"
+                    class="row g-3"
+                    cForm
+                    cRow
+                    ngNativeValidate>
+
+                <c-col [md]="6">
+                  <div cFormFloating>
+
+                    <input type="text"
+                           cFormControl
+                           id="nameInput"
+                           placeholder="Enter Club Name "
+                           [(ngModel)]="c.name"
+                           [ngModelOptions]="{standalone: true}"
+                           required=true
+                    />
+
+                    <label cLabel for="nameInput">Club Name</label>
+                  </div>
+                </c-col>
+                <br>
+                <c-col [md]="3">
+                  <mat-form-field appearance="fill">
+                    <mat-select [(ngModel)]="c.type" [ngModelOptions]="{standalone: true}" required>
+                      <mat-option>None</mat-option>
+                      <mat-option *ngFor="let t of type" [value]="t">
+                        {{t}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-label>Type</mat-label>
+                    <mat-hint>Please pick up your club type here</mat-hint>
+                  </mat-form-field>
+                </c-col>
+                <br>
+                <c-col [md]="6">
+                  <div cFormFloating>
+                    <textarea
+                      cFormControl
+                      id="Description"
+                      placeholder="Enter Description "
+                      [(ngModel)]="c.description"
+                      [ngModelOptions]="{standalone: true}">
+                    </textarea>
+                    <label cLabel for="Description">Club Description</label>
+                  </div>
+                </c-col>
+                <c-col [md]="3">
+                  <mat-form-field appearance="fill">
+                    <mat-select [(ngModel)]="c.status" [ngModelOptions]="{standalone: true}" required>
+                      <mat-option *ngFor="let s of status" [value]="s ==='OPEN'">
+                        {{s}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-label>Status</mat-label>
+                  </mat-form-field>
+                </c-col>
+                <c-col [md]="3">
+                  <mat-form-field appearance="fill">
+                    <mat-select [(ngModel)]="c.field" [ngModelOptions]="{standalone: true}" required>
+                      <mat-option *ngFor="let f of field" [value]="f">
+                        {{f}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-label>Field</mat-label>
+                  </mat-form-field>
+                </c-col>
+                <c-col [md]="12" ></c-col>
+                <br><br>
+                <c-col [sm]>
+                  <button cButton class="me-1" color="primary" type="submit" class="me-1 active btn btn-outline-primary"
+                          aria-pressed="true" variant="outline" (click)="UpdateClub(c)">
+                    Submit
+                  </button>
+                  <button cButton variant="outline" class="me-1 btn btn-outline-secondary"
+                          type="button" (click)="reset()">
+                    Reset
+                  </button>
+                </c-col>
+              </form>
+
+            </div>
+          </c-card-body>
+        </c-card>
+      </c-col>
+
+    </c-row>
+    <c-row _ngcontent-qgx-c191="" _nghost-qgx-c96="" class="row">
+
+    </c-row>
+
+  </c-container>
+</div>
+<ng-template #dialogRef style="background-color: #ac2925" >
+  <h1 mat-dialog-title>{{isSending ? "Sending" : "Finished"}}</h1>
+  <mat-option *ngIf="isSending" class="is-loading"><mat-spinner diameter="50"></mat-spinner></mat-option>
+  <h2 *ngIf="!isSending" mat-dialog-content>{{sent ? "Successfully Updated":"Update Failed"}}</h2>
+  <div *ngIf="!isSending" mat-dialog-actions>
+    <button class="btn btn-primary" mat-button mat-dialog-close>Close</button>
+  </div>
+
+</ng-template>

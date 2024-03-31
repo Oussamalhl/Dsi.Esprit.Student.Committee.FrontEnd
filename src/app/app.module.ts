@@ -102,6 +102,14 @@ import { BrowseReclamationsComponent } from './user/browse-reclamations/browse-r
 import { UserReclamationDetailsComponent } from './user/browse-reclamations/user-reclamation-details/user-reclamation-details.component';
 import { UserReclamationAddComponent } from './user/browse-reclamations/user-reclamation-add/user-reclamation-add.component';
 import { UserReclamationFilesAddComponent } from './user/browse-reclamations/user-reclamation-add/user-reclamation-files-add/user-reclamation-files-add.component';
+import { ClubAddComponent } from './admin/club/club-add/club-add.component';
+import { ClubChartsComponent } from './admin/club/club-charts/club-charts.component';
+import { ClubShowAllComponent } from './admin/club/club-show-all/club-show-all.component';
+import { ClubUpdateComponent } from './admin/club/club-update/club-update.component';
+import { ClubAddFileComponent } from './admin/club/club-add/club-add-file/club-add-file.component';
+import { ClubDetailsComponent } from './admin/club/club-show-all/club-details/club-details.component';
+import { ClubParticipantsComponent } from './admin/club/club-show-all/club-participants/club-participants.component';
+import { ClubShowFilesComponent } from './admin/club/club-show-all/club-show-files/club-show-files.component';
 
 
 
@@ -115,7 +123,7 @@ const APP_CONTAINERS = [
   DefaultLayoutComponent,
 ];
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, DefaultLayoutUComponent, DefaultFooterUComponent, DefaultHeaderUComponent, CommingSoonComponent, UserIndexComponent, SigninComponent,SignupComponent, UserShowAllComponent, UserDetailsComponent, UserAddComponent, UserUpdateComponent, ReclamationShowAllComponent, ReclamationAddComponent, ReclamationUpdateComponent, ReclamationShowFilesComponent, ReclamationAddFileComponent, ReclamationChartsComponent, EventShowAllComponent, EventAddComponent, EventUpdateComponent, EventShowFilesComponent, EventChartsComponent, EventAddFileComponent, EventParticipantsComponent, EventAddParticipantsComponent, EventDetailsComponent, BrowseEventsComponent, UserEventDetailsComponent, ClubEventsComponent, BrowseReclamationsComponent, UserReclamationDetailsComponent, UserReclamationAddComponent, UserReclamationFilesAddComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, DefaultLayoutUComponent, DefaultFooterUComponent, DefaultHeaderUComponent, CommingSoonComponent, UserIndexComponent, SigninComponent,SignupComponent, UserShowAllComponent, UserDetailsComponent, UserAddComponent, UserUpdateComponent, ReclamationShowAllComponent, ReclamationAddComponent, ReclamationUpdateComponent, ReclamationShowFilesComponent, ReclamationAddFileComponent, ReclamationChartsComponent, EventShowAllComponent, EventAddComponent, EventUpdateComponent, EventShowFilesComponent, EventChartsComponent, EventAddFileComponent, EventParticipantsComponent, EventAddParticipantsComponent, EventDetailsComponent, BrowseEventsComponent, UserEventDetailsComponent, ClubEventsComponent, BrowseReclamationsComponent, UserReclamationDetailsComponent, UserReclamationAddComponent, UserReclamationFilesAddComponent, ClubAddComponent, ClubChartsComponent, ClubShowAllComponent, ClubUpdateComponent, ClubAddFileComponent, ClubDetailsComponent, ClubParticipantsComponent, ClubShowFilesComponent],
     imports: [
       NgbCarouselModule,
         BrowserModule,

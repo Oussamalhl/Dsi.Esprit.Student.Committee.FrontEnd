@@ -1,0 +1,186 @@
+<c-breadcrumb [style]="'--cui-breadcrumb-divider:\'>\''">
+  <c-breadcrumb-item url="/admin">Home</c-breadcrumb-item>
+  <c-breadcrumb-item [active]="false">Clubs</c-breadcrumb-item>
+  <c-breadcrumb-item url="/admin/clubs" [active]="true">Show Clubs</c-breadcrumb-item>
+
+</c-breadcrumb>
+<style>
+  table {
+    width: 100%;
+    table-layout: auto;
+    text-align: center;
+  }
+
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  td {
+    font-palette: dark;
+    font-size: 15px;
+  }
+
+  th {
+    width: max-content;
+    font-size: 23px;
+    color: black;
+  }
+
+  .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+
+</style>
+<div class="body flex-grow-1 px-3">
+  <c-container breakpoint="lg" class="h-auto container-lg" _nghost-qgx-c92="">
+    <c-row _ngcontent-qgx-c191="" _nghost-qgx-c96="" class="row">
+      <c-col _ngcontent-qgx-c204="" xs="12" _nghost-qgx-c94="" class="col-12">
+        <c-card _ngcontent-qgx-c204="" class="mb-4 card">
+          <c-card-header _ngcontent-qgx-c204="" class="card-header">
+
+            <strong _ngcontent-qgx-c204 class="h3">Clubs List</strong>
+
+          </c-card-header>
+          <c-card-body _ngcontent-qgx-c204="" class="card-body">
+            <c-container>
+              <mat-form-field appearance="standard">
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Insert Keyword" #input>
+              </mat-form-field>
+              <br>
+              <div style="display: block;
+              overflow-x: scroll;
+              white-space: nowrap;">
+                <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name"> Name
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by description">
+                      Status
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      <mat-accordion>
+                        <mat-expansion-panel hideToggle>
+                          <mat-expansion-panel-header>
+                            more..
+                          </mat-expansion-panel-header>
+                          {{element.description}}
+                        </mat-expansion-panel>
+                        <mat-expansion-panel (opened)="panelOpenState = true"
+                                             (closed)="panelOpenState = false">
+                        </mat-expansion-panel>
+                      </mat-accordion>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="type" sticky>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by target"> Type
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="field" sticky>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by target"> Field
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.field}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by status"> Status
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="files">
+                    <th mat-header-cell *matHeaderCellDef> Files
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      <div class="d-flex justify-content-center">
+                        <button
+                          _ngcontent-qgx-c208
+                          cButton
+                          [routerLink]="[element.id,'Files']"
+                          class="me-1 btn btn-ghost-secondary ng-star-inserted"
+                          variant="ghost"
+                          size="lg">
+                          <svg cIcon name="cil-file" size="xl" title="cilMagnifyingGlass"></svg>
+                        </button>
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Update">
+                    <th mat-header-cell *matHeaderCellDef> Update
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      <div class="d-flex justify-content-center">
+                        <button
+                          _ngcontent-qgx-c208
+                          [routerLink]="['updateClub/'+element.id]"
+                          cButton
+                          class="me-1 btn btn-ghost-warning ng-star-inserted"
+                          variant="ghost"
+                          size="lg">
+                          <svg cIcon name="cil-pencil" size="xl" title="Numbered List Icon"></svg>
+                        </button>
+                      </div>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="Remove">
+                    <th mat-header-cell *matHeaderCellDef> Remove
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      <div class="d-flex justify-content-center">
+                        <button [cPopover]="popoverHtml"
+                                _ngcontent-qgx-c208
+                                cPopoverPlacement="bottom"
+                                [cPopoverTrigger]="'click'"
+                                cButton
+                                class="me-1 btn btn-ghost-danger ng-star-inserted"
+                                variant="ghost"
+                                size="lg">
+
+                          <svg cIcon name="cil-trash" size="xl" title="Numbered List Icon"></svg>
+                          <ng-template #popoverHtml>
+                            <h3 class="popover-header">
+                              Delete Club
+                            </h3>
+
+                            <div class="popover-body">
+                              Are you sure you want to <i cTextColor="danger">DELETE</i> this Club?
+                            </div>
+                            <div class="d-flex justify-content-center">
+                              <button cButton
+                                      _ngcontent-qgx-c208
+                                      class="me-1 btn btn-outline-danger ng-star-inserted"
+                                      variant="outline"
+                                      (click)="Delete(element.id)"> Delete
+                              </button>
+                              <button cButton
+                                      ngcontent-qgx-c208
+                                      class="me-1 btn btn-outline-info ng-star-inserted"
+                                      variant="outline"> Cancel
+                              </button>
+                            </div>
+                            <br>
+                          </ng-template>
+                        </button>
+                      </div>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                  </tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+              </div>
+            </c-container>
+          </c-card-body>
+        </c-card>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>

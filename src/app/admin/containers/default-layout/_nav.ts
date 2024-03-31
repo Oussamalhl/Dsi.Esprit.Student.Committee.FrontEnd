@@ -89,6 +89,26 @@ export const navItems: INavData[] = [
       }
     ]
   },
+  {
+    name: 'Clubs',
+    url: '/admin/clubs',
+    iconComponent: { name: 'cil-bullhorn' },
+    children: [
+      {
+        name: 'add Clubs',
+        url: '/admin/clubs/addClub'
+      },
+      {
+        name: 'show Clubs',
+        url: '/admin/clubs'
+      },
+      {
+        name: 'Club Charts',
+        url: '/admin/clubs/charts',
+        iconComponent: { name: 'cil-chart' }
+      }
+    ]
+  },
 
   {
     name: 'ADS',
