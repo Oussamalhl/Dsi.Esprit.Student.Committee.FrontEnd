@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ReclamationService} from "../../../_services/reclamation.service";
 import {EventService} from "../../../_services/event.service";
 
 @Component({

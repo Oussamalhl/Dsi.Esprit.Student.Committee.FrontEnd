@@ -35,11 +35,18 @@ export class ClubService {
   GetClub(id: number): Observable<Club> {
     return this._http.get<Club>(API_URL + 'showClub?idClub=' + id);
   }
+  GetClubId(name: string): Observable<number> {
+    return this._http.get<number>(API_URL + 'showCId?name=' + name);
+  }
   getClubUsers(idClub: number): Observable<any> {
     return this._http.get<any>(API_URL + 'showClubU?idClub=' + idClub);
   }
   FindAllClubs(): Observable<Club[]> {
     return this._http.get<Club[]>(API_URL + 'showallClubs');
+  }
+
+  FindAllClubNames(): Observable<string[]> {
+    return this._http.get<string[]>(API_URL + 'showAllCNames');
   }
 
   GetClubFiles(id: number): Observable<clubFile[]> {
@@ -86,16 +93,20 @@ export class ClubService {
     return this._http.get<number>(API_URL + 'countAllPart')
   }
 
-  countClubParticipations():Observable<number> {
-    return this._http.get<number>(API_URL + 'countClPart')
+  countClubParticipations(idClub:number):Observable<number> {
+    return this._http.get<number>(API_URL + 'countClPart?idClub='+idClub)
   }
 
-  countAllClubsByType():Observable<number> {
-    return this._http.get<number>(API_URL + 'countClType')
+  countClubEvents(idClub:number):Observable<number> {
+    return this._http.get<number>(API_URL + 'countClEv?idClub='+idClub)
   }
 
-  countAllClubsByStatus():Observable<number> {
-    return this._http.get<number>(API_URL + 'countClStatus')
+  countAllClubsByType():Observable<any> {
+    return this._http.get<any>(API_URL + 'countClType')
+  }
+
+  countAllClubsByStatus():Observable<any> {
+    return this._http.get<any>(API_URL + 'countClStatus')
   }
 
 }

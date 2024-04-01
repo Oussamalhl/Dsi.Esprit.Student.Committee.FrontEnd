@@ -1,1 +1,78 @@
-<p>club-charts works!</p>
+<c-container>
+  <c-row>
+    <c-col xs="11"><b>Totals (of all time)</b></c-col>
+    <c-col xs="2">
+      Clubs
+      <br />
+      {{allCount}}
+    </c-col>
+    <c-col xs="2">
+      Participations
+      <br />
+      {{allParticipations}}
+    </c-col>
+  </c-row>
+</c-container>
+
+
+<c-row>
+  <c-col >
+    <mat-form-field appearance="fill">
+      <mat-select [(ngModel)]="selectedClub" [ngModelOptions]="{standalone: true}" (ngModelChange)="bestClubEvent(selectedClub)" required>
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let c of clubs" [value]="c" >
+          {{c}}
+        </mat-option>
+      </mat-select>
+      <mat-label>Year</mat-label>
+      <mat-hint>Please pick up a club</mat-hint>
+    </mat-form-field>
+  </c-col>
+  <c-col xs="2">
+    <b>Total Events</b> of {{selectedClub}}
+    <br/>
+    <b>{{clubEventsCount}}</b>
+  </c-col>
+  <c-col xs="12" lg="6">
+    <c-card class="mb-4">
+      <c-card-header>
+        Best Club Events {{selectedClub}}
+      </c-card-header>
+      <c-card-body>
+        <c-chart type="polarArea" [data]="dataTops"></c-chart>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
+<c-row>
+  <c-col xs="12" lg="6">
+    <c-card class="mb-4">
+      <c-card-header>
+        Club Status Count
+      </c-card-header>
+      <c-card-body>
+        <c-chart type="pie" [data]="dataStatus"></c-chart>
+      </c-card-body>
+    </c-card>
+  </c-col>
+  <c-col xs="12" lg="6">
+    <c-card class="mb-4">
+      <c-card-header>
+        Club Type Count
+      </c-card-header>
+      <c-card-body>
+        <c-chart type="pie" [data]="dataTypes"></c-chart>
+      </c-card-body>
+    </c-card>
+  </c-col>
+  <c-col xs="12" lg="6">
+    <c-card class="mb-4">
+      <c-card-header>
+        Top Clubs Participations
+      </c-card-header>
+      <c-card-body>
+        <c-chart type="pie" [data]="dataBests"></c-chart>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
