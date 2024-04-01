@@ -21,7 +21,7 @@ export class ClubChartsComponent implements OnInit {
   dataTops: any
   datasets: any
   clubs!: string[]
-  selectedClub!: number
+  selectedClub!: string
   allCount = 0
   allParticipations = 0
   ClubParticipations!: any[][]
@@ -140,7 +140,9 @@ export class ClubChartsComponent implements OnInit {
 
   bestClubEvent(ClubName: string) {
 
+    console.log(ClubName)
     this.CS.GetClubId(ClubName).subscribe(cid => {
+      console.log(cid)
       this.CS.bestClubEvents(cid).subscribe(res => {
         this.topClubEvents = res
         this.datasets = {

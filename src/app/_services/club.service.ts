@@ -77,8 +77,8 @@ export class ClubService {
 
 
 
-  bestClubEvents(icClub:number): Observable<any> {
-    return this._http.get<any>(API_URL + 'bestclubEv?'+icClub)
+  bestClubEvents(idClub:number): Observable<any> {
+    return this._http.get<any>(API_URL + 'bestclubEv?idClub='+idClub)
   }
 
   topClubParticipations(): Observable<any> {
