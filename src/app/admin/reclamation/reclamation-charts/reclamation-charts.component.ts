@@ -27,9 +27,6 @@ export class ReclamationChartsComponent implements OnInit {
   selectedYear!: number
   yearlyCount = 0
   yearlyProcessed = 0
-  clubsCount = 0
-  eventsCount = 0
-  otherCount = 0
 
   allReclamations = 0
 
@@ -56,9 +53,6 @@ export class ReclamationChartsComponent implements OnInit {
 
     this.yearlyCount = 0
     this.yearlyProcessed = 0
-    this.clubsCount = 0
-    this.eventsCount = 0
-    this.otherCount = 0
     this.January = 0
     this.February = 0
     this.March = 0
@@ -150,27 +144,34 @@ export class ReclamationChartsComponent implements OnInit {
     })
 
     this.RS.countReclamationTypeByYear(year).subscribe(res => {
-      //console.log(res)
-      this.reclamationsTypeCount = res;
-      this.reclamationsTypeCount.forEach(e => {
-        //console.log('type: ' + e[0] + ' count: ' + e[1]);
-        e[0] === 'EVENT' ? this.eventsCount = e[1] :
-          e[0] == 'CLUB' ? this.clubsCount = e[1] :
-            e[0] == 'OTHER' ? this.otherCount = e[1] :
-              console.log('null: ' + e)
-      })
-
+      this.reclamationsTypeCount = res
+      this.datasets = {
+        backgroundColor: [],
+        data: []
+      }
       this.dataTypes = {
-        labels: ['Clubs', 'Events', 'Other'],
+        labels: [],
         datasets: [
           {
             label: 'Type',
-            backgroundColor: ['#DD1B16', '#be4807', 'rgba(208,185,185,0.19)'],
-            data: [this.clubsCount, this.eventsCount, this.otherCount]
+            backgroundColor: [],
+            data: []
           }
         ]
       }
-    })
+
+      this.reclamationsTypeCount.forEach(e => {
+        this.datasets.data.push(e[1]);
+        this.datasets.backgroundColor.push('#' + Math.floor(Math.random() * 16777215).toString(16))
+        this.dataTypes.labels.push(e[0])
+        // this.dataTargets.labels.datasets.data.push(e[1])
+        // this.dataTargets.labels.datasets.backgroundColor.push('#DD1B16')
+      })
+      this.dataTypes.datasets.fill(this.datasets)
+      // this.dataTargets.datasets.push(this.datasets.data)
+
+      console.log(this.dataTypes)
+    });
 
     this.RS.countReclamationTargetByYear(year).subscribe(res => {
       //console.log(res)

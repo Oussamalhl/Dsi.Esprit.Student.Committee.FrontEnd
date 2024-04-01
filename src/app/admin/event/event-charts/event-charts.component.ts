@@ -29,12 +29,6 @@ export class EventChartsComponent implements OnInit {
   allParticipations = 0
 
   yearlyCount = 0
-  virtualCount = 0
-  inpersonCount = 0
-  startedCount = 0
-  ongoingCount = 0
-  cancelledCount = 0
-  endedCount = 0
 
   January = 0
   February = 0
@@ -104,12 +98,6 @@ export class EventChartsComponent implements OnInit {
   filterCountByYear(year: number) {
 
     this.yearlyCount = 0
-    this.virtualCount = 0
-    this.inpersonCount = 0
-    this.startedCount = 0
-    this.ongoingCount = 0
-    this.cancelledCount = 0
-    this.endedCount = 0
 
     this.January = 0
     this.February = 0
