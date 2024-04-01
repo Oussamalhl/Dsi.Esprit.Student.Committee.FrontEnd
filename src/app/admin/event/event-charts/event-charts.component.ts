@@ -186,47 +186,63 @@ export class EventChartsComponent implements OnInit {
     });
 
     this.ES.countEventStatusByYear(year).subscribe(res => {
-      //console.log(res)
-      this.eventStatusCount = res;
-      this.eventStatusCount.forEach(e => {
-        //console.log('year: ' + e[0] + ' status: ' + e[1] + ' count: ' + e[2]);
-        e[0] === 'STARTED' ? this.startedCount = e[1] :
-          e[0] == 'CANCELLED' ? this.cancelledCount = e[1] :
-            e[0] == 'ONGOING' ? this.ongoingCount = e[1] :
-              e[0] == 'ENDED' ? this.endedCount = e[1] :
-                console.log("")
-      })
+      this.eventStatusCount = res
+      this.datasets = {
+        backgroundColor: [],
+        data: []
+      }
       this.dataStatus = {
-        labels: ['STARTED', 'CANCELLED', 'ONGOING', 'ENDED'],
+        labels: [],
         datasets: [
           {
             label: 'Status',
-            backgroundColor: ['#0fbbe1', '#d51807', '#0741d5', '#1bd507'],
-            data: [this.startedCount, this.cancelledCount, this.ongoingCount, this.endedCount]
+            backgroundColor: [],
+            data: []
           }
         ]
       }
-    })
-    this.ES.countEventTypeByYear(year).subscribe(res => {
-      console.log(res)
-      this.eventTypeCount = res;
-      this.eventTypeCount.forEach(e => {
-          console.log('type: ' + e[1] + ' count: ' + e[2]);
-          e[0] === 'VIRTUAL' ? this.virtualCount = e[1] :
-            e[0] === 'INPERSON' ? this.inpersonCount = e[1] :
-              console.log("")
+
+      this.eventStatusCount.forEach(e => {
+        this.datasets.data.push(e[1]);
+        this.datasets.backgroundColor.push('#' + Math.floor(Math.random() * 16777215).toString(16))
+        this.dataStatus.labels.push(e[0])
+        // this.dataTargets.labels.datasets.data.push(e[1])
+        // this.dataTargets.labels.datasets.backgroundColor.push('#DD1B16')
       })
+      this.dataStatus.datasets.fill(this.datasets)
+      // this.dataTargets.datasets.push(this.datasets.data)
+
+      console.log(this.dataStatus)
+    });
+    this.ES.countEventTypeByYear(year).subscribe(res => {
+      this.eventTypeCount = res
+      this.datasets = {
+        backgroundColor: [],
+        data: []
+      }
       this.dataTypes = {
-        labels: ['Virtual', 'Inperson'],
+        labels: [],
         datasets: [
           {
             label: 'Type',
-            backgroundColor: ['#DD1B16', '#f57a3b'],
-            data: [this.virtualCount, this.inpersonCount]
+            backgroundColor: [],
+            data: []
           }
         ]
       }
-    })
+
+      this.eventTypeCount.forEach(e => {
+        this.datasets.data.push(e[1]);
+        this.datasets.backgroundColor.push('#' + Math.floor(Math.random() * 16777215).toString(16))
+        this.dataTypes.labels.push(e[0])
+        // this.dataTargets.labels.datasets.data.push(e[1])
+        // this.dataTargets.labels.datasets.backgroundColor.push('#DD1B16')
+      })
+      this.dataTypes.datasets.fill(this.datasets)
+      // this.dataTargets.datasets.push(this.datasets.data)
+
+      console.log(this.dataTypes)
+    });
 
 
     //console.log('yearly count: ' + this.yearlyCount)
