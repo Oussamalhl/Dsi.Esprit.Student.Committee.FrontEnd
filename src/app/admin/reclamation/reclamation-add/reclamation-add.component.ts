@@ -33,36 +33,45 @@ export class ReclamationAddComponent implements OnInit {
   userCtrl = new FormControl();
   filteredUsers!: Observable<string[]>;
   selectedUsers: string[] = [];
+
   constructor(private RS: ReclamationService, private _Activatedroute: ActivatedRoute, private _router: Router, private dialog: MatDialog) {
     this.filteredUsers = this.userCtrl.valueChanges.pipe(
       startWith(null),
       map((user: string | null) => (user ? this._filterUsers(user) : this.users.slice())),
     );
   }
+
   @ViewChild('dialogRef', {static: true}) dialogRef!: TemplateRef<any>;
   @ViewChild('userInput') userInput!: ElementRef<HTMLInputElement>;
 
   openDialog() {
     let dialog = this.dialog.open(this.dialogRef);
   }
+
   addReclamation(r: Reclamation) {
     this.isSending = true;
     let dialog = this.dialog.open(this.dialogRef);
 
     if (this.ngForm.valid) {
-      this.selectedUsers.forEach(u=>this.RS.AddReclamationAdmin(r,u).subscribe(res => {
+      this.selectedUsers.forEach(u => {
+        if(r.type=='OTHER')
+          r.target='OTHER'
+          this.RS.AddReclamationAdmin(r, u).subscribe(res => {
 
-          console.log(res);
-          this.isSending = false;
-          this.sent = true;
-          dialog.addPanelClass('success-dialog');
-        },
-        (err) => {
-          console.log(err);
-          this.isSending = false;
-          this.sent = false;
-          dialog.addPanelClass('fail-dialog')
-        }))
+              console.log(res);
+              this.isSending = false;
+              this.sent = true;
+              dialog.addPanelClass('success-dialog');
+            },
+            (err) => {
+              console.log(err);
+              this.isSending = false;
+              this.sent = false;
+              dialog.addPanelClass('fail-dialog')
+            }
+          )
+        }
+      )
       // this.RS.AddReclamationAdmin(r,username).subscribe(res => {
       //
       //     console.log(res);

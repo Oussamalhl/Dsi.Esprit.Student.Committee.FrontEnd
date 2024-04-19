@@ -19,7 +19,7 @@ export class BrowseReclamationsComponent implements OnInit {
   username="" ;
   u!:User;
   reclamationList:Reclamation[]=[];
-  displayedColumns: string[] = ['reclamation','name', 'description', 'date','type','target','status','files','update','remove'];
+  displayedColumns: string[] = ['reclamation','name', 'description', 'date','type','target','files','update','remove'];
   dataSource = new MatTableDataSource<Reclamation>(this.reclamationList);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

@@ -65,17 +65,17 @@
                 <div>
 
                 </div>
-                <div [ngSwitch]="r.type">
-                  <div *ngSwitchCase="'CLUB'">CLUB reclamation</div>
-                  <div *ngSwitchCase="'EVENT'">EVENT reclamation</div>
-                  <div *ngSwitchCase="'EVENT'">Other reclamation</div>
-                </div>
+<!--                <div [ngSwitch]="r.type">-->
+<!--                  <div *ngSwitchCase="'CLUB'">CLUB reclamation</div>-->
+<!--                  <div *ngSwitchCase="'EVENT'">EVENT reclamation</div>-->
+<!--                  <div *ngSwitchCase="'EVENT'">Other reclamation</div>-->
+<!--                </div>-->
 
 
                 <br>
-                <c-col [md]="3">
+                <c-col [md]="3" *ngIf="r.type!='OTHER'">
                   <mat-form-field appearance="fill">
-                    <mat-select [(ngModel)]="r.target" name="targets" required>
+                    <mat-select  [(ngModel)]="r.target" name="targets" required>
                       <mat-option *ngFor="let t of targets" [value]="t">
                         {{t}}
                       </mat-option>
