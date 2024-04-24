@@ -22,7 +22,7 @@ export class BrowseEventsComponent implements OnInit {
   paths: any[] = [];
   secured: any;
   tmp: any;
-  constructor(private ES:EventService, private sanitizer: DomSanitizer) { }
+  constructor(private ES:EventService) { }
 
 
   ngOnInit(): void {

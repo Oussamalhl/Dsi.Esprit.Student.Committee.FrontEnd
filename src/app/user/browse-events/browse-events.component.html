@@ -14,7 +14,7 @@
 
   />
   <br><br>
-  <div *ngFor="let e of EventsList;index as i">
+  <div *ngFor="let e of EventsList | filter :keyword;index as i">
     <div>
       <div class="col-md-4">
         <div class="kode-event-list-2">

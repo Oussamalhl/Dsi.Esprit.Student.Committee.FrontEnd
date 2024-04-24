@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 import {eventFile} from "../models/eventFile";
 import {event} from "../models/event";
 
-const API_URL = 'http://localhost:9092/eventservice-ms/api/event/';
+const API_URL = 'http://localhost:8084/api/event/';
 
 @Injectable({
   providedIn: 'root'
