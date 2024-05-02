@@ -29,7 +29,6 @@ export class EventShowAllComponent implements OnInit {
   dataSource = new MatTableDataSource<event>(this.eventsList);
   expandedElement!: event | null;
   panelOpenState = false;
-  u: User = new User();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 

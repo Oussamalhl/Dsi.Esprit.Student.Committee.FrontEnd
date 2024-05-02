@@ -16,7 +16,7 @@
   />
   <br><br>
   <div class="row">
-    <div  *ngFor="let e of ClubEventsList;index as i;">
+    <div *ngFor="let e of ClubEventsList | filter :keyword;index as i">
       <div class="col-sm-4 column p-5">
         <div *ngIf="participatables[i]" class="kode-event-list-2">
           <div class="kode-thumb"><a (click)="Participate(e.id)">

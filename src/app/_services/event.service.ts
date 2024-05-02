@@ -125,7 +125,12 @@ export class EventService {
     return this._http.get<boolean>(API_URL + 'getUserCheck?idEvent='+idEvent);
   }
 
-
+  upcomingEvents(): Observable<event[]> {
+    return this._http.get<event[]>(API_URL + 'upcomingEv');
+  }
+  nextUpcomingEvents(): Observable<event[]> {
+    return this._http.get<event[]>(API_URL + 'nextUpcomingEv');
+  }
   countAllEventByMonth(year:number): Observable<any> {
 
     return this._http.get<any>(API_URL + 'countAllEvByMonth?year='+year)
@@ -147,6 +152,11 @@ export class EventService {
   bestEventsOfTheYear(year: number): Observable<any> {
 
     return this._http.get<any>(API_URL + 'bestEvOfYear?year=' + year)
+
+  }
+  averageEventRating(idEvent: number): Observable<number> {
+
+    return this._http.get<number>(API_URL + 'avgEvRate?idEvent=' + idEvent)
 
   }
   countAllEvents():Observable<number> {

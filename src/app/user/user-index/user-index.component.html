@@ -53,40 +53,40 @@
       <div class="row">
         <div class="col-md-3">
           <div class="kf-services">
-            <i class="fa fa-heart-o"></i>
+            <i class="fa fa-sign-in"></i>
             <div class="kf-text">
-              <h2>LOVE<br>CLUBS</h2>
+              <h2>JOIN<br>CLUBS</h2>
               <p>Live Better Study Better</p>
+              <a href="#" class="read-more">Join</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="kf-services">
+            <i class="fa fa-thumb-tack"></i>
+            <div class="kf-text">
+              <h2>ADD<br>COMPLAINT</h2>
+              <p>We are here to listen and treat.</p>
+              <a href="#" class="read-more">Complain</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="kf-services">
+            <i class="fa fa-trophy"></i>
+            <div class="kf-text">
+              <h2>BEST<br>EVENTS</h2>
+              <p>Discover best club events of the year.</p>
               <a href="#" class="read-more">Read More</a>
             </div>
           </div>
         </div>
         <div class="col-md-3">
           <div class="kf-services">
-            <i class="fa fa-stethoscope"></i>
+            <i class="fa fa-group"></i>
             <div class="kf-text">
-              <h2>BreastCare<br>solutions</h2>
-              <p>Getting the best care sometimes means cancer patients must travel away from home.</p>
-              <a href="#" class="read-more">Read More</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="kf-services">
-            <i class="fa fa-tint"></i>
-            <div class="kf-text">
-              <h2>DONATE FOR<br>BREASTCANCER</h2>
-              <p>Join the fight against cancer by donating to the American Cancer Society.</p>
-              <a href="#" class="read-more">Read More</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="kf-services">
-            <i class="fa fa-female"></i>
-            <div class="kf-text">
-              <h2>SAve ThE<br>Women</h2>
-              <p>Our Road map is to provides rides to patients who have no way to get to treatment.</p>
+              <h2>Discover<br>Clubs</h2>
+              <p>Integrate yourself in your suitable club.</p>
               <a href="#" class="read-more">Read More</a>
             </div>
           </div>
@@ -137,43 +137,51 @@
     <div class="container">
       <!--HEADER SECTION START-->
       <div class="heading heading-4">
-        <p style="color:#333">AWARENESS OF BREAST CANCER TO ALL WOMENS</p>
-        <h2 style="color:#333">latest News</h2>
+        <h2 style="color:#333">Upcoming Events of this Month</h2>
       </div>
       <!--HEADER SECTION END-->
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4" *ngFor="let event of events;index as i">
           <div class="kode-event-list-2">
             <div class="kode-thumb">
-              <a href="#"><img alt="" src="/assets/user-template/images/news-img1.png"></a>
+              <a *ngIf="event.files != null" href="#"><img
+                [src]="event.files[0].src"
+                class="d-block w-100"
+                loading="lazy"/></a>
             </div>
             <div class="kode-text">
-              <h2>When the Breast Cancer Went Beyond the Breast</h2>
-              <p class="title">Wednesday Januaur 19th, 2015</p>
+              <h2>{{event.name}}</h2>
+              <p class="title">Starts at {{event.eventDateStart}}</p>
+              <p class="title">Ends at {{event.eventDateEnd}}</p>
+              <p class="title">Remaining places: {{event.places}}</p>
               <a class="btn-filled" href="#">Read more</a>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
+      </div>
+    </div>
+  </section>
+  <section class="white-bg">
+    <div class="container">
+      <!--HEADER SECTION START-->
+      <div class="heading heading-4">
+        <h2 style="color:#333">Upcoming Future Events</h2>
+      </div>
+      <!--HEADER SECTION END-->
+      <div class="row">
+        <div class="col-md-4" *ngFor="let event of nextEvents;index as i">
           <div class="kode-event-list-2">
             <div class="kode-thumb">
-              <a href="#"><img alt="" src="/assets/user-template/images/news-img2.png"></a>
+              <a *ngIf="event.files != null" href="#"><img
+                [src]="event.files[0].src"
+                class="d-block w-100"
+                loading="lazy"/></a>
             </div>
             <div class="kode-text">
-              <h2>Dealing With Change After Diagnosis</h2>
-              <p class="title">Wednesday Januaur 19th, 2015</p>
-              <a class="btn-filled" href="#">Read more</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="kode-event-list-2">
-            <div class="kode-thumb">
-              <a href="#"><img alt="" src="/assets/user-template/images/news-img3.png"></a>
-            </div>
-            <div class="kode-text">
-              <h2>Five Reasons Why We Should All Care More</h2>
-              <p class="title">Wednesday Januaur 19th, 2015</p>
+              <h2>{{event.name}}</h2>
+              <p class="title">Starts at {{event.eventDateStart}}</p>
+              <p class="title">Ends at {{event.eventDateEnd}}</p>
+              <p class="title">Remaining places: {{event.places}}</p>
               <a class="btn-filled" href="#">Read more</a>
             </div>
           </div>
@@ -190,14 +198,13 @@
         <div class="col-md-3">
           <div class="count-up">
             <p>Breast Cancers</p>
-            <span>$</span>
+            <span>^</span>
             <span class="counter circle">1,425,054</span>
           </div>
         </div>
         <div class="col-md-3">
           <div class="count-up">
             <p>People Helped</p>
-            <span>$</span>
             <span class="counter circle">3,124,982</span>
           </div>
         </div>

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {EventService} from "../../../../_services/event.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DomSanitizer} from "@angular/platform-browser";
 import {event} from "../../../../models/event";
 import {eventFile} from "../../../../models/eventFile";
+import {NgxStarRatingComponent} from "ngx-star-rating";
 
 @Component({
   selector: 'app-event-details',
@@ -19,7 +20,8 @@ export class EventDetailsComponent implements OnInit {
   retrievedImages: eventFile[] = [];
   src: any[] = []
   dataParticipations!:any;
-
+  @ViewChild(NgxStarRatingComponent)
+  starsComponent!: NgxStarRatingComponent;
   constructor(private ES: EventService, private _router: Router, private _Activatedroute: ActivatedRoute, private sanitizer: DomSanitizer) { }
 
   getConfirmations(){
@@ -42,9 +44,15 @@ export class EventDetailsComponent implements OnInit {
 
   }
 
+  avgEventRating(idEvent:number){
+    this.ES.averageEventRating(idEvent).subscribe(res => {
+      this.starsComponent.value(res);
+    })
+  }
   ngOnInit(): void {
     this.id = Number(this._Activatedroute.snapshot.paramMap.get("id"));
     this.getConfirmations();
+    this.avgEventRating(this.id);
 
     if (this.id != null) {
       this.ES.GetEvent(this.id).subscribe(res => {

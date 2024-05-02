@@ -1,4 +1,3 @@
-
 export class eventFile {
   fileId!: number;
 
@@ -9,6 +8,6 @@ export class eventFile {
   uploadDate!: Date;
 
   picByte!: string[]
-
+  src!: any
   reclamation!: Event;
 }
