@@ -4,6 +4,8 @@ import {EventService} from "../../_services/event.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {event} from "../../models/event";
 import {eventFile} from "../../models/eventFile";
+import {ReclamationService} from "../../_services/reclamation.service";
+import {ClubService} from "../../_services/club.service";
 
 @Component({
   selector: 'app-user-index',
@@ -19,13 +21,29 @@ export class UserIndexComponent implements OnInit {
   files: eventFile[] = [];
   retrievedImages: eventFile[] = [];
   src: any[] = []
+  allDoneReclamations!:number
+  allEvents!:number
+  allClubsParticipations!:number
+  allEventsParticipations!:number
 
-  constructor(private titleService: Title, private ES: EventService, private _router: Router, private _Activatedroute: ActivatedRoute, private sanitizer: DomSanitizer) {
+  constructor(private titleService: Title,private CS: ClubService, private RS: ReclamationService, private ES: EventService, private _router: Router, private _Activatedroute: ActivatedRoute, private sanitizer: DomSanitizer) {
     this.titleService.setTitle("Home");
   }
 
   ngOnInit(): void {
 
+    this.RS.countAllDoneReclamation().subscribe(res=>{
+      this.allDoneReclamations=res;
+    })
+    this.ES.countAllEvents().subscribe(res=>{
+      this.allEvents=res;
+    })
+    this.CS.countAllClubsParticipations().subscribe(res=>{
+      this.allClubsParticipations=res;
+    })
+    this.ES.countAllEventsParticipations().subscribe(res=>{
+      this.allEventsParticipations=res;
+    })
     this.ES.upcomingEvents().subscribe(res => {
       //console.log(res);
       this.events = res;

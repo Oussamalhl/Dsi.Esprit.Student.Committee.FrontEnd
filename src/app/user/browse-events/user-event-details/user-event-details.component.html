@@ -77,8 +77,6 @@
             <!--              -->
             <!--            </p>-->
             <form *ngIf="e.status=='ENDED'" style="background-color:transparent" [formGroup]="form" (ngSubmit)="onSubmit()" cForm cRow class="needs-validation">
-
-
                 <div class="col-md-6">
                   <ngx-star-rating style="border-color: transparent;background-color: transparent" formControlName="rating" [id]="'rating'" class="form-control"></ngx-star-rating>
                 </div>

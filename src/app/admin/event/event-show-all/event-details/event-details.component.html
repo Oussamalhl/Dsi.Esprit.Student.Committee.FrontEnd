@@ -27,15 +27,16 @@
           <c-card-body _ngcontent-qgx-c191="" class="card-body">
             <div class="body flex-grow-1 px-3">
 
-              <div class="card" style="width: 18rem;">
+              <div class="card" style="width: 20rem;">
                 <div class="card-body">
-                  <h3 class="card-title">{{name}}</h3>
+                  <h2 class="card-title"><b>{{name}}</b></h2>
                   <h4 class="card-subtitle mb-2 text-body-secondary">Starts: {{e.eventDateStart}} at {{e.eventTime}} <br>Ends: {{e.eventDateEnd}}</h4>
                   <p class="card-text">{{e.description}}</p>
                 </div>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">Event Location: {{e.eventLocation}}</li>
                   <li class="list-group-item">Places: {{e.places}}</li>
+                  <li class="list-group-item">Remaining Places: {{remainingPlaces}}</li>
                   <li class="list-group-item">Event Motive: {{e.eventMotive}}</li>
                   <li class="list-group-item">Type: {{e.type}}</li>
                   <li class="list-group-item">Status: {{e.status}}</li>
@@ -47,8 +48,15 @@
                   <ul class="list-group "> <b>Tags:</b>
                       <li *ngFor="let t of e.tags;index as i" class="list-group-item">{{t}}</li>
                   </ul>
+                  <ul class="list-group "> <b>Rating:</b>
+                    <li class="list-group-item">
+                      <ngx-star-rating [disabled]="true" [(ngModel)]="rating"></ngx-star-rating>
+                    </li>
+                  </ul>
+
                 </ul>
                 <c-row>
+                  <b>Photos:</b>
                   <c-carousel *ngIf="src.length>=1" [dark]="true" [wrap]="false">
                     <c-carousel-indicators></c-carousel-indicators>
                     <c-carousel-inner>
@@ -82,14 +90,17 @@
                   </c-card-body>
                 </c-card>
               </c-col>
-              <ngx-star-rating style="border-color: transparent;background-color: transparent"></ngx-star-rating>
+<!--              <form *ngIf="e.status=='ENDED'" style="background-color:transparent" [formGroup]="form" cForm cRow>-->
+<!--                <div class="col-md-6">-->
+<!--                  <ngx-star-rating style="border-color: transparent;background-color: transparent" formControlName="rating" [id]="'rating'" class="form-control"></ngx-star-rating>-->
+<!--                </div>-->
+<!--              </form>-->
+
             </div>
           </c-card-body>
         </c-card>
       </c-col>
-
     </c-row>
-
-
   </c-container>
 </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

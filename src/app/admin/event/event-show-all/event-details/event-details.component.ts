@@ -1,10 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {EventService} from "../../../../_services/event.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DomSanitizer} from "@angular/platform-browser";
 import {event} from "../../../../models/event";
 import {eventFile} from "../../../../models/eventFile";
-import {NgxStarRatingComponent} from "ngx-star-rating";
 
 @Component({
   selector: 'app-event-details',
@@ -20,8 +19,13 @@ export class EventDetailsComponent implements OnInit {
   retrievedImages: eventFile[] = [];
   src: any[] = []
   dataParticipations!:any;
-  @ViewChild(NgxStarRatingComponent)
-  starsComponent!: NgxStarRatingComponent;
+  remainingPlaces!:number
+  rating!:number
+  // @ViewChild(NgxStarsComponent)
+  // starsComponent!: NgxStarsComponent;
+  // form = new FormGroup({
+  //   rating: new FormControl()
+  // });
   constructor(private ES: EventService, private _router: Router, private _Activatedroute: ActivatedRoute, private sanitizer: DomSanitizer) { }
 
   getConfirmations(){
@@ -39,6 +43,7 @@ export class EventDetailsComponent implements OnInit {
             }
           ]
         }
+        this.remainingPlaces=this.e.places-resConfirmed
       })
     })
 
@@ -46,13 +51,13 @@ export class EventDetailsComponent implements OnInit {
 
   avgEventRating(idEvent:number){
     this.ES.averageEventRating(idEvent).subscribe(res => {
-      this.starsComponent.value(res);
+      console.log("rating: "+res)
+      this.rating=res
+      // this.starsComponent.setRating(this.rating);
     })
   }
   ngOnInit(): void {
     this.id = Number(this._Activatedroute.snapshot.paramMap.get("id"));
-    this.getConfirmations();
-    this.avgEventRating(this.id);
 
     if (this.id != null) {
       this.ES.GetEvent(this.id).subscribe(res => {
@@ -66,14 +71,14 @@ export class EventDetailsComponent implements OnInit {
         this.files = res;
         //console.log(res);
         res.forEach(f => {
-          if (!f.filePath.includes(".pdf")) {
+          if (f.fileName.includes(".png") || f.fileName.includes(".jpg")) {
             this.retrievedImages.push(f);
             this.src.push(this.sanitizer.bypassSecurityTrustResourceUrl("data:image/png;base64," + f.picByte))
-
           }
         })
       })
-
+      this.getConfirmations();
+      this.avgEventRating(this.id);
     }
   }
 
