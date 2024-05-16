@@ -115,17 +115,17 @@ export class ReclamationChartsComponent implements OnInit {
         datasets: [
           {
             label: 'Selected Year',
-            backgroundColor: 'rgba(39, 41, 245, 0.97)',
-            borderColor: 'rgba(39, 41, 245, 0.97)',
-            pointBackgroundColor: 'rgba(39, 41, 245, 0.97)',
+            backgroundColor: 'rgba(245, 39, 80, 0.97)',
+            borderColor: 'rgba(245, 39, 80, 0.97)',
+            pointBackgroundColor: 'rgba(245, 39, 80, 0.97)',
             pointBorderColor: '#fff',
             data: []
           },
           {
             label: 'Compared Year',
-            backgroundColor: 'rgba(245, 39, 80, 0.97)',
-            borderColor: 'rgba(245, 39, 80, 0.97)',
-            pointBackgroundColor: 'rgba(245, 39, 80, 0.97)',
+            backgroundColor: 'rgba(39, 41, 245, 0.97)',
+            borderColor: 'rgba(39, 41, 245, 0.97)',
+            pointBackgroundColor: 'rgba(39, 41, 245, 0.97)',
             pointBorderColor: '#fff',
             data: []
           }

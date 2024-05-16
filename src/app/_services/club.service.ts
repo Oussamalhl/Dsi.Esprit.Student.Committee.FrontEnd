@@ -52,7 +52,12 @@ export class ClubService {
   GetClubFiles(id: number): Observable<clubFile[]> {
     return this._http.get<clubFile[]>(API_URL + 'getFiles/' + id);
   }
-
+  GetClubFilesByName(name: string): Observable<clubFile[]> {
+    return this._http.get<clubFile[]>(API_URL + 'getFilesByName/' + name);
+  }
+  GetClubByName(name: string): Observable<Club> {
+    return this._http.get<Club>(API_URL + 'getClubByName?name=' + name);
+  }
   AddClubFiles(id: number, file: FormData) {
     return this._http.post<clubFile>(API_URL + 'addFile/' + id, file, {observe: 'response'});
   }
@@ -79,6 +84,9 @@ export class ClubService {
 
   bestClubEvents(idClub:number): Observable<any> {
     return this._http.get<any>(API_URL + 'bestclubEv?idClub='+idClub)
+  }
+  bestClubs(): Observable<any> {
+    return this._http.get<any>(API_URL + 'bestclubs')
   }
 
   topClubParticipations(): Observable<any> {

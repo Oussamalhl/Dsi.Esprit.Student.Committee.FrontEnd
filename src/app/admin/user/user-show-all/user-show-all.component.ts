@@ -51,13 +51,7 @@ export class UserShowAllComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    this._service.getAllUsers().subscribe(res=>{
-      console.log(res);
-      this.ListUsers=res;
-      this.dataSource=new MatTableDataSource<User>(this.ListUsers);
-      this.dataSource.sort=this.sort;
-      this.dataSource.paginator=this.paginator;
-    });
+    this.reload()
   }
 
 

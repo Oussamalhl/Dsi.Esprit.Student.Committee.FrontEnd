@@ -391,51 +391,42 @@
       </div>
       <!--HEADER SECTION END-->
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4" *ngFor="let club of clubsList;index as i">
           <div class="kode-blog-list">
             <div class="kode-thumb">
-              <a href="#"><img src="/assets/user-template/images/blog1.png" alt=""></a>
+              <a *ngIf="club.files != null" href="#"><img
+                [src]="club.files[0].src"
+                class="d-block w-100"
+                loading="lazy"/></a>
             </div>
             <div class="kode-text">
               <div class="kode-avatar">
-                <a href="#"><img src="/assets/user-template/images/avatar.png" alt=""></a>
+                <a *ngIf="club.files != null" href="#"><img
+                  [src]="club.files[0].src"
+                  class="d-block w-100"
+                  loading="lazy"/></a>
               </div>
-              <h2>12th March 2015</h2>
-              <p>Posted By: Paige in Blog </p>
-              <h4>Recent developments in breast cancer</h4>
+              <h2>{{club.name}}</h2>
+              <p>President:  </p>
+              <h4>Most recent event: </h4>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="kode-blog-list">
-            <div class="kode-thumb">
-              <a href="#"><img src="/assets/user-template/images/blog2.png" alt=""></a>
-            </div>
-            <div class="kode-text">
-              <div class="kode-avatar">
-                <a href="#"><img src="/assets/user-template/images/avatar.png" alt=""></a>
-              </div>
-              <h2>12th March 2015</h2>
-              <p>Posted By: Paige in Blog </p>
-              <h4>Living Beyond Breast Cancer</h4>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="kode-blog-list">
-            <div class="kode-thumb">
-              <a href="#"><img src="/assets/user-template/images/blog3.png" alt=""></a>
-            </div>
-            <div class="kode-text">
-              <div class="kode-avatar">
-                <a href="#"><img src="/assets/user-template/images/avatar.png" alt=""></a>
-              </div>
-              <h2>12th March 2015</h2>
-              <p>Posted By: Paige in Blog </p>
-              <h4>How I’m Getting Even With Stage 4</h4>
-            </div>
-          </div>
-        </div>
+<!--        <div class="col-md-4">-->
+<!--          <div class="kode-blog-list">-->
+<!--            <div class="kode-thumb">-->
+<!--              <a href="#"><img src="/assets/user-template/images/blog1.png" alt=""></a>-->
+<!--            </div>-->
+<!--            <div class="kode-text">-->
+<!--              <div class="kode-avatar">-->
+<!--                <a href="#"><img src="/assets/user-template/images/avatar.png" alt=""></a>-->
+<!--              </div>-->
+<!--              <h2>12th March 2015</h2>-->
+<!--              <p>Posted By: Paige in Blog </p>-->
+<!--              <h4>Recent developments in breast cancer</h4>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
     </div>
   </section>

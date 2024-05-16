@@ -28,15 +28,17 @@ export class RegisterComponent {
         console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
-        this.router.navigate(['/']).then(() => {
-          window.location.reload();
-        });
+
       },
       error: err => {
         this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
+        this.router.navigate(['/']).then(() => {
+          window.location.reload();
+        });
       }
     });
+    setTimeout(() => this.router.navigateByUrl("signin"),1000);
   }
 
 }

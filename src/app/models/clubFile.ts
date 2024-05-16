@@ -9,5 +9,7 @@ export class clubFile{
 
   picByte!: string[]
 
+  src!:any
+
   reclamation!: Event;
 }

@@ -1,1 +1,141 @@
-<p>club-show-files works!</p>
+<c-breadcrumb [style]="'--cui-breadcrumb-divider:\'>\''">
+  <c-breadcrumb-item [routerLink]="'/admin'" [active]="false">Home</c-breadcrumb-item>
+  <c-breadcrumb-item [active]="false">Clubs</c-breadcrumb-item>
+  <c-breadcrumb-item [routerLink]="'/admin/clubs'" [active]="false">Show Clubs</c-breadcrumb-item>
+  <c-breadcrumb-item [routerLink]="'/admin/clubs/'+id+'/Files'" [active]="true">Show Files</c-breadcrumb-item>
+</c-breadcrumb>
+
+<div class="body flex-grow-1 px-3">
+  <c-container breakpoint="lg" class="h-auto container-lg" _nghost-qgx-c92="">
+    <c-row _ngcontent-qgx-c191="" _nghost-qgx-c96="" class="row">
+      <c-col _ngcontent-qgx-c204="" xs="12" _nghost-qgx-c94="" class="col-12">
+        <c-card _ngcontent-qgx-c204="" class="mb-4 card">
+          <c-card-header _ngcontent-qgx-c204="" class="card-header">
+
+            <strong _ngcontent-qgx-c204 class="h3">Club "{{name}}" Files</strong>
+
+          </c-card-header>
+          <c-card-body _ngcontent-qgx-c204="" class="card-body">
+
+            <c-container>
+              <c-row class="align-items-end" >
+                <div class="d-grid gap-2 col-6 mx-auto">
+                  <button
+                    _ngcontent-qgx-c208
+                    cButton
+                    [routerLink]="['add']"
+                    class="me-1 btn btn-ghost-primary ng-star-inserted"
+                    variant="ghost"
+                    size="lg">
+                    <svg cIcon name="cilArrowBottom" size="xl" title="cilArrowBottom"></svg>
+                    Add File(s)
+                  </button>
+                  <br>
+                </div>
+              </c-row>
+              <c-row>
+                <div *ngIf="pdf.length>=1">
+                  <div *ngFor="let f of pdf;index as i">
+                    <h2>{{pdfFiles[i].fileName}}</h2>
+                    <object [data]=f target="_blank" rel="noopener noreferrer" type="application/pdf" width="100%"
+                            height="600px"></object>
+                    <div class="d-flex justify-content-center">
+                      <button [cPopover]="popoverHtml"
+                              _ngcontent-qgx-c208
+                              cPopoverPlacement="bottom"
+                              [cPopoverTrigger]="'click'"
+                              cButton
+                              class="me-1 btn btn-ghost-danger ng-star-inserted"
+                              variant="ghost"
+                              size="lg">
+
+                        <svg cIcon name="cil-trash" size="xl" title="Numbered List Icon"></svg>
+                        <ng-template #popoverHtml>
+                          <h3 class="popover-header">
+                            Delete PDF
+                          </h3>
+
+                          <div class="popover-body">
+                            Are you sure you want to <i cTextColor="danger">DELETE</i> this PDF?
+                          </div>
+                          <div class="d-flex justify-content-center">
+                            <button cButton
+                                    _ngcontent-qgx-c208
+                                    class="me-1 btn btn-outline-danger ng-star-inserted"
+                                    variant="outline"
+                                    (click)="Remove(pdfFiles[i].fileId)"
+                            > Delete
+                            </button>
+                            <button cButton
+                                    ngcontent-qgx-c208
+                                    class="me-1 btn btn-outline-info ng-star-inserted"
+                                    variant="outline"> Cancel
+                            </button>
+                          </div>
+                          <br>
+                        </ng-template>
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <c-carousel *ngIf="src.length>=1" [dark]="true" [wrap]="false">
+                  <c-carousel-indicators></c-carousel-indicators>
+                  <c-carousel-inner>
+                    <c-carousel-item *ngFor="let src of src;index as i">
+                      <img
+                        [src]="src"
+                        class="d-block w-100"
+                        loading="lazy"/>
+                      <c-carousel-caption class="d-none d-md-block">
+                        <button [cPopover]="popoverHtml"
+                                _ngcontent-qgx-c208
+                                cPopoverPlacement="bottom"
+                                [cPopoverTrigger]="'click'"
+                                cButton
+                                class="me-1 btn btn-ghost-danger ng-star-inserted"
+                                variant="ghost"
+                                size="lg">
+
+                          <svg cIcon name="cil-trash" size="xl" title="Numbered List Icon"></svg>
+                          <ng-template #popoverHtml>
+                            <h3 class="popover-header">
+                              Delete Image
+                            </h3>
+
+                            <div class="popover-body">
+                              Are you sure you want to <i cTextColor="danger">DELETE</i> this Image?
+                            </div>
+                            <div class="d-flex justify-content-center">
+                              <button cButton
+                                      _ngcontent-qgx-c208
+                                      class="me-1 btn btn-outline-danger ng-star-inserted"
+                                      variant="outline"
+                                      (click)="Remove(retrievedImages[i].fileId)"
+                              > Delete
+                              </button>
+                              <button cButton
+                                      ngcontent-qgx-c208
+                                      class="me-1 btn btn-outline-info ng-star-inserted"
+                                      variant="outline"> Cancel
+                              </button>
+                            </div>
+                            <br>
+                          </ng-template>
+                          Remove
+                        </button>
+
+                      </c-carousel-caption>
+                    </c-carousel-item>
+                  </c-carousel-inner>
+                  <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
+                  <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
+                </c-carousel>
+              </c-row>
+            </c-container>
+          </c-card-body>
+        </c-card>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>
