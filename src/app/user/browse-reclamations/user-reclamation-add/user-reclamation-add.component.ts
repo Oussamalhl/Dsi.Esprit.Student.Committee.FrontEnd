@@ -88,6 +88,7 @@ export class UserReclamationAddComponent implements OnInit {
           this.empty = true;
           this.uploaded = true;
           dialog.addPanelClass('success-dialog');
+          setTimeout(() => this._router.navigateByUrl("reclamations"), 1000);
         },
         (err) => {
           console.log(err);
@@ -97,7 +98,6 @@ export class UserReclamationAddComponent implements OnInit {
         }
       )
     }
-    setTimeout(() => this._router.navigateByUrl("reclamations"), 1000);
   }
 
   getTargets(type: string) {

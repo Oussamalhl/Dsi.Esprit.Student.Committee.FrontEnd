@@ -9,11 +9,21 @@
   .example-radio-button {
     margin: 5px;
   }
+
+  c-form-feedback{
+    text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+    1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff
+  }
 </style>
 
 
 <form #browserDefaultsForm="ngForm"
-      ngNativeValidate>
+      class="needs-validation"
+      (ngSubmit)="addReclamation(r)"
+      [validated]=true
+      [gutter]="4"
+      cForm
+      cRow>
   <section class="causes-section overlay">
     <div class="container">
       <div class="kode-cause" style="color: #d0005e">
@@ -22,12 +32,14 @@
           <div class="col-md-7">
             <div cFormFloating>
               <input
+                required
                 cFormControl
                 id="name"
                 placeholder="Enter Name "
                 [(ngModel)]="r.name"
                 [ngModelOptions]="{standalone: true}">
-              <label cLabel for="Description">Reclamation Name</label>
+              <c-form-feedback [valid]="false"><b>complaint's name is required!</b></c-form-feedback>
+              <label cLabel for="Description">Complaint's Name</label>
             </div>
           </div>
 
@@ -41,7 +53,7 @@
                     {{t}}
                   </mat-option>
                 </mat-select>
-                <mat-label>Type</mat-label>
+                <mat-label><b>Type</b></mat-label>
                 <mat-hint>Please pick up your reclamation type here</mat-hint>
               </mat-form-field>
 
@@ -69,7 +81,7 @@
                       {{t}}
                     </mat-option>
                   </mat-select>
-                  <mat-label>Target</mat-label>
+                  <mat-label><b>Target</b></mat-label>
                 </mat-form-field>
               </div>
             </div>
@@ -77,6 +89,7 @@
             <div class="col-md-8">
               <div cFormFloating>
                     <textarea
+                      required
                       cFormControl
                       id="Description"
                       rows="8"
@@ -85,7 +98,8 @@
                       [(ngModel)]="r.description"
                       [ngModelOptions]="{standalone: true}">
                     </textarea>
-                <label cLabel for="Description">Reclamation Description</label>
+                <c-form-feedback [valid]="false"><b>complaint's description is required!</b></c-form-feedback>
+                <label cLabel for="Description">Complaint's Description</label>
                 <br><br><br>
 
               </div>
@@ -100,7 +114,7 @@
                     <c-card _ngcontent-qgx-c191="" class="mb-4 card">
                       <c-card-header cTextColor="high-emphasis" cBgColor="danger" _ngcontent-qgx-c191=""
                                      class="card-header">
-                        <strong _ngcontent-qgx-c191="" class="h3">Upload Reclamation "{{r.name}}" File(s)</strong>
+                        <strong _ngcontent-qgx-c191="" class="h3">Upload Complaint "{{r.name}}" File(s)</strong>
                       </c-card-header>
                       <c-card-body _ngcontent-qgx-c191="" class="card-body">
                         <div class="body flex-grow-1 px-3">
@@ -138,11 +152,11 @@
           </div>
           <div class="col-md-6">
             <button cButton class="me-1" color="primary" type="submit"
-                    aria-pressed="true" variant="outline" (click)="addReclamation(r)">
+                    aria-pressed="true">
               Submit
             </button>
-            <button cButton variant="outline" class="me-1 btn btn-outline-secondary"
-                    type="reset">
+            <button cButton class="me-1" color="secondary"
+                    aria-pressed="true" type="reset">
               Reset
             </button>
           </div>

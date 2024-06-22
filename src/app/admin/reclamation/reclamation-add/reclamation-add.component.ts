@@ -62,6 +62,7 @@ export class ReclamationAddComponent implements OnInit {
               this.isSending = false;
               this.sent = true;
               dialog.addPanelClass('success-dialog');
+              setTimeout(() => this._router.navigateByUrl("admin/reclamations"), 1000);
             },
             (err) => {
               console.log(err);
@@ -87,7 +88,6 @@ export class ReclamationAddComponent implements OnInit {
       //   }
       // )
     }
-    setTimeout(() => this._router.navigateByUrl("admin/reclamations"), 1000);
   }
 
   getTargets(type: string) {

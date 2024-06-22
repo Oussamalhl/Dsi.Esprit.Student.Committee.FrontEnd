@@ -14,6 +14,7 @@
   .example-radio-button {
     margin: 5px;
   }
+
 </style>
 <div class="body flex-grow-1 px-3">
   <c-container breakpoint="lg" class="h-auto container-lg" _nghost-qgx-c92="">
@@ -28,10 +29,12 @@
             <div class="body flex-grow-1 px-3">
 
               <form #browserDefaultsForm="ngForm"
-                    class="row g-3"
+                    class="needs-validation"
+                    (ngSubmit)="addUser(u)"
+                    [validated]=true
+                    [gutter]="4"
                     cForm
-                    cRow
-                    ngNativeValidate>
+                    cRow>
                 <c-col [md]="6">
                   <div cFormFloating>
 
@@ -43,7 +46,7 @@
                            [ngModelOptions]="{standalone: true}"
                            required
                     />
-
+                    <c-form-feedback [valid]="false">username is required!</c-form-feedback>
                     <label cLabel for="nameInput">Username</label>
                   </div>
                 </c-col>
@@ -59,7 +62,7 @@
                            [ngModelOptions]="{standalone: true}"
                            required
                     />
-
+                    <c-form-feedback [valid]="false">First name is required!</c-form-feedback>
                     <label cLabel for="firstName">First Name</label>
                   </div>
                 </c-col>
@@ -75,22 +78,24 @@
                            [ngModelOptions]="{standalone: true}"
                            required
                     />
-
+                    <c-form-feedback [valid]="false">Last name is required!</c-form-feedback>
                     <label cLabel for="lastName">Last Name</label>
                   </div>
                 </c-col>
                 <br>
                 <c-col [md]="6">
                   <div cFormFloating>
-
                     <input type="password"
+                           minlength="6"
                            cFormControl
                            id="Password"
+                           placeholder="Enter Password "
                            [(ngModel)]="u.password"
                            [ngModelOptions]="{standalone: true}"
                            required
                     />
-
+                    <c-form-feedback [valid]="false">Please enter a password with 6 characters or more...</c-form-feedback>
+                    <c-form-feedback [valid]="true">Looks good!</c-form-feedback>
                     <label cLabel for="password">User Password</label>
                   </div>
                 </c-col>
@@ -105,7 +110,8 @@
                            [ngModelOptions]="{standalone: true}"
                            required
                     />
-
+                    <c-form-feedback [valid]="false">Please enter a valid email.</c-form-feedback>
+                    <c-form-feedback [valid]="true">Looks good!</c-form-feedback>
                     <label cLabel for="email">Email</label>
                   </div>
                 </c-col>
@@ -162,8 +168,8 @@
                 <br><br>
                 <c-col [sm]>
 
-                  <button cButton class="me-1" color="primary" type="submit" class="me-1 active btn btn-outline-primary"
-                          aria-pressed="true" variant="outline" (click)="addUser(u)">
+                  <button cButton color="primary" type="submit" class="me-1 active btn btn-outline-primary"
+                          aria-pressed="true" variant="outline" >
                     Submit
                   </button>
                   <button cButton variant="outline" class="me-1 btn btn-outline-secondary"
@@ -185,11 +191,11 @@
 
   </c-container>
 </div>
-<ng-template #dialogRef style="background-color: #ac2925" >
+<ng-template #dialogRef style="background-color: #ac2925">
   <h1 mat-dialog-title>{{isSending ? "Sending" : "Finished"}}</h1>
   <mat-option *ngIf="isSending" class="is-loading"><mat-spinner diameter="50"></mat-spinner></mat-option>
   <h2 *ngIf="!isSending" mat-dialog-content>{{sent ? "Successfully Added":"Add Failed"}}</h2>
   <div *ngIf="!isSending" mat-dialog-actions>
-    <button class="btn btn-primary" mat-button mat-dialog-close>Close</button>
+    <button class="btn btn-primary" mat-button mat-dialog-close="">Close</button>
   </div>
 </ng-template>

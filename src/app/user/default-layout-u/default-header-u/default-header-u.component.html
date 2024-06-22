@@ -74,13 +74,9 @@
         <!--NAVIGATION START-->
         <div class="navigation">
           <ul>
-            <li class="menu-item kode-parent-menu"><a href="index-2.html">Home</a>
-              <ul class="dl-submenu">
-                <li><a href="index-3.html">Home Layout 1</a></li>
-                <li><a href="index-boxed.html">Home Layout 2</a></li>
-              </ul>
+            <li class="menu-item kode-parent-menu"><a href="#">Home</a>
             </li>
-            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="#">About Us</a></li>
 
             <li class="menu-item kode-parent-menu last" *ngIf="showAdminBoard"><a href="#">Admin</a>
               <ul class="dl-submenu">
@@ -109,9 +105,6 @@
               </ul>
             </li>
             <li class="menu-item kode-parent-menu last"><a href="#">Contact Us</a>
-              <ul class="dl-submenu">
-
-              </ul>
             </li >
           </ul>
         </div>
@@ -121,16 +114,6 @@
             <li><a href="#"><i class="fa fa-bars"></i></a></li>
             <li><a [routerLink]="['/signin']" *ngIf="!isLoggedIn" ><i class="fa fa-user"></i></a></li>
             <li><a [routerLink]="['/profile']"  *ngIf="isLoggedIn" ><i class="fa fa-user"></i></a></li>
-
-
-
-
-
-
-
-
-
-
             <li *ngIf="isLoggedIn" >Hi, {{username}} </li>
             <li><a href="#"><i class="fa fa-search"></i></a></li>
             <li *ngIf="isLoggedIn"><a href="#" (click)="logout()" class="fa fa-power-off"> logout</a></li>

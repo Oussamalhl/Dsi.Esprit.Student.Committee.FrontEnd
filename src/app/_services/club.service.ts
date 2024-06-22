@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 import {clubFile} from "../models/clubFile";
 import {Club} from "../models/Club";
 
-const API_URL = 'http://localhost:8085/api/club/';
+const API_URL = 'http://localhost:9092/clubservice-ms/api/club/';
 
 @Injectable({
   providedIn: 'root'

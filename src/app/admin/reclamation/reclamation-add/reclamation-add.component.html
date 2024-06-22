@@ -1,7 +1,7 @@
 <c-breadcrumb [style]="'--cui-breadcrumb-divider:\'>\''">
   <c-breadcrumb-item url="/admin">Home</c-breadcrumb-item>
-  <c-breadcrumb-item url="/admin/reclamations" >Reclamations</c-breadcrumb-item>
-  <c-breadcrumb-item url="/admin/reclamations/addReclamation" [active]="true">Add Reclamation</c-breadcrumb-item>
+  <c-breadcrumb-item url="/admin/reclamations" >Complaints</c-breadcrumb-item>
+  <c-breadcrumb-item url="/admin/reclamations/addReclamation" [active]="true">Add Complaint</c-breadcrumb-item>
 </c-breadcrumb>
 <style>
   .example-radio-group {
@@ -22,16 +22,18 @@
       <c-col _ngcontent-qgx-c191="" xs="12" _nghost-qgx-c94="" class="col-12">
         <c-card _ngcontent-qgx-c191="" class="mb-4 card">
           <c-card-header _ngcontent-qgx-c191="" class="card-header">
-            <strong _ngcontent-qgx-c191="" class="h3">Add Reclamation</strong>
+            <strong _ngcontent-qgx-c191="" class="h3">Add Complaint</strong>
           </c-card-header>
           <c-card-body _ngcontent-qgx-c191="" class="card-body">
             <div class="body flex-grow-1 px-3">
 
               <form #browserDefaultsForm="ngForm"
-                    class="row g-3"
+                    class="needs-validation"
+                    (ngSubmit)="addReclamation(r)"
+                    [validated]=true
+                    [gutter]="4"
                     cForm
-                    cRow
-                    ngNativeValidate>
+                    cRow>
 
                 <c-col [md]="6">
                   <div cFormFloating>
@@ -44,8 +46,8 @@
                            [ngModelOptions]="{standalone: true}"
                            required=true
                     />
-
-                    <label cLabel for="nameInput">Reclamation Name</label>
+                    <c-form-feedback [valid]="false">complaint's name is required!</c-form-feedback>
+                    <label cLabel for="nameInput">Complaint's Name</label>
                   </div>
                 </c-col>
 
@@ -58,7 +60,7 @@
                       </mat-option>
                     </mat-select>
                     <mat-label>Type</mat-label>
-                    <mat-hint>Please pick up your reclamation type here</mat-hint>
+                    <mat-hint>Please pick up your complaint's type here</mat-hint>
                   </mat-form-field>
                 </c-col>
 
@@ -131,9 +133,10 @@
                       placeholder="Enter Description "
                       [(ngModel)]="r.description"
                       [ngModelOptions]="{standalone: true}"
+                      required
                     ></textarea>
-
-                    <label cLabel for="Description">Reclamation Description</label>
+                    <c-form-feedback [valid]="false">complaint's description is required!</c-form-feedback>
+                    <label cLabel for="Description">Complaint's Description</label>
                   </div>
                 </c-col>
                 <br>
@@ -153,8 +156,8 @@
                 <br><br>
                 <c-col [sm]>
 
-                  <button cButton class="me-1" color="primary" type="submit" class="me-1 active btn btn-outline-primary"
-                          aria-pressed="true" variant="outline" (click)="addReclamation(r)">
+                  <button cButton color="primary" type="submit" class="me-1 active btn btn-outline-primary"
+                          aria-pressed="true" variant="outline">
                     Submit
                   </button>
                   <button cButton variant="outline" class="me-1 btn btn-outline-secondary"
@@ -181,7 +184,7 @@
   <mat-option *ngIf="isSending" class="is-loading"><mat-spinner diameter="50"></mat-spinner></mat-option>
   <h2 *ngIf="!isSending" mat-dialog-content>{{sent ? "Successfully Added":"Add Failed"}}</h2>
   <div *ngIf="!isSending" mat-dialog-actions>
-    <button class="btn btn-primary" mat-button mat-dialog-close>Close</button>
+    <button class="btn btn-primary" mat-button mat-dialog-close="">Close</button>
   </div>
 
 </ng-template>

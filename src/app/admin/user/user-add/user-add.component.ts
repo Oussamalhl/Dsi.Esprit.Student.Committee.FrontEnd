@@ -48,7 +48,7 @@ export class UserAddComponent implements OnInit {
 
   addUser(u:User) {
 
-    this.isSending = true;
+
     let dialog = this.dialog.open(this.dialogRef);
 
     let role : Role[]=[]
@@ -56,11 +56,13 @@ export class UserAddComponent implements OnInit {
     u.roles=role;
     console.log(u.roles);
     if (this.ngForm.valid){
+      this.isSending = true;
       this.US.AddUser(u).subscribe(res => {
           console.log(res);
           this.isSending = false;
           this.sent = true;
           dialog.addPanelClass('success-dialog');
+          setTimeout(() => this._router.navigateByUrl("admin/users"),1000);
         },
         (err) => {
           console.log(err);
@@ -69,7 +71,6 @@ export class UserAddComponent implements OnInit {
           dialog.addPanelClass('fail-dialog')
         }
       )
-      setTimeout(() => this._router.navigateByUrl("admin/users"),1000);
     }
   }
 

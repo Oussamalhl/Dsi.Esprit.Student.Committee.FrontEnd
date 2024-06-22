@@ -72,15 +72,17 @@ export const navItems: INavData[] = [
   {
     name: 'Events',
     url: '/admin/events',
-    iconComponent: { name: 'cil-bullhorn' },
+    iconComponent: { name: 'cil-bell-exclamation' },
     children: [
       {
         name: 'add Events',
-        url: '/admin/events/addEvent'
+        url: '/admin/events/addEvent',
+        iconComponent: { name: 'cil-share' }
       },
       {
         name: 'show Events',
-        url: '/admin/events'
+        url: '/admin/events',
+        iconComponent: { name: 'cil-calendar' }
       },
       {
         name: 'Event Charts',
@@ -92,15 +94,17 @@ export const navItems: INavData[] = [
   {
     name: 'Clubs',
     url: '/admin/clubs',
-    iconComponent: { name: 'cil-bullhorn' },
+    iconComponent: { name: 'cil-house' },
     children: [
       {
         name: 'add Clubs',
-        url: '/admin/clubs/addClub'
+        url: '/admin/clubs/addClub',
+        iconComponent: { name: 'cil-library-add' }
       },
       {
         name: 'show Clubs',
-        url: '/admin/clubs'
+        url: '/admin/clubs',
+        iconComponent: { name: 'cil-list-rich' }
       },
       {
         name: 'Club Charts',
@@ -110,25 +114,25 @@ export const navItems: INavData[] = [
     ]
   },
 
-  {
-    name: 'ADS',
-    iconComponent: { name: 'cil-star' },
-    url: '/admin/ad',
-    children: [
-      {
-        name: 'addAd',
-        url: '/admin/ad/add',
-        badge: {
-          color: 'success',
-          text: 'FREE'
-        }
-      },
-      {
-        name: 'showAd',
-        url: '/admin/ad/show'
-      }
-    ]
-  },
+  // {
+  //   name: 'ADS',
+  //   iconComponent: { name: 'cil-star' },
+  //   url: '/admin/ad',
+  //   children: [
+  //     {
+  //       name: 'addAd',
+  //       url: '/admin/ad/add',
+  //       badge: {
+  //         color: 'success',
+  //         text: 'FREE'
+  //       }
+  //     },
+  //     {
+  //       name: 'showAd',
+  //       url: '/admin/ad/show'
+  //     }
+  //   ]
+  // },
   {
     name: 'Widgets',
     url: '/admin/widgets',

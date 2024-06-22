@@ -6,7 +6,7 @@ import {User} from "../models/User";
 import {UserService} from "./user.service";
 import {reclamationFile} from "../models/reclamationFile";
 
-const API_URL = 'http://localhost:9094/api/reclamation/';
+const API_URL = 'http://localhost:9092/reclamationservice-ms/api/reclamation/';
 
 @Injectable({
   providedIn: 'root'
