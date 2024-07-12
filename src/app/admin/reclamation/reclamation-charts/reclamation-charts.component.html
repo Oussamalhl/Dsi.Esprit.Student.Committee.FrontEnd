@@ -50,23 +50,14 @@
   <c-col xs="12" lg="6">
     <c-card class="mb-4">
       <c-card-header>
-        Previous yearly count comparison
+        Compared year
       </c-card-header>
       <c-card-body>
         <c-chart type="line" [data]="dataComparison"></c-chart>
       </c-card-body>
     </c-card>
   </c-col>
-  <c-col xs="12" lg="6">
-    <c-card class="mb-4">
-      <c-card-header>
-        Reclamations Status
-      </c-card-header>
-      <c-card-body>
-        <c-chart type="pie" [data]="dataStatus"></c-chart>
-      </c-card-body>
-    </c-card>
-  </c-col>
+
   <c-col xs="12" lg="6">
     <c-card class="mb-4">
       <c-card-header>
@@ -84,6 +75,17 @@
       </c-card-header>
       <c-card-body>
         <c-chart type="pie" [data]="dataTargets"></c-chart>
+      </c-card-body>
+    </c-card>
+  </c-col>
+
+  <c-col xs="12" lg="6">
+    <c-card class="mb-4">
+      <c-card-header>
+        Reclamations Status
+      </c-card-header>
+      <c-card-body>
+        <c-chart type="pie" [data]="dataStatus"></c-chart>
       </c-card-body>
     </c-card>
   </c-col>

@@ -30,7 +30,7 @@ export class EventService {
     return this._http.delete(API_URL + 'deleteUserEvent?idEvent=' + idEvent);
   }
   deleteUserEventAdm(idEvent:number,username:string) {
-    return this._http.delete(API_URL + 'deleteUserEventa?idEvent=' + idEvent+ '&username=' + username);
+    return this._http.delete(API_URL + 'deleteUserEventa?eventId=' + idEvent+ '&username=' + username);
   }
 
   deleteUserEventM(eventId: number, username: string) {
@@ -127,6 +127,9 @@ export class EventService {
 
   upcomingEvents(): Observable<event[]> {
     return this._http.get<event[]>(API_URL + 'upcomingEv');
+  }
+  latestEvents(): Observable<event[]> {
+    return this._http.get<event[]>(API_URL + 'latestEv');
   }
   nextUpcomingEvents(): Observable<event[]> {
     return this._http.get<event[]>(API_URL + 'nextUpcomingEv');

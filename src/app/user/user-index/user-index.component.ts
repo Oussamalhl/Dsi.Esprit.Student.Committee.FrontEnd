@@ -20,6 +20,9 @@ export class UserIndexComponent implements OnInit {
   id!: number;
   events!: event[];
   nextEvents!: event[]
+  bestEvents: event[]=[]
+  latestEvents!: event[]
+  bestYearlyEvents!: any[][]
   files: eventFile[] = [];
   cFiles: clubFile[]=[];
   retrievedImages: eventFile[] = [];
@@ -59,21 +62,21 @@ export class UserIndexComponent implements OnInit {
           this.files = res;
           //this.src=[]
           if (this.files.length > 0) {
-            console.log("files: " + this.files);
+            //console.log("files: " + this.files);
             this.files.forEach(f => {
-                console.log("f: " + f.fileName);
+                //console.log("f: " + f.fileName);
                 //this.retrievedImages.push(f);
                 e.files = [f]
                 e.files[0].src = (this.sanitizer.bypassSecurityTrustResourceUrl("data:image/png;base64," + f.picByte))
                 //this.src.push(this.sanitizer.bypassSecurityTrustResourceUrl("data:image/png;base64," + f.picByte))
-                console.log("src: " + e.files[0].src);
+                //console.log("src: " + e.files[0].src);
 
               }
             )
           }
         })
         this.ES.countEventConfirmed(e.id).subscribe(res => {
-          console.log("count: "+res)
+          //console.log("count: "+res)
           e.places = e.places - res;
         })
       })
@@ -88,14 +91,14 @@ export class UserIndexComponent implements OnInit {
           this.files = res;
           //this.src=[]
           if (this.files.length > 0) {
-            console.log("files: " + this.files);
+            //console.log("files: " + this.files);
             this.files.forEach(f => {
-                console.log("f: " + f.fileName);
+                //console.log("f: " + f.fileName);
                 //this.retrievedImages.push(f);
                 e.files = [f]
                 e.files[0].src = (this.sanitizer.bypassSecurityTrustResourceUrl("data:image/png;base64," + f.picByte))
                 //this.src.push(this.sanitizer.bypassSecurityTrustResourceUrl("data:image/png;base64," + f.picByte))
-                console.log("src: " + e.files[0].src);
+                //console.log("src: " + e.files[0].src);
 
               }
             )
@@ -108,31 +111,31 @@ export class UserIndexComponent implements OnInit {
     });
 
     this.CS.bestClubs().subscribe(res => {
-      console.log("best clubs: "+res);
+      //console.log("best clubs: "+res);
       this.bestClubs = res;
       this.bestClubs.forEach(e => {
         this.CS.GetClubByName(e[1]).subscribe(c =>{
-          console.log("club: "+c);
+          //console.log("club: "+c);
 
           this.cFiles = []
           this.CS.GetClubFiles(c.id).subscribe(res => {
             this.cFiles = res;
             //this.src=[]
             if (this.cFiles.length > 0) {
-              console.log("files: " + this.cFiles);
+              //console.log("files: " + this.cFiles);
               this.cFiles.forEach(f => {
-                  console.log("f: " + f.fileName);
+                  //console.log("f: " + f.fileName);
                   //this.retrievedImages.push(f);
                   c.files = [f]
                   c.files[0].src = (this.sanitizer.bypassSecurityTrustResourceUrl("data:image/png;base64," + f.picByte))
                   //this.src.push(this.sanitizer.bypassSecurityTrustResourceUrl("data:image/png;base64," + f.picByte))
-                  console.log("src: " + c.files[0].src);
+                  //.log("src: " + c.files[0].src);
 
                 }
               )
             }
             this.clubsList.push(c);
-            console.log("clubs list: "+this.clubsList);
+            //console.log("clubs list: "+this.clubsList);
           })
         })
 
@@ -142,8 +145,59 @@ export class UserIndexComponent implements OnInit {
         // })
       })
     });
+    this.ES.latestEvents().subscribe(res => {
+      //console.log(res);
+      this.latestEvents = res;
+      this.latestEvents.forEach(e => {
+        this.files = []
+        this.ES.GetEventFiles(e.id).subscribe(res => {
+          this.files = res;
+          //this.src=[]
+          if (this.files.length > 0) {
+            //console.log("files: " + this.files);
+            this.files.forEach(f => {
+                //console.log("f: " + f.fileName);
+                //this.retrievedImages.push(f);
+                e.files = [f]
+                e.files[0].src = (this.sanitizer.bypassSecurityTrustResourceUrl("data:image/png;base64," + f.picByte))
+                //this.src.push(this.sanitizer.bypassSecurityTrustResourceUrl("data:image/png;base64," + f.picByte))
+                //console.log("src: " + e.files[0].src);
 
+              }
+            )
+          }
+        })
+      })
+    });
 
+    this.ES.bestEventsOfTheYear(new Date().getFullYear()).subscribe(res => {
+      this.bestEvents=[]
+      console.log("Year: "+new Date().getFullYear());
+      this.bestYearlyEvents=res
+      console.log("bestYearlyEvents: "+this.bestYearlyEvents);
+      //this.bestYearlyEvents=this.bestYearlyEvents.sort((a, b) => (a[1] < b[1] ? -1 : 1))
+      this.bestYearlyEvents.forEach(e => {
+        this.ES.GetEvent(e[0]).subscribe(e =>{
+          console.log("event: "+e.name);
+
+          this.files = []
+          this.ES.GetEventFiles(e.id).subscribe(res => {
+            this.files = res;
+            if (this.files.length > 0) {
+              this.files.forEach(f => {
+                  e.files = [f]
+                  e.files[0].src = (this.sanitizer.bypassSecurityTrustResourceUrl("data:image/png;base64," + f.picByte))
+                    console.log("src: " + e.files[0].fileName);
+                }
+              )
+            }
+            this.bestEvents.push(e);
+          })
+        })
+
+      })
+
+    });
 
   }
 
